@@ -15,6 +15,7 @@ int main () {
     gameWindow->draw (*circleShape);
     gameWindow->display ();
 
+    // To mantain window visibility
     while (1) {
     }
 

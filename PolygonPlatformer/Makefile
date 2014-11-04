@@ -1,6 +1,5 @@
 # Makefile gry #TITLE
-# 	data: 13.04.2014
-#	autor: Pawel Kaczynski
+# 	data: 04.11
 # 
 # Każdy nowy plik z rozszerzeniem .cpp trzeba dołączyć do zmiennej OBJECTS z rozszerzeniem .o
 
@@ -18,7 +17,7 @@ $(EXEC): $(OBJECTS)
 %.o: %.c
 	$(CXX) -c -o $@ $< $(CFLAGS)
 
-# Traktuje ponizsze wyrazy jaki instrukcje, nie nazwy plikow
+# Traktuje ponizsze wyrazy jako instrukcje, nie nazwy plikow
 .PHONY: clean del
 
 # Czysci wszystkie pliki posrednie

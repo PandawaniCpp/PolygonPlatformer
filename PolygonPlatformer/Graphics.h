@@ -6,21 +6,13 @@ public:
 	
 	~Graphics();
 	
-	int getWindowWidth(){
-		return mWindowWidth;
-	}
+	int getWindowWidth();
 
-	int getWindowHeight(){
-		return mWindowHeight;
-	}
+	int getWindowHeight();
 
-	void setWindowWidth(unsigned int width){
-		mWindowWidth = width;
-	}
+	void setWindowWidth(unsigned int width);
 
-	void setWindowHeight(unsigned int height){
-		mWindowHeight = height;
-	}
+	void setWindowHeight(unsigned int height);
 
 private:
 	unsigned int mWindowWidth;

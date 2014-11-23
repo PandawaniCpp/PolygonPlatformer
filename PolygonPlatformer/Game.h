@@ -21,10 +21,12 @@ private:
 
 private:
 
+	Graphics graphics;
+
+	std::string gameName;
+
 	sf::RenderWindow gameWindow;
 
 	sf::CircleShape gamePlayer;
-
-	Graphics graphics;
 };
 

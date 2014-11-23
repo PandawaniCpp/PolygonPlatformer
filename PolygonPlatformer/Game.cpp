@@ -2,22 +2,18 @@
 #include "Game.h"
 
 
-Game::Game(){
-	graphics.setWindowWidth(800);
-	graphics.setWindowHeight(600);
-	gameWindow.create(sf::VideoMode(graphics.getWindowWidth(), graphics.getWindowHeight()), "Platformer");
+Game::Game() : gameName("Platformer"),
+			 gameWindow(sf::VideoMode(graphics.getWindowWidth(), graphics.getWindowHeight()), gameName) {
 	gamePlayer.setRadius(40.f);
 	gamePlayer.setPosition(400.f, 300.f);
 	gamePlayer.setFillColor(sf::Color::Red);
 }
 
-Game::~Game()
-{
+Game::~Game(){
 
 }
 
-void Game::run()
-{
+void Game::run(){
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);
@@ -35,8 +31,7 @@ void Game::run()
 	}
 }
 
-void Game::processEvents()
-{
+void Game::processEvents(){
 	sf::Event event;
 	while (gameWindow.pollEvent(event))
 	{
@@ -55,13 +50,11 @@ void Game::processEvents()
 	}
 }
 
-void Game::update(sf::Time timePerFrame)
-{
+void Game::update(sf::Time timePerFrame){
 
 }
 
-void Game::render()
-{
+void Game::render(){
 	gameWindow.clear();
 	gameWindow.draw(gamePlayer);
 	gameWindow.display();

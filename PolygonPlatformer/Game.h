@@ -1,13 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class Game
-{
-private:
-
-	sf::RenderWindow gameWindow;
-
-	sf::CircleShape gamePlayer;
+class Game{
 
 public:
 	Game();
@@ -23,5 +17,11 @@ private:
 	void update(sf::Time timePerFrame);
 
 	void render();
+
+private:
+
+	sf::RenderWindow gameWindow;
+
+	sf::CircleShape gamePlayer;
 };
 

@@ -26,6 +26,5 @@ void Graphics::setWindowWidth(unsigned int width){
 
 void Graphics::setWindowHeight(unsigned int height){
 	mWindowHeight = height;
-	sf::VideoMode::getDesktopMode
 }
 

@@ -1,14 +1,16 @@
 
 #include "Game.h"
 
-Game::Game()
-	: gameWindow(sf::VideoMode(640, 480), "Platformer")
-	, gamePlayer()
-{
+
+Game::Game(){
+	graphics.setWindowWidth(800);
+	graphics.setWindowHeight(600);
+	gameWindow.create(sf::VideoMode(graphics.getWindowWidth(), graphics.getWindowHeight()), "Platformer");
 	gamePlayer.setRadius(40.f);
-	gamePlayer.setPosition(300.f, 220.f);
-	gamePlayer.setFillColor(sf::Color::Cyan);
+	gamePlayer.setPosition(400.f, 300.f);
+	gamePlayer.setFillColor(sf::Color::Red);
 }
+
 Game::~Game()
 {
 

@@ -1,11 +1,14 @@
 #include "Graphics.h"
 
 
-Graphics::Graphics()
-{
+Graphics::Graphics(){
+	mWindowWidth = 800;
+	mWindowHeight = 600;
 }
 
 
-Graphics::~Graphics()
-{
+Graphics::~Graphics(){
+
 }
+
+

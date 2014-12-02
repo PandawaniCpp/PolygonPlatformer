@@ -1,30 +1,42 @@
 #include "Graphics.h"
 
 
-Graphics::Graphics(){
-	mWindowWidth = 800;
-	mWindowHeight = 600;
+Graphics::Graphics () : mWindowWidth (1120), mWindowHeight (630), mBitsPerPixel (32U), mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
+    // Obtaining native fullscreen modes.
+    mVideoModes = sf::VideoMode::getFullscreenModes();
 }
 
 
-Graphics::~Graphics(){
+Graphics::~Graphics () {
 
 }
 
 
-int Graphics::getWindowWidth(){
-	return mWindowWidth;
+unsigned int Graphics::getWindowWidth () {
+    return mWindowWidth;
 }
 
-int Graphics::getWindowHeight(){
-	return mWindowHeight;
+unsigned int Graphics::getWindowHeight () {
+    return mWindowHeight;
 }
 
-void Graphics::setWindowWidth(unsigned int width){
-	mWindowWidth = width;
+unsigned int Graphics::getWindowStyle () {
+    return mWindowStyle;
 }
 
-void Graphics::setWindowHeight(unsigned int height){
-	mWindowHeight = height;
+sf::VideoMode Graphics::getVideoMode () {
+    return mCurrentVideoMode;
+}
+
+void Graphics::setWindowWidth (const unsigned int width) {
+    mWindowWidth = width;
+}
+
+void Graphics::setWindowHeight (const unsigned int height) {
+    mWindowHeight = height;
+}
+
+void Graphics::setWindowStyle (const unsigned int style) {
+    mWindowStyle = style;
 }
 

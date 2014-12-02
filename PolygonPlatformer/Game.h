@@ -1,32 +1,35 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Graphics.h"
+#include "ErrorHandler.h"
 
 class Game{
 
 public:
-	Game();
+    Game();
 
-	virtual ~Game();
+    virtual ~Game();
 
-	void run();
-
-private:
-
-	void processEvents();
-
-	void update(sf::Time timePerFrame);
-
-	void render();
+    void run();
 
 private:
 
-	Graphics graphics;
+    void processEvents();
 
-	std::string gameName;
+    void update(sf::Time timePerFrame);
 
-	sf::RenderWindow gameWindow;
+    void render();
 
-	sf::CircleShape gamePlayer;
+private:
+
+    Graphics graphics;
+
+    ErrorHandler errorHandler;
+
+    std::string gameName;
+
+    sf::RenderWindow gameWindow;
+
+    sf::CircleShape gamePlayer;
 };
 

@@ -1,23 +1,38 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-class Graphics{
+#include <vector>
+
+class Graphics {
 public:
-	Graphics();
-	
-	~Graphics();
-	
-	int getWindowWidth();
+    Graphics ();
 
-	int getWindowHeight();
+    ~Graphics ();
 
-	void setWindowWidth(unsigned int width);
+    unsigned int getWindowWidth ();
 
-	void setWindowHeight(unsigned int height);
+    unsigned int getWindowHeight ();
+
+    unsigned int getWindowStyle ();
+
+    sf::VideoMode getVideoMode ();
+
+    void setWindowWidth (const unsigned int width);
+
+    void setWindowHeight (const unsigned int height);
+
+    void setWindowStyle (const unsigned int style);
 
 private:
-	unsigned int mWindowWidth;
+    // Screen resolution and color mode
+    unsigned int mWindowWidth;
+    unsigned int mWindowHeight;
+    unsigned int mBitsPerPixel;
 
-	unsigned int mWindowHeight;
+    unsigned int mWindowStyle = sf::Style::Close;
+
+    sf::VideoMode mCurrentVideoMode;
+
+    std::vector<sf::VideoMode> mVideoModes;
 
 };
 

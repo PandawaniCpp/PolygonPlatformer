@@ -2,16 +2,21 @@
 
 #pragma once
 #include <memory>
+#include <assert.h>
 #include <SFML/Graphics.hpp>
-class SceneNode : sf::Sprite{
+
+class SceneNode : public sf::Transformable, public sf::Drawable{
 
 public:
-	typedef std::unique_ptr<SceneNode> Ptr;
+	typedef std::shared_ptr<SceneNode> Ptr;
 
 	SceneNode();
 
 	void attachChild(Ptr child);
-
+	SceneNode::Ptr detachChild(const SceneNode& node);
+private:
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const;
+	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const{};
 protected:
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;

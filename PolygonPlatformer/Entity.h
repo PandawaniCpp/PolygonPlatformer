@@ -10,7 +10,6 @@ public:
 	void setPosition(sf::Vector2f position);
 
 	sf::Vector2f getPosition();
-
 protected:
 	sf::Vector2f mPosition;
 };

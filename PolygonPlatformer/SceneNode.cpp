@@ -19,16 +19,15 @@ SceneNode::Ptr SceneNode::detachChild (const SceneNode& node) {
     return result;
 }
 
-void SceneNode::draw (sf::RenderTarget& target,
-                      sf::RenderStates states) const {
-    states.transform *= getTransform ();
-    drawCurrent (target, states);
+void SceneNode::draw (sf::RenderTarget& target) const {
+
+    this->drawCurrent (target);
     for (auto itr = mChildren.begin ();
          itr != mChildren.end (); ++itr) {
-        (*itr)->draw (target, states);
+        (*itr)->draw (target);
     }
 }
 
-void SceneNode::drawCurrent (sf::RenderTarget& target, sf::RenderStates states) const {
-    target.draw (*this, states);
+void SceneNode::drawCurrent (sf::RenderTarget& target) const {
+    target.draw (*this);
 }

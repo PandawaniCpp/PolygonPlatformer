@@ -15,10 +15,10 @@ public:
     void attachChild (Ptr child);
     SceneNode::Ptr detachChild (const SceneNode& node);
 
-private:
 
-    virtual void draw (sf::RenderTarget& target, sf::RenderStates states)const;
-    virtual void drawCurrent (sf::RenderTarget& target, sf::RenderStates states) const;
+
+    virtual void draw (sf::RenderTarget& target)const;
+    virtual void drawCurrent (sf::RenderTarget& target) const;
 
 protected:
     std::vector<Ptr> mChildren;

@@ -3,13 +3,14 @@
 
 
 Game::Game () : gameName ("Platformer"),
-gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle ()) {
+gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle ()), gamePlayer(new Player) {
     //gamePlayer.setRadius(40.f);
     //gamePlayer.setPosition(400.f, 300.f);
     //gamePlayer.setFillColor(sf::Color::Red);
-    textures.load (Textures::PLAYER, "E:/Programy Visual Studio/Gra_Polygon/PolygonPlatformer/textures/player.png");
-    gamePlayer.setTexture (textures.get (Textures::PLAYER));
-    gamePlayer.setPosition (300.f, 300.f);
+    mRootNode.attachChild (gamePlayer);
+    textures.load (Textures::PLAYER, "./textures/player.png");
+    gamePlayer->setTexture (textures.get (Textures::PLAYER));
+    gamePlayer->setPosition (300.f, 300.f);
 }
 
 Game::~Game () {
@@ -56,7 +57,7 @@ void Game::update (sf::Time timePerFrame) {
 
 void Game::render () {
     gameWindow.clear ();
-    gameWindow.draw ((sf::Sprite)gamePlayer);
+    mRootNode.draw (gameWindow);
     gameWindow.display ();
 
     /* throw std::runtime_error ("LOL");

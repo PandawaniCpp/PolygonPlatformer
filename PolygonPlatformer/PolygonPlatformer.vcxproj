@@ -87,6 +87,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="TextureHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="TextureHolder.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,63 +2,63 @@
 #include "Game.h"
 
 
-Game::Game() : gameName("Platformer"),
-             gameWindow(graphics.getVideoMode(), gameName, graphics.getWindowStyle()) {
-    gamePlayer.setRadius(40.f);
-    gamePlayer.setPosition(400.f, 300.f);
-    gamePlayer.setFillColor(sf::Color::Red);
+Game::Game () : gameName ("Platformer"),
+gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle ()) {
+    //gamePlayer.setRadius(40.f);
+    //gamePlayer.setPosition(400.f, 300.f);
+    //gamePlayer.setFillColor(sf::Color::Red);
+    textures.load (Textures::PLAYER, "E:/Programy Visual Studio/Gra_Polygon/PolygonPlatformer/textures/player.png");
+    gamePlayer.setTexture (textures.get (Textures::PLAYER));
+    gamePlayer.setPosition (300.f, 300.f);
 }
 
-Game::~Game(){
+Game::~Game () {
 
 }
 
-void Game::run(){
+void Game::run () {
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
-    sf::Time timePerFrame = sf::seconds(1.f / 60.f);
-    while (gameWindow.isOpen())
-    {
-        processEvents();
-        timeSinceLastUpdate += clock.restart();
-        while (timeSinceLastUpdate > timePerFrame)
-        {
+    sf::Time timePerFrame = sf::seconds (1.f / 60.f);
+
+    while (gameWindow.isOpen ()) {
+        processEvents ();
+        timeSinceLastUpdate += clock.restart ();
+        while (timeSinceLastUpdate > timePerFrame) {
             timeSinceLastUpdate -= timePerFrame;
-            processEvents();
-            update(timePerFrame);
+            processEvents ();
+            update (timePerFrame);
         }
-        render();
+        render ();
     }
 }
 
-void Game::processEvents(){
+void Game::processEvents () {
     sf::Event event;
-    while (gameWindow.pollEvent(event))
-    {
-        switch (event.type)
-        {
-        case sf::Event::KeyPressed:
-            break;
+    while (gameWindow.pollEvent (event)) {
+        switch (event.type) {
+            case sf::Event::KeyPressed:
+                break;
 
-        case sf::Event::KeyReleased:
-            break;
+            case sf::Event::KeyReleased:
+                break;
 
-        case sf::Event::Closed:
-            gameWindow.close();
-            break;
+            case sf::Event::Closed:
+                gameWindow.close ();
+                break;
         }
     }
 }
 
-void Game::update(sf::Time timePerFrame){
+void Game::update (sf::Time timePerFrame) {
 
 }
 
-void Game::render(){
-    gameWindow.clear();
-    gameWindow.draw (gamePlayer);
-    gameWindow.display();
+void Game::render () {
+    gameWindow.clear ();
+    gameWindow.draw ((sf::Sprite)gamePlayer);
+    gameWindow.display ();
 
-   /* throw std::runtime_error ("LOL");
-    throw std::runtime_error (errorHandler.getErrorMessage(ErrorHandler::FILE_NOT_FOUND));*/
+    /* throw std::runtime_error ("LOL");
+     throw std::runtime_error (errorHandler.getErrorMessage(ErrorHandler::FILE_NOT_FOUND));*/
 }

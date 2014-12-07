@@ -1,22 +1,16 @@
 #include "Entity.h"
 
-class Creature :public Entity{
+class Creature :public Entity {
 
 public:
-	Creature();
+    Creature ();
 
-	void heal(unsigned amount);
+    void heal (unsigned amount);
 
-	void damage(unsigned amount);
-
-	virtual void drawCurrent(sf::RenderTarget& target,
-		sf::RenderStates states) const;
+    void damage (unsigned amount);
 
 
 protected:
-	int hitPoints;
-
-private:
-	sf::Sprite mSprite;
+    int hitPoints;
 
 };

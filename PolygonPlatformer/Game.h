@@ -2,23 +2,28 @@
 #include <SFML/Graphics.hpp>
 #include "Graphics.h"
 #include "ErrorHandler.h"
+#include "SceneNode.h"
+#include "TextureHolder.h"
+#include "Player.h"
 
-class Game{
+
+
+class Game {
 
 public:
-    Game();
+    Game ();
 
-    virtual ~Game();
+    virtual ~Game ();
 
-    void run();
+    void run ();
 
 private:
 
-    void processEvents();
+    void processEvents ();
 
-    void update(sf::Time timePerFrame);
+    void update (sf::Time timePerFrame);
 
-    void render();
+    void render ();
 
 private:
 
@@ -30,6 +35,8 @@ private:
 
     sf::RenderWindow gameWindow;
 
-    sf::CircleShape gamePlayer;
+    Player gamePlayer;
+
+    TextureHolder textures;
 };
 

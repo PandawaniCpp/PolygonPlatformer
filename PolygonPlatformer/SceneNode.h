@@ -5,19 +5,22 @@
 #include <assert.h>
 #include <SFML/Graphics.hpp>
 
-class SceneNode : public sf::Transformable, public sf::Drawable{
+class SceneNode : public sf::Sprite {
 
 public:
-	typedef std::shared_ptr<SceneNode> Ptr;
+    typedef std::shared_ptr<SceneNode> Ptr;
 
-	SceneNode();
+    SceneNode ();
 
-	void attachChild(Ptr child);
-	SceneNode::Ptr detachChild(const SceneNode& node);
+    void attachChild (Ptr child);
+    SceneNode::Ptr detachChild (const SceneNode& node);
+
 private:
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states)const;
-	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const{};
+
+    virtual void draw (sf::RenderTarget& target, sf::RenderStates states)const;
+    virtual void drawCurrent (sf::RenderTarget& target, sf::RenderStates states) const;
+
 protected:
-	std::vector<Ptr> mChildren;
-	SceneNode* mParent;
+    std::vector<Ptr> mChildren;
+    SceneNode* mParent;
 };

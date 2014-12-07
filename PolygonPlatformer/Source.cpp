@@ -2,10 +2,9 @@
 #include "Game.h"
 #include "Graphics.h"
 
-int main () 
-{
+int main () {
     Game game;
-    game.run();
+    game.run ();
 
     return 0;
 }

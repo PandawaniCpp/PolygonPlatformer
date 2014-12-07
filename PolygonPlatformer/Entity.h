@@ -1,15 +1,15 @@
 #include "SceneNode.h"
 
-class Entity : public SceneNode{
+class Entity : public SceneNode {
 
 public:
-	Entity();
+    Entity ();
 
-	void setPosition(float x, float y);
+    void setPosition (float x, float y);
 
-	void setPosition(sf::Vector2f position);
+    void setPosition (sf::Vector2f position);
 
-	sf::Vector2f getPosition();
+    sf::Vector2f getPosition ();
 protected:
-	sf::Vector2f mPosition;
+    sf::Vector2f mPosition;
 };

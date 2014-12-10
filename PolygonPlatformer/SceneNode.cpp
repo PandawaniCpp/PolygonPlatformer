@@ -5,7 +5,7 @@ SceneNode::SceneNode () : mParent (nullptr) {
 }
 
 void SceneNode::attachChild (Ptr child) {
-    mParent = this;
+    child->mParent = this;
     mChildren.push_back (std::move (child));
 }
 

@@ -35,7 +35,7 @@ private:
 
     sf::RenderWindow gameWindow;
 
-    SceneNode::Ptr gamePlayer;
+    Player::Ptr gamePlayer;
 
     TextureHolder textures;
 

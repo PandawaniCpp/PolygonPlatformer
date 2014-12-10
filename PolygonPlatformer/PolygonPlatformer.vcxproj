@@ -85,6 +85,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="TextureHolder.h" />
   </ItemGroup>

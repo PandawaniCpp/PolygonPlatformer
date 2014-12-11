@@ -28,8 +28,7 @@ private:
     unsigned int mWindowHeight;
     unsigned int mBitsPerPixel;
 
-	// sf::Style
-	unsigned int mWindowStyle;
+    unsigned int mWindowStyle = sf::Style::Close;
 
     sf::VideoMode mCurrentVideoMode;
 

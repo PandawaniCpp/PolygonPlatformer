@@ -3,7 +3,6 @@
 
 Graphics::Graphics () : mWindowWidth (1120), mWindowHeight (630), mBitsPerPixel (32U), mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
     // Obtaining native fullscreen modes.
-	mWindowStyle = sf::Style::Close;
     mVideoModes = sf::VideoMode::getFullscreenModes();
 }
 

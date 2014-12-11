@@ -101,11 +101,8 @@
     <ClInclude Include="Creature.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Player.h" />
-<<<<<<< HEAD
     <ClInclude Include="PlayerState.h" />
-=======
     <ClInclude Include="ResourcesID.h" />
->>>>>>> origin/master
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />

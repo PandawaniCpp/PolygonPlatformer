@@ -5,6 +5,7 @@
 #include "SceneNode.h"
 #include "TextureHolder.h"
 #include "Player.h"
+#include "./textures/window_icon.cpp"
 
 
 

@@ -9,6 +9,7 @@ gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), grap
     //gamePlayer.setFillColor(sf::Color::Red);
 	gameWindow.setVerticalSyncEnabled(graphics.getVsync());
 	gameWindow.setMouseCursorVisible(false);
+	gameWindow.setIcon(window_icon.width, window_icon.height, window_icon.pixel_data);
     mRootNode.attachChild (gamePlayer);
     textures.load (Textures::PLAYER, "./textures/player.png");
     gamePlayer->setTexture (textures.get (Textures::PLAYER));
@@ -41,7 +42,6 @@ void Game::processEvents () {
     while (gameWindow.pollEvent (event)) {
         switch (event.type) {
             case sf::Event::KeyPressed:
-				exit(1);
                 break;
 
             case sf::Event::KeyReleased:

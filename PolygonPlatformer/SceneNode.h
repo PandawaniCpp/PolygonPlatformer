@@ -11,7 +11,8 @@ public:
     typedef std::shared_ptr<SceneNode> Ptr;
 
     SceneNode ();
-
+    virtual void update (sf::Time timePerFrame) {
+    };
     void attachChild (Ptr child);
     SceneNode::Ptr detachChild (const SceneNode& node);
 

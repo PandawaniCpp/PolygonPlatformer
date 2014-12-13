@@ -42,6 +42,9 @@
     <ClCompile Include="TextureHolder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+        <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="TextureHolder.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MenuState.h">
       <Filter>Header Files</Filter>

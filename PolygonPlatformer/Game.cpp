@@ -68,7 +68,8 @@ void Game::update (sf::Time timePerFrame) {
 
 void Game::render () {
     gameWindow.clear ();
-    mRootNode.draw (gameWindow);
+	mStateStack.draw();
+    //mRootNode.draw (gameWindow);
     gameWindow.display ();
 
     /* throw std::runtime_error ("LOL");

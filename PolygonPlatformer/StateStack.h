@@ -9,10 +9,11 @@
 #include <cassert>
 #include "State.h"
 #include "ResourcesID.h"
-//#include "../KeyboardInterface.h"
+#include "Graphics.h"
 
 
-class StateStack {//:// private sf::NonCopyable {
+
+class StateStack {
 public:        
 	enum Action        
 	{
@@ -46,7 +47,6 @@ private:
      
 	std::vector<State::Ptr>        stateStack;        
 	std::vector<PendingChange>     pendingList;        
-	//Game *						   game;
 	std::map<States::ID, std::function<State::Ptr()>>    factories;
 };
 

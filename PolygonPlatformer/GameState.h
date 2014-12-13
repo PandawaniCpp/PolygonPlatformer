@@ -9,11 +9,6 @@ public:
 
 	virtual void draw();
 	virtual bool update(sf::Time dt);
-	virtual bool handleEvent(const sf::Event& event)=0; 
-
-
-private:
-	sf::Text text;
-	sf::Sprite background;
+	virtual bool handleEvent(const sf::Event& event) = 0;  
 
 };

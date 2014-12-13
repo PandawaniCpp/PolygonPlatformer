@@ -8,20 +8,20 @@ MenuState::MenuState(StateStack & stack) {
 }
 
 void MenuState::draw() {
-//	game->gameWindow->draw(background);
-	//game->gameWindow->draw(text);
+
+	ptrWindow->draw(background);
+	ptrWindow->draw(text);
 }
 
 bool MenuState::update(sf::Time dt) {
 	return true;
 }
-/*
-bool MenuState::handleEvent(const Command * command) {
-	// "Press any key to continue"      
-	if (command->commandType == Commands::PRESS_ANY_KEY) {
-		requestStackPop();
-		requestStackPush(States::LOAD);
-	}
 
+bool MenuState::handleEvent(const sf::Event& event) {
+	
+	if (event.type == sf::Event::KeyPressed) {
+	requestStackPop();        
+	requestStackPush(States::GAME); 
+	}
 	return true;
-}*/
+}

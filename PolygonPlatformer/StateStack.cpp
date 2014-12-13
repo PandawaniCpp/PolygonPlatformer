@@ -10,7 +10,6 @@ StateStack::StateStack()
 }
 
 void StateStack::update(sf::Time dt) {
-	// Update only the top state. WHY?
 	if (!stateStack.empty())
 		stateStack.back()->update(dt);
 
@@ -26,8 +25,8 @@ States::ID StateStack::getCurrentStateID() {
 	}
 
 void StateStack::draw() {
-	// Draw all active states from bottom to top, WHY not the top only
-	for (State::Ptr & state : stateStack)  // FOREACH
+	
+	for (State::Ptr & state : stateStack)  
 		state->draw();
 }
 
@@ -39,7 +38,6 @@ State::Ptr StateStack::createState(States::ID stateID) {
 	return found->second();
 }
 // Czemu to odpala gdy wszystkie są true?
-// Jak to zrobić? Panda używa klasy Command 
 void StateStack::handleEvent(const sf::Event& event) {
 	for (auto itr = stateStack.rbegin(); itr != stateStack.rend(); ++itr)   
 	{ 
@@ -65,7 +63,7 @@ bool StateStack::isEmpty() const {
 	return stateStack.empty();
 }
 
-//Zapytać Pandy co robią OnActive i OnDestroy
+
 void StateStack::applyPendingChanges() {
 	for(PendingChange & change: pendingList) {
 		switch (change.action) {

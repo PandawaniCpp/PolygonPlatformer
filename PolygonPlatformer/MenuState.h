@@ -1,3 +1,4 @@
+#pragma once
 #include "State.h"
 #include <SFML/Graphics.hpp>
 
@@ -9,7 +10,7 @@ public:
 
 	virtual void draw();
 	virtual bool update(sf::Time dt);
-	virtual bool handleEvent(const sf::Event& event)=0; 
+	virtual bool handleEvent(const sf::Event& event); 
 
 
 private:

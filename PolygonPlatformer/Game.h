@@ -1,10 +1,22 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
+//Basic core
 #include "Graphics.h"
 #include "ErrorHandler.h"
 #include "SceneNode.h"
 #include "TextureHolder.h"
 #include "Player.h"
+
+//States
+#include "StateStack.h"
+#include "MenuState.h"
+#include "GameState.h"
+
+// enumerators
+#include "ResourcesID.h"
+
+//Icon
 #include "./textures/window_icon.cpp"
 
 
@@ -41,5 +53,7 @@ private:
     TextureHolder textures;
 
     SceneNode mRootNode;
+
+	StateStack mStateStack;
 };
 

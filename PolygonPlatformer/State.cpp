@@ -28,3 +28,7 @@ void State::requestStackPop() {
 void State::requestStateClear() {
 	stateStack->clearStates();
 }
+
+bool    State::handleEvent(const sf::Event& event){
+	return true;
+}

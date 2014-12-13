@@ -2,14 +2,20 @@
 #include "Game.h"
 
 
-Game::Game () : gameName ("Platformer"),
+Game::Game() : gameName("Platformer"), mStateStack(),
 gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()), gamePlayer(new Player) {
-    //gamePlayer.setRadius(40.f);
-    //gamePlayer.setPosition(400.f, 300.f);
-    //gamePlayer.setFillColor(sf::Color::Red);
+    //Settig basic window options
 	gameWindow.setVerticalSyncEnabled(graphics.getVsync());
 	gameWindow.setMouseCursorVisible(false);
 	gameWindow.setIcon(window_icon.width, window_icon.height, window_icon.pixel_data);
+
+	//States
+	mStateStack.registerState<MenuState>(States::MENU);   
+	mStateStack.registerState<GameState>(States::GAME);
+	mStateStack.pushState(States::GAME);
+	mStateStack.applyPendingChanges();
+
+	//Player
     mRootNode.attachChild (gamePlayer);
     textures.load (Textures::PLAYER, "./textures/player.png");
     gamePlayer->setTexture (textures.get (Textures::PLAYER));
@@ -42,9 +48,11 @@ void Game::processEvents () {
     while (gameWindow.pollEvent (event)) {
         switch (event.type) {
             case sf::Event::KeyPressed:
+				mStateStack.handleEvent(event);
                 break;
 
             case sf::Event::KeyReleased:
+				mStateStack.handleEvent(event);
                 break;
 
             case sf::Event::Closed:
@@ -55,7 +63,7 @@ void Game::processEvents () {
 }
 
 void Game::update (sf::Time timePerFrame) {
-
+	mStateStack.update(timePerFrame);
 }
 
 void Game::render () {

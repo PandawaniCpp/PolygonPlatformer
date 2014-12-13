@@ -18,7 +18,7 @@ public:
 	virtual         ~State();						   
 	virtual void    draw() = 0;        
 	virtual bool    update(sf::Time dt) = 0;        
-	virtual bool    handleEvent(const sf::Event& event)=0;
+	virtual bool    handleEvent(const sf::Event& event);
 	States::ID		getStateID();
 	
 protected:        

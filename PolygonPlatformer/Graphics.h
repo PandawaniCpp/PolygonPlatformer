@@ -16,11 +16,19 @@ public:
 
     sf::VideoMode getVideoMode ();
 
+	bool getVsync ();
+
+	sf::ContextSettings getContextSettings();
+
     void setWindowWidth (const unsigned int width);
 
     void setWindowHeight (const unsigned int height);
 
     void setWindowStyle (const unsigned int style);
+
+	void setVsync(const bool vsync);
+
+	void setAntialiasing(const unsigned int antialiasing);
 
 private:
     // Screen resolution and color mode
@@ -31,9 +39,14 @@ private:
 	// sf::Style
 	unsigned int mWindowStyle;
 
+	bool mVsync;
+
     sf::VideoMode mCurrentVideoMode;
 
     std::vector<sf::VideoMode> mVideoModes;
+
+	//Ustawienia do okna: antialiasing & depths
+	sf::ContextSettings  mContextSettings;
 
 };
 

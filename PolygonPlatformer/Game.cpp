@@ -3,10 +3,12 @@
 
 
 Game::Game () : gameName ("Platformer"),
-gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle ()), gamePlayer(new Player) {
+gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()), gamePlayer(new Player) {
     //gamePlayer.setRadius(40.f);
     //gamePlayer.setPosition(400.f, 300.f);
     //gamePlayer.setFillColor(sf::Color::Red);
+	gameWindow.setVerticalSyncEnabled(graphics.getVsync());
+	gameWindow.setMouseCursorVisible(false);
     mRootNode.attachChild (gamePlayer);
     textures.load (Textures::PLAYER, "./textures/player.png");
     gamePlayer->setTexture (textures.get (Textures::PLAYER));

@@ -3,14 +3,15 @@
 
 
 MenuState::MenuState(StateStack & stack) {
+	//backgroundMenu.load(, "./textures/Menu.png");
 	stateStack = &stack;
 	stateID = States::MENU;
 }
 
 void MenuState::draw() {
 
-	ptrWindow->draw(background);
-	ptrWindow->draw(text);
+	//ptrWindow->draw(backgroundMenu);
+	
 }
 
 bool MenuState::update(sf::Time dt) {

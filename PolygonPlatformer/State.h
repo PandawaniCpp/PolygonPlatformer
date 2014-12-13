@@ -2,6 +2,8 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include "TextureHolder.h"
 #include <memory>
 #include "ResourcesID.h"
 
@@ -10,7 +12,7 @@ class StateStack;
 class State {
 public:        
 	typedef std::unique_ptr <State> Ptr;        
-    
+	 	
 	State();
 	State(StateStack& stack, sf::RenderWindow* ptr);
 	virtual         ~State();						   
@@ -27,6 +29,8 @@ protected:
 
 	States::ID stateID;
 	StateStack*     stateStack;
-	sf::RenderWindow* ptrWindow;
+	sf::RenderWindow*  ptrWindow;
+
+	
 
 };

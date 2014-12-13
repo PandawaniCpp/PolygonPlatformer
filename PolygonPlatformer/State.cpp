@@ -6,7 +6,7 @@ State::State() {
 }
 
 State::State(StateStack& stack, sf::RenderWindow* ptr)
-	: stateStack(&stack), ptrWindow(ptr) {
+	: stateStack(&stack) ,ptrWindow(ptr) {
 }
 
 State::~State() {

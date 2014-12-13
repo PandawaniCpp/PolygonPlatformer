@@ -13,7 +13,7 @@ public:
 
 
 private:
-	sf::Text text;
-	sf::Sprite background;
+	       
+	TextureHolder backgroundMenu;
 
 };

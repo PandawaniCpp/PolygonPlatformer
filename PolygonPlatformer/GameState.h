@@ -2,13 +2,16 @@
 #include <SFML/Graphics.hpp>
 
 class StateStack;
-class MenuState : public State {
+class GameState : public State {
 public:
 	
-	MenuState(StateStack & stack);
+	GameState(StateStack & stack);
 
 	virtual void draw();
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event) = 0;  
 
+private:
+	//Player&			player;
+	//World           world;
 };

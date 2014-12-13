@@ -41,6 +41,7 @@ void Game::processEvents () {
     while (gameWindow.pollEvent (event)) {
         switch (event.type) {
             case sf::Event::KeyPressed:
+				exit(1);
                 break;
 
             case sf::Event::KeyReleased:

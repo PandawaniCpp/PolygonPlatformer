@@ -5,7 +5,7 @@
 
 namespace Textures {
     enum ID {
-        PLAYER, ENEMY_FIGHTER
+        PLAYER, ENEMY_FIGHTER,GAME_BACKGROUND,GROUND
     };
 }
 

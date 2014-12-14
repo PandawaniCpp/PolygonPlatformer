@@ -1,6 +1,7 @@
 #include "SceneNode.h"
+#define PIXELTOMETER (1.f/10.f)
 
-SceneNode::SceneNode () : mParent (nullptr) {
+SceneNode::SceneNode (b2World* world) : mParent (nullptr),myBody(nullptr) {
 
 }
 
@@ -19,7 +20,7 @@ SceneNode::Ptr SceneNode::detachChild (const SceneNode& node) {
     return result;
 }
 
-void SceneNode::update (sf::Time dt)  {
+void SceneNode::update (sf::Time dt, b2World* world) {
     this->updateCurrent (dt);
     for (auto itr = mChildren.begin ();
          itr != mChildren.end (); ++itr) {
@@ -27,8 +28,9 @@ void SceneNode::update (sf::Time dt)  {
     }
 }
 
-void SceneNode::updateCurrent (sf::Time dt) {
-
+void SceneNode::updateCurrent (sf::Time dt, b2World* world) {
+    if(myBody!=nullptr)
+        setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
 }
 
 

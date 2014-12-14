@@ -21,6 +21,15 @@ private:
     TextureHolder textures;
     b2Vec2 gravity;
     bool doSleep;
-    b2World world;
-	//World           world;
+    b2World *world;
+    float timeStep;
+    int velocityIterations;
+    int positionIterations;
+    b2FixtureDef boxFixtureDef;
+    b2PolygonShape boxShape;
+    b2BodyDef myBodyDef;
+    b2BodyDef groundBodyDef;
+    b2PolygonShape groundBox;
+
+
 };

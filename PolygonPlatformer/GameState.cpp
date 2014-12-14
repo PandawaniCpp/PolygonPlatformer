@@ -19,7 +19,7 @@ GameState::GameState (StateStack & stack) : doSleep (true),
     player->setOrigin (player->getTextureRect ().width / 2.f, player->getTextureRect ().height / 2.f);
     textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
     root.setTexture (textures.get (Textures::GAME_BACKGROUND));
-    root.setOrigin (root.getTextureRect ().width / 2, root.getTextureRect ().height / 2);
+    root.setOrigin (root.getTextureRect ().width / 2.f, root.getTextureRect ().height / 2.f);
     root.setPosition (1120.f / 2.f, 630.f / 2.f);
     world->SetAllowSleeping (doSleep);
 
@@ -61,13 +61,15 @@ void GameState::draw(sf::RenderTarget& target){
 }
 
 bool GameState::handleEvent(const sf::Event& event) {
+            player->handleEvent (event);
+    
 
-	if (event.key.code == sf::Keyboard::Up) {
+	/*if (event.key.code == sf::Keyboard::Up) {
 		// do shit
 	}
 	if (event.key.code == sf::Keyboard::Down) {
 		// do other shit
-	}
+	}*/
 	return true;
 }
 

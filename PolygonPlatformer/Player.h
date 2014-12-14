@@ -4,10 +4,17 @@
 
 #pragma once
 
+
+
+
 class Player :public Creature {
 public:
     PlayerState *currentState;
     Player ();
     virtual void updateCurrent (sf::Time dt, b2World* world = nullptr);
+    bool handleEvent (const sf::Event& event);
+    bool isMovingLeft;
+    bool isMovingRight;
+    bool isJumping;
     
 };

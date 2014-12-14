@@ -10,15 +10,18 @@ public:
     typedef std::shared_ptr<SceneNode> Ptr;
 
     SceneNode (b2World* world = nullptr);
-    
+
     void attachChild (Ptr child);
     SceneNode::Ptr detachChild (const SceneNode& node);
 
 
-    virtual void update (sf::Time dt,b2World* world=nullptr);
+    virtual void update (sf::Time dt, b2World* world = nullptr);
     virtual void updateCurrent (sf::Time dt, b2World* world = nullptr);
     virtual void draw (sf::RenderTarget& target)const;
     virtual void drawCurrent (sf::RenderTarget& target) const;
+    virtual bool handleEvent (const sf::Event& event) {
+        return true;
+    };
     b2Body* myBody;
 protected:
     std::vector<Ptr> mChildren;

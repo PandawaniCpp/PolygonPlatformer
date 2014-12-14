@@ -2,22 +2,40 @@
 #include <SFML/Graphics.hpp>
 class Player;
 
+namespace PlayerStateType {
+    enum ID {
+        ON_GROUND, FLYING
+    };
+}
+
+
+
 
 class PlayerState {
 public:
+
+    
     virtual void update (Player* owner, sf::Time timePerFrame) {
     }
+    virtual bool handleEvent (Player* owner, const sf::Event& event) {
+        return true;
+    };
+
+    PlayerStateType::ID id;
 };
 
 
-class JumpingState :public PlayerState {
+class FlyingState :public PlayerState {
+public:
+    FlyingState ();
     virtual void update (Player* owner, sf::Time timePerFrame);
+    bool handleEvent (Player* owner, const sf::Event& event);
 };
 
-class IdleState :public PlayerState {
-    virtual void update (Player* owner, sf::Time timePerFrame);
-};
 
-class RunningState :public PlayerState {
+class OnGroundState :public PlayerState {
+public:
+    OnGroundState ();
     virtual void update (Player* owner, sf::Time timePerFrame);
+    bool handleEvent (Player* owner, const sf::Event& event);
 };

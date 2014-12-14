@@ -1,6 +1,9 @@
 #pragma once
 #include "State.h"
+#include "Player.h"
 #include <SFML/Graphics.hpp>
+#include "TextureHolder.h"
+#include <Box2D/Box2D.h>
 
 class StateStack;
 class GameState : public State{
@@ -8,11 +11,16 @@ public:
 	
 	GameState(StateStack & stack);
 
-	virtual void draw();
+	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);  
 
 private:
-	//Player&			player;
+	Player::Ptr	player;
+    SceneNode root;
+    TextureHolder textures;
+    b2Vec2 gravity;
+    bool doSleep;
+    b2World world;
 	//World           world;
 };

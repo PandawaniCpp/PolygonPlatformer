@@ -24,10 +24,10 @@ States::ID StateStack::getCurrentStateID() {
 
 	}
 
-void StateStack::draw() {
+void StateStack::draw (sf::RenderTarget& target) {
 	
 	for (State::Ptr & state : stateStack)  
-		state->draw();
+		state->draw(target);
 }
 
 

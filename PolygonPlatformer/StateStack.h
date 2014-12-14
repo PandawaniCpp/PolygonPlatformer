@@ -27,7 +27,7 @@ public:
 	template <typename T>
 	void           registerState(States::ID stateID);
 	void           update(sf::Time dt);       
-    void           draw();        
+    void           draw (sf::RenderTarget& target);
 	void           handleEvent(const sf::Event& event);
 	void           pushState(States::ID stateID);        
 	void           popState();        

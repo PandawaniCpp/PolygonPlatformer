@@ -8,7 +8,7 @@ public:
 	
 	MenuState(StateStack & stack);
 
-	virtual void draw();
+    virtual void draw (sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event); 
 

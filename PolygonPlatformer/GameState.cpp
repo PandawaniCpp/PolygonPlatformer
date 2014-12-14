@@ -2,14 +2,21 @@
 
 
 
-GameState::GameState(StateStack & stack) {
+GameState::GameState(StateStack & stack):player(new Player),doSleep(true),gravity(0,-10.f),world(gravity) {
 	
 	stateStack = &stack;
 	stateID = States::GAME;
+    
+   root.attachChild (player);
+    textures.load (Textures::PLAYER, "./textures/player.png");
+    player->setTexture (textures.get (Textures::PLAYER));
+    player->setPosition (300.f, 300.f);
+
+    world.SetAllowSleeping (doSleep);
 }
 
-void GameState::draw(){
-
+void GameState::draw(sf::RenderTarget& target){
+    root.draw (target);
 }
 
 bool GameState::handleEvent(const sf::Event& event) {
@@ -25,5 +32,6 @@ bool GameState::handleEvent(const sf::Event& event) {
 
 
 bool GameState::update(sf::Time dt) {
-	return true;
+    root.update (dt);
+    return true;
 }

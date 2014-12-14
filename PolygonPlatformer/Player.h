@@ -6,5 +6,5 @@ class Player :public Creature {
 public:
     PlayerState *currentState;
     Player ();
-    virtual void update (sf::Time timePerFrame);
+    virtual void updateCurrent (sf::Time dt);
 };

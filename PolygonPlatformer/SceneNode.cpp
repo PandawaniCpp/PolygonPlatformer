@@ -19,6 +19,19 @@ SceneNode::Ptr SceneNode::detachChild (const SceneNode& node) {
     return result;
 }
 
+void SceneNode::update (sf::Time dt)  {
+    this->updateCurrent (dt);
+    for (auto itr = mChildren.begin ();
+         itr != mChildren.end (); ++itr) {
+        (*itr)->update (dt);
+    }
+}
+
+void SceneNode::updateCurrent (sf::Time dt) {
+
+}
+
+
 void SceneNode::draw (sf::RenderTarget& target) const {
 
     this->drawCurrent (target);

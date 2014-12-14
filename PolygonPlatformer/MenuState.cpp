@@ -8,7 +8,7 @@ MenuState::MenuState(StateStack & stack) {
 	stateID = States::MENU;
 }
 
-void MenuState::draw() {
+void MenuState::draw (sf::RenderTarget& target) {
 
 	//ptrWindow->draw(backgroundMenu);
 	

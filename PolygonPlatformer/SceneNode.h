@@ -11,13 +11,13 @@ public:
     typedef std::shared_ptr<SceneNode> Ptr;
 
     SceneNode ();
-    virtual void update (sf::Time timePerFrame) {
-    };
+    
     void attachChild (Ptr child);
     SceneNode::Ptr detachChild (const SceneNode& node);
 
 
-
+    virtual void update (sf::Time dt);
+    virtual void updateCurrent (sf::Time dt);
     virtual void draw (sf::RenderTarget& target)const;
     virtual void drawCurrent (sf::RenderTarget& target) const;
 

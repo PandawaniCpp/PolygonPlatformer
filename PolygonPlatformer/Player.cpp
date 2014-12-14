@@ -3,6 +3,6 @@
 Player::Player () :currentState (new IdleState) {
 }
 
-void Player::update (sf::Time timePerFrame) {
-    currentState->update (this, timePerFrame);
+void Player::updateCurrent (sf::Time dt) {
+    currentState->update (this, dt);
 }

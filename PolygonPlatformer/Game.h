@@ -48,11 +48,11 @@ private:
 
     sf::RenderWindow gameWindow;
 
-    Player::Ptr gamePlayer;
+    //Player::Ptr gamePlayer;
 
-    TextureHolder textures;
+    //TextureHolder textures;
 
-    SceneNode mRootNode;
+    //SceneNode mRootNode;
 
 	StateStack mStateStack;
 };

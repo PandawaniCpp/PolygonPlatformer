@@ -3,7 +3,7 @@
 
 
 Game::Game() : gameName("Platformer"), mStateStack(),
-gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()), gamePlayer(new Player) {
+gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()) {
     //Settig basic window options
 	gameWindow.setVerticalSyncEnabled(graphics.getVsync());
 	gameWindow.setMouseCursorVisible(false);
@@ -16,10 +16,10 @@ gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), grap
 	mStateStack.applyPendingChanges();
 
 	//Player
-    mRootNode.attachChild (gamePlayer);
+    /*mRootNode.attachChild (gamePlayer);
     textures.load (Textures::PLAYER, "./textures/player.png");
     gamePlayer->setTexture (textures.get (Textures::PLAYER));
-    gamePlayer->setPosition (300.f, 300.f);
+    gamePlayer->setPosition (300.f, 300.f);*/
 }
 
 Game::~Game () {
@@ -68,7 +68,7 @@ void Game::update (sf::Time timePerFrame) {
 
 void Game::render () {
     gameWindow.clear ();
-	mStateStack.draw();
+	mStateStack.draw(gameWindow);
     //mRootNode.draw (gameWindow);
     gameWindow.display ();
 

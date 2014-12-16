@@ -16,5 +16,8 @@ public:
     bool isMovingLeft;
     bool isMovingRight;
     bool isJumping;
+    bool isAscending;
+    bool isFalling;
+    sf::Time timeOnGround;
     
 };

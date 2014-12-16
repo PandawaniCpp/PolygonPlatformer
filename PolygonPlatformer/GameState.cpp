@@ -34,6 +34,7 @@ GameState::GameState (StateStack & stack) : doSleep (true),
 
     boxFixtureDef.shape = &boxShape;
     boxFixtureDef.density = 1;
+    boxFixtureDef.friction = 0;
     dynamicBody->CreateFixture (&boxFixtureDef);
     dynamicBody->SetFixedRotation (true);
     player->myBody = dynamicBody;
@@ -55,7 +56,7 @@ GameState::GameState (StateStack & stack) : doSleep (true),
     root.attachChild (tmp);*/
 
     root.attachChild (SceneNode::Ptr (new Platform ({10.f, 250.f}, {20, 1}, textures, *world)));
-    root.attachChild (SceneNode::Ptr (new Platform ({500.f, 350.f}, {13, 1}, textures, *world)));
+    root.attachChild (SceneNode::Ptr (new Platform ({500.f, 350.f}, {13, 2}, textures, *world)));
 }
 
 void GameState::draw(sf::RenderTarget& target){

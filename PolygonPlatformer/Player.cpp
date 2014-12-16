@@ -17,9 +17,18 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
         currentState = new OnGroundState;
     }
 
-    if (!(isMovingLeft||isMovingRight))
-        myBody->SetLinearVelocity (b2Vec2 (0.f, myBody->GetLinearVelocity ().y));
+    if (myBody->GetLinearVelocity ().y != 0)
+        timeOnGround = sf::Time::Zero;
+    if (myBody->GetLinearVelocity ().y == 0)
+        timeOnGround += dt;
 
+    if (timeOnGround.asSeconds() >= 2.f / 60.f) {
+        isFalling = true;
+        isAscending = false;
+    }
+
+    if (!(isMovingLeft || isMovingRight))
+        myBody->SetLinearVelocity (b2Vec2 (0.f, myBody->GetLinearVelocity ().y));
 
     if (!(isMovingLeft&&isMovingRight)) {
 
@@ -29,9 +38,20 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
             myBody->SetLinearVelocity (b2Vec2 (30.f, myBody->GetLinearVelocity ().y));
     }
 
-    if (isJumping&&currentState->id==PlayerStateType::ON_GROUND)
-      myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -40.f));
-    
+    if (myBody->GetLinearVelocity ().y > 0) {
+
+        isFalling = true;
+        isAscending = false;
+    }
+    if (myBody->GetLinearVelocity ().y < 0) {
+
+        isFalling = false;
+        isAscending = true;
+    }
+
+    if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
+        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -40.f));
+
 }
 
 bool Player::handleEvent (const sf::Event& event) {
@@ -39,11 +59,11 @@ bool Player::handleEvent (const sf::Event& event) {
     switch (event.type) {
         case sf::Event::KeyPressed:
 
-            currentState->handleEvent (this,event);
+            currentState->handleEvent (this, event);
             break;
 
         case sf::Event::KeyReleased:
-            currentState->handleEvent (this,event);
+            currentState->handleEvent (this, event);
             break;
     }
 

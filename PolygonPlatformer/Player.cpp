@@ -50,7 +50,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     }
 
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
-        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -40.f));
+        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -50.f));
 
 }
 

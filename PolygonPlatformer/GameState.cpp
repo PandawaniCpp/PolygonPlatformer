@@ -73,6 +73,16 @@ void GameState::draw(sf::RenderTarget& target){
 }
 
 bool GameState::handleEvent(const sf::Event& event) {
+    switch (event.type) {
+
+        case sf::Event::KeyPressed:
+            if (event.key.code == sf::Keyboard::Space)
+            createBot ();
+            break;
+
+        case sf::Event::KeyReleased:
+            break;
+    }
     player->handleEvent (event);
 
 	return true;
@@ -85,4 +95,35 @@ bool GameState::update(sf::Time dt) {
 	view.setCenter(player->getPosition());
 
     return true;
+}
+
+void GameState::createBot ()  {
+    Player::Ptr tmp(new SceneNode);
+    tmp->setTexture (textures.get (Textures::PLAYER));
+    root.attachChild (tmp);
+    tmp->setOrigin (tmp->getTextureRect ().width / 2.f, tmp->getTextureRect ().height / 2.f);
+
+
+    b2BodyDef tempBodyDef;
+    tempBodyDef.type = b2_dynamicBody;
+    tempBodyDef.position.Set ((rand()%1120)*PIXELTOMETER,(rand()%315)*PIXELTOMETER);
+    tempBodyDef.angle = 0;
+
+    b2Body* tempDynamicBody = world->CreateBody (&tempBodyDef);
+
+    b2FixtureDef tempBoxFixtureDef;
+
+    b2PolygonShape tempBoxShape;
+
+    tempBoxShape.SetAsBox ((tmp->getTextureRect ().width / 2.f)*PIXELTOMETER, (tmp->getTextureRect ().height / 2)*PIXELTOMETER);
+
+    tempBoxFixtureDef.shape = &boxShape;
+    tempBoxFixtureDef.density = 1;
+    tempBoxFixtureDef.friction = 1;
+
+    tempDynamicBody->CreateFixture (&tempBoxFixtureDef);
+    
+    tmp->myBody = tempDynamicBody;
+
+
 }

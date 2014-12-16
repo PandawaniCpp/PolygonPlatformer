@@ -57,22 +57,24 @@ GameState::GameState (StateStack & stack) : doSleep (true),
 
     root.attachChild (SceneNode::Ptr (new Platform ({10.f, 250.f}, {20, 1}, textures, *world)));
     root.attachChild (SceneNode::Ptr (new Platform ({500.f, 350.f}, {13, 2}, textures, *world)));
+
+
+	/////////////////////////////////
+	//Camera - Viewport//////////////
+	/////////////////////////////////
+	view.setCenter(player->getPosition());
 }
 
 void GameState::draw(sf::RenderTarget& target){
+	sf::Vector2u size = target.getSize();
+	view.setSize(size.x, size.y);
+	target.setView(view);
     root.draw (target);
 }
 
 bool GameState::handleEvent(const sf::Event& event) {
-            player->handleEvent (event);
-    
+    player->handleEvent (event);
 
-	/*if (event.key.code == sf::Keyboard::Up) {
-		// do shit
-	}
-	if (event.key.code == sf::Keyboard::Down) {
-		// do other shit
-	}*/
 	return true;
 }
 
@@ -80,6 +82,7 @@ bool GameState::handleEvent(const sf::Event& event) {
 bool GameState::update(sf::Time dt) {
     world->Step (timeStep, velocityIterations, positionIterations);
     root.update (dt,world);
+	view.setCenter(player->getPosition());
 
     return true;
 }

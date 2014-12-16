@@ -32,5 +32,8 @@ private:
     b2BodyDef groundBodyDef;
     b2PolygonShape groundBox;
 
+	//Window View
+	sf::View view;
+
 
 };

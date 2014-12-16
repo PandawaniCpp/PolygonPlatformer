@@ -8,6 +8,7 @@ gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), grap
 	gameWindow.setVerticalSyncEnabled(graphics.getVsync());
 	gameWindow.setMouseCursorVisible(false);
 	gameWindow.setIcon(window_icon.width, window_icon.height, window_icon.pixel_data);
+	gameWindow.setKeyRepeatEnabled(false);
 
 	//States
 	mStateStack.registerState<MenuState>(States::MENU);   

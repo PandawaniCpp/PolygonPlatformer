@@ -87,6 +87,7 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlatformAtom.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -96,6 +97,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
+    <ClCompile Include="TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
@@ -106,6 +108,7 @@
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlatformAtom.h" />
     <ClInclude Include="Player.h" />
@@ -115,6 +118,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextureHolder.h" />
+    <ClInclude Include="TitleState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

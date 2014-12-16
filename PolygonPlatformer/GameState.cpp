@@ -73,7 +73,12 @@ void GameState::draw(sf::RenderTarget& target){
 }
 
 bool GameState::handleEvent(const sf::Event& event) {
-    player->handleEvent (event);
+	player->handleEvent(event);
+
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+
+		requestStackPush(States::PAUSE);
+	}
 
 	return true;
 }

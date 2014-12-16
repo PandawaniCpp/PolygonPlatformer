@@ -6,7 +6,7 @@
 #include "TextureHolder.h"
 #include <memory>
 #include "ResourcesID.h"
-
+#include "SceneNode.h"
 class StateStack;
 
 class State {

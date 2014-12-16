@@ -12,6 +12,8 @@
 #include "StateStack.h"
 #include "MenuState.h"
 #include "GameState.h"
+#include "TitleState.h"
+#include "PauseState.h"
 
 // enumerators
 #include "ResourcesID.h"

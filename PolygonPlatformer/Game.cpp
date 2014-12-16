@@ -11,9 +11,11 @@ gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), grap
 	gameWindow.setKeyRepeatEnabled(false);
 
 	//States
-	mStateStack.registerState<MenuState>(States::MENU);   
+	mStateStack.registerState<MenuState>(States::MENU);
+	mStateStack.registerState<TitleState>(States::TITLE);
 	mStateStack.registerState<GameState>(States::GAME);
-	mStateStack.pushState(States::GAME);
+	mStateStack.registerState<PauseState>(States::PAUSE);
+	mStateStack.pushState(States::TITLE);
 	mStateStack.applyPendingChanges();
 
 	//Player

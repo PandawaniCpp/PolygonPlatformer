@@ -30,6 +30,7 @@ bool FlyingState::handleEvent (Player* owner, const sf::Event& event) {
                 owner->isMovingLeft = true;
             if (event.key.code == sf::Keyboard::D)
                 owner->isMovingRight = true;
+		
             break;
 
         case sf::Event::KeyReleased:

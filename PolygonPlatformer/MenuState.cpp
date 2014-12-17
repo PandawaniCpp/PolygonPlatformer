@@ -8,8 +8,6 @@ MenuState::MenuState(StateStack & stack) {
 	SceneNode::Ptr tmp(new SceneNode);
 	root.attachChild(tmp);
 	tmp->setTexture(backgroundMenu.get(Textures::MENU));
-	//root.setOrigin(root.getTextureRect().width / 2.f, root.getTextureRect().height / 2.f);
-	//root.setPosition(1120.f / 2.f, 630.f / 2.f);
 	stateStack = &stack;
 	stateID = States::MENU;
 }

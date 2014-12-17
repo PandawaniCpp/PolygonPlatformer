@@ -4,10 +4,10 @@
 
 PauseState::PauseState(StateStack & stack) {
 
-	backgroundMenu.load(Textures::PAUSE, "./textures/Pause.png");
-	SceneNode::Ptr tmp(new SceneNode);
-	root.attachChild(tmp);
-	tmp->setTexture(backgroundMenu.get(Textures::PAUSE));
+	//backgroundMenu.load(Textures::PAUSE, "./textures/Pause.png");
+	//SceneNode::Ptr tmp(new SceneNode);
+	//root.attachChild(tmp);
+	//tmp->setTexture(backgroundMenu.get(Textures::PAUSE));
 	stateStack = &stack;
 	stateID = States::TITLE;
 }

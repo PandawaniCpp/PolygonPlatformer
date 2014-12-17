@@ -1,6 +1,5 @@
 #include "SceneNode.h"
 #define PIXELTOMETER (1.f/10.f)
-#define RADIANTOANGLE (57.2957795)
 
 SceneNode::SceneNode (b2World* world) : mParent (nullptr),myBody(nullptr) {
 
@@ -30,11 +29,8 @@ void SceneNode::update (sf::Time dt, b2World* world) {
 }
 
 void SceneNode::updateCurrent (sf::Time dt, b2World* world) {
-    if (myBody != nullptr) {
-
+    if(myBody!=nullptr)
         setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
-        setRotation (myBody->GetAngle ()*RADIANTOANGLE);
-    }
 }
 
 

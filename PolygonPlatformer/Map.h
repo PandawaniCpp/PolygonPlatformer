@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneNode.h"
+#include "Platform.h"
 /**
 @author: nietup
 Brief decritption of the whole level anatomy:
@@ -12,9 +13,10 @@ Why fuck with atoms? They will be useful in generating platforms different in sh
 
 class Map : public SceneNode {
 public:
-    Map (std::pair<int, int>, std::pair<int, int>, std::pair<int, int>, unsigned int);
+    Map (std::pair<int, int>, std::pair<int, int>, std::pair<int, int>, unsigned int, TextureHolder &, b2World &);
     ~Map ();
-    void generate (std::pair<int, int>, std::pair<int, int>, std::pair<int, int>, unsigned int);
+
+    void generate (std::pair<int, int>, std::pair<int, int>, std::pair<int, int>, unsigned int, TextureHolder &, b2World &);
 
     typedef std::pair<int, int> Dimensions;     //1. int specifies the width, 2. - heigth. In PlatformAtoms
 
@@ -23,5 +25,9 @@ private:
     Dimensions mBiggestPlatform;
     Dimensions mSmallestPlatform;
     unsigned int mNumberOfPlatforms;
+
+
+    b2BodyDef mWallBodyDef;      //kk i dont know how this works yet
+    b2PolygonShape mWallLine;
 };
 

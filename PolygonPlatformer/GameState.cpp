@@ -40,24 +40,12 @@ positionIterations (2) {
     player->myBody = dynamicBody;
     dynamicBody->SetLinearVelocity (b2Vec2 (30.f, -10.f));
 
-    /*groundBodyDef.position.Set ((1120.0f / 2.f)*PIXELTOMETER, 300.f*PIXELTOMETER);
-    //groundBodyDef.type = b2_dynamicBody;
-    b2Body* groundBody = world->CreateBody (&groundBodyDef);
-
-
-    groundBox.SetAsBox ((1120.0f/2.f)*PIXELTOMETER, (30.0f/2.f)*PIXELTOMETER);
-    groundBody->CreateFixture (&groundBox, 0.0f);
-
-    /*SceneNode::Ptr tmp( new SceneNode);
-    tmp->myBody = groundBody;
-    textures.load (Textures::GROUND, "./textures/ground.png");
-    tmp->setTexture (textures.get (Textures::GROUND));
-    tmp->setOrigin (tmp->getTextureRect ().width / 2.f, tmp->getTextureRect ().height / 2.f);
-    root.attachChild (tmp);*/
-
-    root.attachChild (SceneNode::Ptr (new Platform ({10.f, 250.f}, {20, 1}, textures, *world)));
-    root.attachChild (SceneNode::Ptr (new Platform ({500.f, 350.f}, {13, 2}, textures, *world)));
-
+    
+    /////////////////////////////////
+    //Scene - Setup//////////////////
+    /////////////////////////////////
+    Map * sampleMap = new Map({0, 0}, {0, 0}, {0, 0}, 0, textures, *world);
+    root.attachChild (SceneNode::Ptr (sampleMap));
 
     /////////////////////////////////
     //Camera - Viewport//////////////

@@ -1,8 +1,25 @@
 #include "Player.h"
+
 #define PIXELTOMETER (1.f/10.f)
 
-Player::Player () :currentState (new FlyingState) {
+Player::Player () :currentState (new FlyingState)  {
+	 //myTextureHolder.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
+	MyId = ObjectId::PLAYER;
+	contactCounter = 0;
 }
+
+void Player::beginContact(SceneNode* anotherNode)
+{
+	if (anotherNode->MyId == ObjectId::PLATFORM)
+		contactCounter++;
+}
+
+void Player::endContact(SceneNode* anotherNode)
+{
+	if (anotherNode->MyId == ObjectId::PLATFORM)
+		contactCounter--;
+}
+
 
 void Player::updateCurrent (sf::Time dt, b2World* world) {
     setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
@@ -51,6 +68,17 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
         myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -50.f));
+
+
+	if (contactCounter == 0)
+	{
+		setTexture(globalTextureHolder->get(Textures::PLAYER_JUMPING));
+	}
+
+	if (contactCounter > 0)
+	{
+		setTexture(globalTextureHolder->get(Textures::PLAYER));
+	}
 
 }
 

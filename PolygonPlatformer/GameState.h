@@ -5,6 +5,7 @@
 #include "TextureHolder.h"
 #include <Box2D/Box2D.h>
 #include "Map.h"
+#include "MyContactListener.h"
 
 class StateStack;
 class GameState : public State{
@@ -32,6 +33,7 @@ private:
     b2BodyDef myBodyDef;
     b2BodyDef groundBodyDef;
     b2PolygonShape groundBox;
+	MyContactListener myContactListenerInstance;
 
 	//Window View
 	sf::View view;

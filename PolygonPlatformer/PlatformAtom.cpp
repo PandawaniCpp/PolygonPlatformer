@@ -8,6 +8,13 @@ PlatformAtom::PlatformAtom (sf::Vector2f position, TextureHolder &texture, b2Wor
     groundBox.SetAsBox ((getTextureRect ().width / 2.f)*PIXELTOMETER, (getTextureRect ().height / 2.f)*PIXELTOMETER);
     groundBody->CreateFixture (&groundBox, 0.0f);
 
+
+	// Krecik - added it.
+	MyId = ObjectId::PLATFORM;
+	groundBody->SetUserData(this);
+	//end of changes
+
+
     myBody = groundBody;
     setOrigin (getTextureRect ().width / 2.f, getTextureRect ().height / 2.f);
 }

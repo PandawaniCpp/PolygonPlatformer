@@ -1,5 +1,7 @@
 #include "Creature.h"
 #include "PlayerState.h"
+#include "SceneNode.h"
+#include "TextureHolder.h"
 #include <Box2D/Box2D.h>
 
 #pragma once
@@ -12,6 +14,8 @@ public:
     PlayerState *currentState;
     Player ();
     virtual void updateCurrent (sf::Time dt, b2World* world = nullptr);
+	void beginContact(SceneNode* anotherNode);
+	void endContact(SceneNode* anotherNode);
     bool handleEvent (const sf::Event& event);
     bool isMovingLeft;
     bool isMovingRight;
@@ -19,5 +23,5 @@ public:
     bool isAscending;
     bool isFalling;
     sf::Time timeOnGround;
-    
+	int contactCounter;
 };

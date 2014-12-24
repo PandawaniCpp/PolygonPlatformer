@@ -1,9 +1,10 @@
 #include "GameState.h"
+
 #define PIXELTOMETER (1.f/10.f)
 
 
-GameState::GameState (StateStack & stack) : doSleep (true),
-player (new Player),
+GameState::GameState(StateStack & stack) : doSleep(true), 
+player (new Player()),
 timeStep (1.0f / 60.0f),
 velocityIterations (6),
 positionIterations (2) {
@@ -13,7 +14,16 @@ positionIterations (2) {
 
     gravity = b2Vec2 (0.f, 100.f);
     world = new b2World (gravity);
+
+
+	/////////////////////////////////
+	//Creating Player////////////////
+	/////////////////////////////////
+	
     root.attachChild (player);
+
+	player->globalTextureHolder = &textures;
+	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
     textures.load (Textures::PLAYER, "./textures/player.png");
     player->setTexture (textures.get (Textures::PLAYER));
     player->setOrigin (player->getTextureRect ().width / 2.f, player->getTextureRect ().height / 2.f);
@@ -23,6 +33,9 @@ positionIterations (2) {
     root.setPosition (1120.f / 2.f, 630.f / 2.f);
     world->SetAllowSleeping (doSleep);
 
+	/////////////////////////////////
+	//Creating Player in Box2d///////
+	/////////////////////////////////
 
     myBodyDef.type = b2_dynamicBody;
     myBodyDef.position.Set (100.f*PIXELTOMETER, 100.f*PIXELTOMETER);
@@ -30,15 +43,30 @@ positionIterations (2) {
 
     b2Body* dynamicBody = world->CreateBody (&myBodyDef);
 
-    boxShape.SetAsBox ((player->getTextureRect ().width / 2.f)*PIXELTOMETER, (player->getTextureRect ().height / 2)*PIXELTOMETER);
+    boxShape.SetAsBox ((player->getTextureRect ().width / 2.f)*PIXELTOMETER, (player->getTextureRect ().height / 2.f)*PIXELTOMETER);
 
     boxFixtureDef.shape = &boxShape;
     boxFixtureDef.density = 1;
     boxFixtureDef.friction = 0;
     dynamicBody->CreateFixture (&boxFixtureDef);
     dynamicBody->SetFixedRotation (true);
+	dynamicBody->SetUserData(player.get());
     player->myBody = dynamicBody;
     dynamicBody->SetLinearVelocity (b2Vec2 (30.f, -10.f));
+
+
+	/////////////////////////////////
+	//Setting up collisions//////////
+	/////////////////////////////////
+	world->SetContactListener(&myContactListenerInstance);
+
+
+
+
+
+
+
+
 
     
     /////////////////////////////////
@@ -111,7 +139,7 @@ void GameState::createBot () {
 
     b2PolygonShape tempBoxShape;
 
-    tempBoxShape.SetAsBox ((tmp->getTextureRect ().width / 2.f)*PIXELTOMETER, (tmp->getTextureRect ().height / 2)*PIXELTOMETER);
+    tempBoxShape.SetAsBox ((tmp->getTextureRect ().width / 2.f)*PIXELTOMETER, (tmp->getTextureRect ().height / 2.f)*PIXELTOMETER);
 
     tempBoxFixtureDef.shape = &boxShape;
     tempBoxFixtureDef.density = 1;

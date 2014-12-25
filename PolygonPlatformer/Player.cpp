@@ -86,6 +86,12 @@ bool Player::handleEvent (const sf::Event& event) {
 
     switch (event.type) {
         case sf::Event::KeyPressed:
+			if (event.key.code == sf::Keyboard::K)
+			{
+				SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER)+30.f, myBody->GetPosition().y / PIXELTOMETER,globalRoot));
+				globalRoot->attachChild(tmp);
+				//globalRoot->detachChild(*(tmp.get()));
+			}
 
             currentState->handleEvent (this, event);
             break;

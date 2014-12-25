@@ -9,7 +9,7 @@
 namespace ObjectId
 {
 	enum ID{
-		PLAYER, PLATFORM, ENEMY
+		PLAYER, PLATFORM, ENEMY,FRIENDLY_BULLET
 	};
 }
 
@@ -38,6 +38,9 @@ public:
 	virtual void beginContact(SceneNode* anotherNode){};
 	virtual void endContact(SceneNode* anotherNode){};
 
+
+	SceneNode *globalRoot;
+	b2World *globalWorld;
 	TextureHolder *globalTextureHolder;
     b2Body* myBody;
 	ObjectId::ID MyId;

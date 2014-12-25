@@ -21,10 +21,12 @@ positionIterations (2) {
 	/////////////////////////////////
 	
     root.attachChild (player);
+	
 
 	player->globalTextureHolder = &textures;
 	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
     textures.load (Textures::PLAYER, "./textures/player.png");
+	textures.load(Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
     player->setTexture (textures.get (Textures::PLAYER));
     player->setOrigin (player->getTextureRect ().width / 2.f, player->getTextureRect ().height / 2.f);
     textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
@@ -32,7 +34,8 @@ positionIterations (2) {
     root.setOrigin (root.getTextureRect ().width / 2.f, root.getTextureRect ().height / 2.f);
     root.setPosition (1120.f / 2.f, 630.f / 2.f);
     world->SetAllowSleeping (doSleep);
-
+	player->globalWorld = world;
+	player->globalRoot = &root;
 	/////////////////////////////////
 	//Creating Player in Box2d///////
 	/////////////////////////////////

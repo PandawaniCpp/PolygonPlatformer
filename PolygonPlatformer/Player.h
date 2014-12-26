@@ -31,4 +31,5 @@ public:
 	sf::Time shootingCooldown;
 	bool isShooting;
 	sf::Time timeSinceLastShot;
+	int animationCounter;
 };

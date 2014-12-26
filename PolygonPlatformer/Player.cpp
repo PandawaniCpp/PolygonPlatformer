@@ -9,6 +9,7 @@ Player::Player () :currentState (new FlyingState)  {
 	isFacingRight = true;
 	isShooting = false;
 	shootingCooldown = sf::seconds (1.f / 5.f);
+	animationCounter = 0;
 }
 
 void Player::beginContact(SceneNode* anotherNode)
@@ -98,10 +99,24 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
         myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -50.f));
 
-	if (isFacingRight)
-		setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT));
-	else
-		setTexture(globalTextureHolder->get(Textures::PLAYER_LEFT));
+	if (!isMovingLeft&&isMovingRight)
+	{
+		setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT_ANIMATION));
+		setTextureRect(sf::IntRect(30 * (animationCounter/2), 0, 30, 50));
+		animationCounter++;
+		animationCounter %= 12;
+		//setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT));
+	}
+	else if (isMovingLeft&&!isMovingRight)
+	{
+		//setTexture(globalTextureHolder->get(Textures::PLAYER_LEFT));
+		setTextureRect(sf::IntRect(0, 0, 30, 50));
+		setTextureRect(sf::IntRect(30 * (animationCounter / 2), 0, 30, 50));
+		animationCounter--;
+		if (animationCounter < 0)
+			animationCounter = 11;
+
+	}
 	/*if (contactCounter == 0)
 	{
 		setTexture(globalTextureHolder->get(Textures::PLAYER_JUMPING));

@@ -25,6 +25,7 @@ positionIterations (2) {
 	
 
 	player->globalTextureHolder = &textures;
+	textures.load(Textures::PLAYER_RIGHT_ANIMATION, "./textures/player_right_tmp.png");
 	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
     textures.load (Textures::PLAYER_RIGHT, "./textures/player_right.png");
 	textures.load(Textures::PLAYER_LEFT, "./textures/player_left.png");

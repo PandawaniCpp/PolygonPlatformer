@@ -19,6 +19,7 @@ public:
 	void beginContact(SceneNode* anotherNode);
 	void endContact(SceneNode* anotherNode);
     bool handleEvent (const sf::Event& event);
+	void shoot();
     bool isMovingLeft;
     bool isMovingRight;
     bool isJumping;
@@ -26,4 +27,8 @@ public:
     bool isFalling;
     sf::Time timeOnGround;
 	int contactCounter;
+	bool isFacingRight;
+	sf::Time shootingCooldown;
+	bool isShooting;
+	sf::Time timeSinceLastShot;
 };

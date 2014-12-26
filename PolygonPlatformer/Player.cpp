@@ -6,6 +6,9 @@ Player::Player () :currentState (new FlyingState)  {
 	 //myTextureHolder.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
 	MyId = ObjectId::PLAYER;
 	contactCounter = 0;
+	isFacingRight = true;
+	isShooting = false;
+	shootingCooldown = sf::seconds (1.f / 5.f);
 }
 
 void Player::beginContact(SceneNode* anotherNode)
@@ -20,6 +23,13 @@ void Player::endContact(SceneNode* anotherNode)
 		contactCounter--;
 }
 
+void Player::shoot(){
+	SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER, globalRoot, globalQueuedForDeletion, isFacingRight));
+	//globalRoot->attachChild(tmp);
+	globalQueuedForInsertion->push_back(tmp);
+}
+
+
 
 void Player::updateCurrent (sf::Time dt, b2World* world) {
     setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
@@ -33,6 +43,25 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
         delete currentState;
         currentState = new OnGroundState;
     }
+
+
+	timeSinceLastShot += dt;
+	if (!isShooting&&timeSinceLastShot >= shootingCooldown)
+		timeSinceLastShot = shootingCooldown;
+
+
+	if (timeSinceLastShot >= shootingCooldown&&isShooting)
+	{
+		shoot();
+		timeSinceLastShot -= shootingCooldown;
+	}
+
+
+
+	if (isMovingLeft&&!isMovingRight)
+		isFacingRight = false;
+	if (isMovingRight&&!isMovingLeft)
+		isFacingRight = true;
 
     if (myBody->GetLinearVelocity ().y != 0)
         timeOnGround = sf::Time::Zero;
@@ -69,16 +98,19 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
         myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -50.f));
 
-
-	if (contactCounter == 0)
+	if (isFacingRight)
+		setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT));
+	else
+		setTexture(globalTextureHolder->get(Textures::PLAYER_LEFT));
+	/*if (contactCounter == 0)
 	{
 		setTexture(globalTextureHolder->get(Textures::PLAYER_JUMPING));
 	}
 
 	if (contactCounter > 0)
 	{
-		setTexture(globalTextureHolder->get(Textures::PLAYER));
-	}
+		setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT));
+	}*/
 
 }
 
@@ -88,8 +120,9 @@ bool Player::handleEvent (const sf::Event& event) {
         case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::K)
 			{
-				SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER)+30.f, myBody->GetPosition().y / PIXELTOMETER,globalRoot));
-				globalRoot->attachChild(tmp);
+				isShooting = true;
+				/*SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,globalRoot,globalQueuedForDeletion,isFacingRight));
+				globalRoot->attachChild(tmp);*/
 				//globalRoot->detachChild(*(tmp.get()));
 			}
 
@@ -97,6 +130,11 @@ bool Player::handleEvent (const sf::Event& event) {
             break;
 
         case sf::Event::KeyReleased:
+			if (event.key.code == sf::Keyboard::K)
+			{
+				isShooting = false;
+				
+			}
             currentState->handleEvent (this, event);
             break;
     }

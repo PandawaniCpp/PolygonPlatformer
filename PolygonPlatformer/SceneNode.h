@@ -38,7 +38,8 @@ public:
 	virtual void beginContact(SceneNode* anotherNode){};
 	virtual void endContact(SceneNode* anotherNode){};
 
-
+	std::vector<SceneNode *> *globalQueuedForDeletion;
+	std::vector<Ptr> *globalQueuedForInsertion;
 	SceneNode *globalRoot;
 	b2World *globalWorld;
 	TextureHolder *globalTextureHolder;

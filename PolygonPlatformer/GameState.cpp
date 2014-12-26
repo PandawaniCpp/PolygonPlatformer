@@ -9,6 +9,7 @@ timeStep (1.0f / 60.0f),
 velocityIterations (6),
 positionIterations (2) {
 
+	
     stateStack = &stack;
     stateID = States::GAME;
 
@@ -25,9 +26,10 @@ positionIterations (2) {
 
 	player->globalTextureHolder = &textures;
 	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
-    textures.load (Textures::PLAYER, "./textures/player.png");
+    textures.load (Textures::PLAYER_RIGHT, "./textures/player_right.png");
+	textures.load(Textures::PLAYER_LEFT, "./textures/player_left.png");
 	textures.load(Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
-    player->setTexture (textures.get (Textures::PLAYER));
+    player->setTexture (textures.get (Textures::PLAYER_RIGHT));
     player->setOrigin (player->getTextureRect ().width / 2.f, player->getTextureRect ().height / 2.f);
     textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
     root.setTexture (textures.get (Textures::GAME_BACKGROUND));
@@ -36,6 +38,8 @@ positionIterations (2) {
     world->SetAllowSleeping (doSleep);
 	player->globalWorld = world;
 	player->globalRoot = &root;
+	player->globalQueuedForDeletion = &queuedForDeletion;
+	player->globalQueuedForInsertion = &queuedForInsertion;
 	/////////////////////////////////
 	//Creating Player in Box2d///////
 	/////////////////////////////////
@@ -118,6 +122,15 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 bool GameState::update (sf::Time dt) {
     world->Step (timeStep, velocityIterations, positionIterations);
+	for (std::vector<SceneNode *>::iterator it = queuedForDeletion.begin(); it != queuedForDeletion.end(); ++it)
+		root.detachChild(*(*it));
+	queuedForDeletion.clear();
+
+	for (std::vector<SceneNode::Ptr>::iterator it = queuedForInsertion.begin(); it != queuedForInsertion.end(); ++it)
+		root.attachChild(*it);
+	queuedForInsertion.clear();
+
+
     root.update (dt, world);
     view.setCenter (player->getPosition ());
 
@@ -126,7 +139,7 @@ bool GameState::update (sf::Time dt) {
 
 void GameState::createBot () {
     Player::Ptr tmp (new SceneNode);
-    tmp->setTexture (textures.get (Textures::PLAYER));
+    tmp->setTexture (textures.get (Textures::PLAYER_LEFT));
     root.attachChild (tmp);
     tmp->setOrigin (tmp->getTextureRect ().width / 2.f, tmp->getTextureRect ().height / 2.f);
 

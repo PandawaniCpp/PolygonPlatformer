@@ -34,7 +34,8 @@ private:
     b2BodyDef groundBodyDef;
     b2PolygonShape groundBox;
 	MyContactListener myContactListenerInstance;
-
+	std::vector<SceneNode *> queuedForDeletion;
+	std::vector<SceneNode::Ptr> queuedForInsertion;
 	//Window View
 	sf::View view;
 

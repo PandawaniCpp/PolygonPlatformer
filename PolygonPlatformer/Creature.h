@@ -11,6 +11,7 @@ public:
 
 
 protected:
-    int hitPoints;
+    float maxHP;
+	float currentHP;
 
 };

@@ -33,6 +33,8 @@ positionIterations (2) {
 	///////////////////////////
 	//Loading textures/////////
 	///////////////////////////
+	textures.load(Textures::HEALTHBAR_RED, "./textures/healthbar_red.png");
+	textures.load(Textures::HEALTHBAR_GREEN, "./textures/healthbar_green.png");
 	textures.load(Textures::PLAYER_RIGHT_ANIMATION, "./textures/player_right_tmp.png");
 	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
 	textures.load(Textures::PLAYER_RIGHT, "./textures/player_right.png");

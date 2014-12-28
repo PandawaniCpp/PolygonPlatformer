@@ -1,15 +1,16 @@
 #include "Creature.h"
 
 void Creature::damage (unsigned amount) {
-    hitPoints -= amount;
+    currentHP -= amount;
 }
 
 void Creature::heal (unsigned amount) {
-    hitPoints += amount;
+	currentHP += amount;
 }
 
 Creature::Creature () {
-    hitPoints = 10;
+	maxHP = 10;
+	currentHP = 10;
 }
 
 

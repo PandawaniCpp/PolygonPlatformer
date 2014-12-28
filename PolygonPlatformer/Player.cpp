@@ -10,6 +10,9 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	isShooting = false;
 	shootingCooldown = sf::seconds (1.f / 5.f);
 	animationCounter = 0;
+	maxHP = 100;
+	currentHP = 100;
+
 
 	setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT_ANIMATION));
 	setTextureRect(sf::IntRect(0, 0, 30, 50));
@@ -35,13 +38,15 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 
 
 	/*textures->load(Textures::HEALTHBAR_RED, "./textures/healthbar_red.png");
-	textures->load(Textures::HEALTHBAR_GREEN, "./textures/healthbar_green.png");
+	textures->load(Textures::HEALTHBAR_GREEN, "./textures/healthbar_green.png");*/
 	healthbar_red->setTexture(globalTextureHolder->get(Textures::HEALTHBAR_RED));
 	healthbar_green->setTexture(globalTextureHolder->get(Textures::HEALTHBAR_GREEN));
 	healthbar_red->setPosition(getPosition().x, getPosition().y - 30.f);
 	healthbar_green->setPosition(getPosition().x, getPosition().y - 30.f);
 	attachChild(healthbar_red);
-	attachChild(healthbar_green);*/
+	attachChild(healthbar_green);
+	healthbar_green->setOrigin(healthbar_green->getTextureRect().width / 2.f, healthbar_green->getTextureRect().height / 2.f);
+	healthbar_red->setOrigin(healthbar_red->getTextureRect().width / 2.f, healthbar_red->getTextureRect().height / 2.f);
 	
 }
 
@@ -159,7 +164,11 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 	{
 		setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT));
 	}*/
-
+	healthbar_red->setPosition(myBody->GetPosition().x / PIXELTOMETER, (myBody->GetPosition().y / PIXELTOMETER) - 30.f);
+	healthbar_green->setPosition(myBody->GetPosition().x / PIXELTOMETER, (myBody->GetPosition().y / PIXELTOMETER) - 30.f);
+	healthbar_green->setTextureRect(sf::IntRect(0, 0, static_cast<int>(25 * (currentHP / maxHP)), 4));
+	if (currentHP < 0)
+		currentHP = 0;
 }
 
 bool Player::handleEvent (const sf::Event& event) {
@@ -172,6 +181,10 @@ bool Player::handleEvent (const sf::Event& event) {
 				/*SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,globalRoot,globalQueuedForDeletion,isFacingRight));
 				globalRoot->attachChild(tmp);*/
 				//globalRoot->detachChild(*(tmp.get()));
+			}
+			if (event.key.code == sf::Keyboard::P)
+			{
+				damage(10);
 			}
 
             currentState->handleEvent (this, event);

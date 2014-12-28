@@ -24,7 +24,11 @@
 
 
 class Game {
-
+	friend class GameState;
+	friend class TitleState;
+	friend class MenuState;
+	friend class LoadState;
+	friend class PauseState;
 public:
     Game ();
 

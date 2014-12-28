@@ -22,7 +22,7 @@ public:
 		CLEAR, 
 	};
 public:                
-	explicit	   StateStack(); 
+	explicit StateStack(Game *game);
 	virtual		   ~StateStack();
 	template <typename T>
 	void           registerState(States::ID stateID);
@@ -48,6 +48,7 @@ private:
 	std::vector<State::Ptr>        stateStack;        
 	std::vector<PendingChange>     pendingList;        
 	std::map<States::ID, std::function<State::Ptr()>>    factories;
+	Game *							game;
 };
 
 
@@ -55,6 +56,6 @@ template <typename T>
 void StateStack::registerState(States::ID stateID) {    
 	factories[stateID] = [this] ()    
 	{        
-		return State::Ptr(new T(*this));    
+		return State::Ptr(new T(*this,game));    
 	}; 
 } 

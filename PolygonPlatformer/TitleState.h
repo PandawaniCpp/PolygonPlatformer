@@ -6,7 +6,7 @@ class StateStack;
 class TitleState : public State {
 public:
 
-	TitleState(StateStack & stack);
+	TitleState(StateStack & stack, Game * game);
 
 	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);

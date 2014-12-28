@@ -6,7 +6,7 @@ class StateStack;
 class MenuState : public State {
 public:
 	
-	MenuState(StateStack & stack);
+	MenuState(StateStack & stack, Game * game);
 
     virtual void draw (sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);

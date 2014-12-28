@@ -2,13 +2,12 @@
 #include "MenuState.h"
 
 
-MenuState::MenuState(StateStack & stack) {
-	
+MenuState::MenuState(StateStack & stack, Game * game)
+	: State(stack, game) {
 	backgroundMenu.load(Textures::MENU, "./textures/Menu.png");
 	SceneNode::Ptr tmp(new SceneNode);
 	root.attachChild(tmp);
 	tmp->setTexture(backgroundMenu.get(Textures::MENU));
-	stateStack = &stack;
 	stateID = States::MENU;
 }
 

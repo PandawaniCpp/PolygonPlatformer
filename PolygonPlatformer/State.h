@@ -8,19 +8,18 @@
 #include "ResourcesID.h"
 #include "SceneNode.h"
 class StateStack;
-
+class Game;
 class State {
 public:        
 	typedef std::unique_ptr <State> Ptr;        
 	 	
-	State();
-	State(StateStack& stack, sf::RenderWindow* ptr);
+	State(StateStack& stack, Game *game);
 	virtual         ~State();						   
     virtual void    draw (sf::RenderTarget& target) = 0;
 	virtual bool    update(sf::Time dt) = 0;        
 	virtual bool    handleEvent(const sf::Event& event);
 	States::ID		getStateID();
-	
+	Game*			gamePtr;
 protected:        
 	void            requestStackPush(States::ID stateID);       
 	void            requestStackPop();        
@@ -29,8 +28,5 @@ protected:
 
 	States::ID stateID;
 	StateStack*     stateStack;
-	sf::RenderWindow*  ptrWindow;
-
-	
 
 };

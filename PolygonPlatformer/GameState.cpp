@@ -3,12 +3,12 @@
 #define PIXELTOMETER (1.f/10.f)
 
 
-GameState::GameState(StateStack & stack) : doSleep(true), 
+GameState::GameState(StateStack & stack, Game * game) : State(stack, game), doSleep(true),
 timeStep (1.0f / 60.0f),
 velocityIterations (6),
 positionIterations (2) {
 
-	stateStack = &stack;
+	//stateStack = &stack;
 	stateID = States::GAME;
 
 	/////////////////////////////////

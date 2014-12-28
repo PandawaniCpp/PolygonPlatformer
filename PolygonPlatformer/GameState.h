@@ -13,7 +13,7 @@ class StateStack;
 class GameState : public State{
 public:
 	
-	GameState(StateStack & stack);
+	GameState(StateStack & stack, Game * gamePtr);
 
 	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);

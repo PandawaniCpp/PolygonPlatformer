@@ -2,13 +2,13 @@
 #include "TitleState.h"
 
 
-TitleState::TitleState(StateStack & stack) {
-	
+TitleState::TitleState(StateStack & stack, Game * game)
+	: State(stack, game) {
+
 	backgroundMenu.load(Textures::TITLE, "./textures/Title.png");
 	SceneNode::Ptr tmp(new SceneNode);
 	root.attachChild(tmp);
 	tmp->setTexture(backgroundMenu.get(Textures::TITLE));
-	stateStack = &stack;
 	stateID = States::TITLE;
 }
 

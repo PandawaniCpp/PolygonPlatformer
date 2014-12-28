@@ -71,7 +71,7 @@ void Player::shoot(){
 
 void Player::updateCurrent (sf::Time dt, b2World* world) {
     setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
-	healthbar_red->setPosition(getPosition().x, getPosition().y - 30.f);
+	//healthbar_red->setPosition(getPosition().x, getPosition().y - 30.f);
     /*if (myBody->GetLinearVelocity ().y == 0 && currentState)
         currentState->update (this, dt);*/
     if (currentState->id == PlayerStateType::ON_GROUND&&myBody->GetLinearVelocity ().y != 0) {

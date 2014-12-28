@@ -1,5 +1,9 @@
 #include "Creature.h"
 
+SceneNode* Creature::currentPlayer = nullptr;
+
+
+
 void Creature::damage (unsigned amount) {
     currentHP -= amount;
 }

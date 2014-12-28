@@ -1,6 +1,8 @@
 #pragma once
 #include "State.h"
 #include "Player.h"
+#include "Creature.h"
+#include "EnemyFighter.h"
 #include <SFML/Graphics.hpp>
 #include "TextureHolder.h"
 #include <Box2D/Box2D.h>
@@ -17,6 +19,7 @@ public:
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);  
     /*void createBot ();*/
+	void spawnEnemyFighter(float x, float y);
 
 private:
 	SceneNode*	player;

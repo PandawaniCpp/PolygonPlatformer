@@ -41,6 +41,8 @@ positionIterations (2) {
 	textures.load(Textures::PLAYER_LEFT, "./textures/player_left.png");
 	textures.load(Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
 	textures.load(Textures::GAME_BACKGROUND, "./textures/game_background.png");
+	textures.load(Textures::ENEMY_BULLET, "./textures/enemy_bullet.png");
+	textures.load(Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
 
 
 	/////////////////////////////////
@@ -56,6 +58,7 @@ positionIterations (2) {
 	/////////////////////////////////
 	player = new(Player);
 
+	Creature::currentPlayer = player;
 
 
 	/////////////////////////////////
@@ -85,16 +88,16 @@ void GameState::draw (sf::RenderTarget& target) {
 
 bool GameState::handleEvent (const sf::Event& event) {
     
-        /*switch (event.type) {
+        switch (event.type) {
 
             case sf::Event::KeyPressed:
-                if (event.key.code == sf::Keyboard::Space)
-                    createBot ();
+				if (event.key.code == sf::Keyboard::Space)
+					spawnEnemyFighter(rand()%800,rand()%300);
                 break;
 
             case sf::Event::KeyReleased:
                 break;
-    }*/
+    }
     player->handleEvent (event);
 
 
@@ -110,20 +113,29 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 bool GameState::update (sf::Time dt) {
     world->Step (timeStep, velocityIterations, positionIterations);
-	for (std::vector<SceneNode *>::iterator it = queuedForDeletion.begin(); it != queuedForDeletion.end(); ++it)
-		root.detachChild(*(*it));
-	queuedForDeletion.clear();
 
 	for (std::vector<SceneNode::Ptr>::iterator it = queuedForInsertion.begin(); it != queuedForInsertion.end(); ++it)
 		root.attachChild(*it);
 	queuedForInsertion.clear();
 
 
+
+	for (std::vector<SceneNode *>::iterator it = queuedForDeletion.begin(); it != queuedForDeletion.end(); ++it)
+		root.detachChild(*(*it));
+	queuedForDeletion.clear();
+
+	
+
     root.update (dt, world);
     view.setCenter (player->getPosition ());
 
     return true;
 }
+
+void GameState::spawnEnemyFighter(float x, float y){
+	new EnemyFighter(x,y);
+}
+
 
 /*void GameState::createBot () {
     Player::Ptr tmp (new SceneNode);

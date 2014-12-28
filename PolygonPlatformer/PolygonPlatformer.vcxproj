@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyFighter.cpp" />
     <ClCompile Include="FriendlyBullet.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -102,6 +103,7 @@
     <ClCompile Include="TitleState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyFighter.h" />
     <ClInclude Include="FriendlyBullet.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="ErrorHandler.h" />

@@ -38,11 +38,13 @@ public:
 	virtual void beginContact(SceneNode* anotherNode){};
 	virtual void endContact(SceneNode* anotherNode){};
 
-	std::vector<SceneNode *> *globalQueuedForDeletion;
-	std::vector<Ptr> *globalQueuedForInsertion;
-	SceneNode *globalRoot;
-	b2World *globalWorld;
-	TextureHolder *globalTextureHolder;
+	static std::vector<SceneNode *> *globalQueuedForDeletion;
+	static std::vector<Ptr> *globalQueuedForInsertion;
+	static SceneNode *globalRoot;
+	static b2World *globalWorld;
+	static TextureHolder *globalTextureHolder;
+
+
     b2Body* myBody;
 	ObjectId::ID MyId;
 	

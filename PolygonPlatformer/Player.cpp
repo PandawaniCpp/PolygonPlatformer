@@ -2,14 +2,47 @@
 
 #define PIXELTOMETER (1.f/10.f)
 
-Player::Player () :currentState (new FlyingState)  {
-	 //myTextureHolder.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
+Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), healthbar_green(new SceneNode)  {
+
 	MyId = ObjectId::PLAYER;
 	contactCounter = 0;
 	isFacingRight = true;
 	isShooting = false;
 	shootingCooldown = sf::seconds (1.f / 5.f);
 	animationCounter = 0;
+
+	setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT_ANIMATION));
+	setTextureRect(sf::IntRect(0, 0, 30, 50));
+	setOrigin(getTextureRect().width / 2.f, getTextureRect().height / 2.f);
+	globalRoot->attachChild(Ptr(this));
+
+	b2FixtureDef boxFixtureDef;
+	b2PolygonShape boxShape;
+	b2BodyDef myBodyDef;
+	myBodyDef.type = b2_dynamicBody;
+	myBodyDef.position.Set(100.f*PIXELTOMETER, 100.f*PIXELTOMETER);
+	myBodyDef.angle = 0;
+	b2Body* dynamicBody = globalWorld->CreateBody(&myBodyDef);
+	boxShape.SetAsBox((getTextureRect().width / 2.f)*PIXELTOMETER, (getTextureRect().height / 2.f)*PIXELTOMETER);
+	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.density = 1;
+	boxFixtureDef.friction = 0;
+	dynamicBody->CreateFixture(&boxFixtureDef);
+	dynamicBody->SetFixedRotation(true);
+	dynamicBody->SetUserData(this);
+	myBody = dynamicBody;
+	
+
+
+	/*textures->load(Textures::HEALTHBAR_RED, "./textures/healthbar_red.png");
+	textures->load(Textures::HEALTHBAR_GREEN, "./textures/healthbar_green.png");
+	healthbar_red->setTexture(globalTextureHolder->get(Textures::HEALTHBAR_RED));
+	healthbar_green->setTexture(globalTextureHolder->get(Textures::HEALTHBAR_GREEN));
+	healthbar_red->setPosition(getPosition().x, getPosition().y - 30.f);
+	healthbar_green->setPosition(getPosition().x, getPosition().y - 30.f);
+	attachChild(healthbar_red);
+	attachChild(healthbar_green);*/
+	
 }
 
 void Player::beginContact(SceneNode* anotherNode)
@@ -25,8 +58,7 @@ void Player::endContact(SceneNode* anotherNode)
 }
 
 void Player::shoot(){
-	SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER, globalRoot, globalQueuedForDeletion, isFacingRight));
-	//globalRoot->attachChild(tmp);
+	SceneNode::Ptr tmp(new FriendlyBullet((myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,isFacingRight));
 	globalQueuedForInsertion->push_back(tmp);
 }
 
@@ -34,6 +66,7 @@ void Player::shoot(){
 
 void Player::updateCurrent (sf::Time dt, b2World* world) {
     setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
+	healthbar_red->setPosition(getPosition().x, getPosition().y - 30.f);
     /*if (myBody->GetLinearVelocity ().y == 0 && currentState)
         currentState->update (this, dt);*/
     if (currentState->id == PlayerStateType::ON_GROUND&&myBody->GetLinearVelocity ().y != 0) {

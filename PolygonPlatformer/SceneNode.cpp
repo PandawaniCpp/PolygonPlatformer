@@ -2,6 +2,15 @@
 #define PIXELTOMETER (1.f/10.f)
 #define RADIANTOANGLE (57.2957795)
 
+
+std::vector<SceneNode *>* SceneNode::globalQueuedForDeletion = nullptr;
+std::vector<SceneNode::Ptr>* SceneNode::globalQueuedForInsertion = nullptr;
+SceneNode* SceneNode::globalRoot = nullptr;
+b2World* SceneNode::globalWorld = nullptr;
+TextureHolder* SceneNode::globalTextureHolder = nullptr;
+
+
+
 SceneNode::SceneNode (b2World* world) : mParent (nullptr),myBody(nullptr) {
 
 }

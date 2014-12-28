@@ -16,10 +16,10 @@ public:
 	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);  
-    void createBot ();
+    /*void createBot ();*/
 
 private:
-	Player::Ptr	player;
+	SceneNode*	player;
     SceneNode root;
     TextureHolder textures;
     b2Vec2 gravity;
@@ -28,9 +28,6 @@ private:
     float timeStep;
     int velocityIterations;
     int positionIterations;
-    b2FixtureDef boxFixtureDef;
-    b2PolygonShape boxShape;
-    b2BodyDef myBodyDef;
     b2BodyDef groundBodyDef;
     b2PolygonShape groundBox;
 	MyContactListener myContactListenerInstance;

@@ -4,77 +4,62 @@
 
 
 GameState::GameState(StateStack & stack) : doSleep(true), 
-player (new Player()),
 timeStep (1.0f / 60.0f),
 velocityIterations (6),
 positionIterations (2) {
 
-	
-    stateStack = &stack;
-    stateID = States::GAME;
+	stateStack = &stack;
+	stateID = States::GAME;
 
-    gravity = b2Vec2 (0.f, 100.f);
-    world = new b2World (gravity);
+	/////////////////////////////////
+	//Setting up Box2d world/////////
+	/////////////////////////////////
+
+	gravity = b2Vec2(0.f, 100.f);
+	world = new b2World(gravity);
+	world->SetAllowSleeping(doSleep);
+
+	//////////////////////////////////////////
+	//Initializing SceneNode static variables/
+	//////////////////////////////////////////
+
+	SceneNode::globalRoot = &root;
+	SceneNode::globalWorld = world;
+	SceneNode::globalQueuedForDeletion = &queuedForDeletion;
+	SceneNode::globalQueuedForInsertion = &queuedForInsertion;
+	SceneNode::globalTextureHolder = &textures;
+
+   
+	///////////////////////////
+	//Loading textures/////////
+	///////////////////////////
+	textures.load(Textures::PLAYER_RIGHT_ANIMATION, "./textures/player_right_tmp.png");
+	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
+	textures.load(Textures::PLAYER_RIGHT, "./textures/player_right.png");
+	textures.load(Textures::PLAYER_LEFT, "./textures/player_left.png");
+	textures.load(Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
+	textures.load(Textures::GAME_BACKGROUND, "./textures/game_background.png");
+
+
+	/////////////////////////////////
+	//Setting up background//////////
+	/////////////////////////////////
+	root.setTexture(textures.get(Textures::GAME_BACKGROUND));
+	root.setOrigin(root.getTextureRect().width / 2.f, root.getTextureRect().height / 2.f);
+	root.setPosition(1120.f / 2.f, 630.f / 2.f);
 
 
 	/////////////////////////////////
 	//Creating Player////////////////
 	/////////////////////////////////
-	
-    root.attachChild (player);
-	
+	player = new(Player);
 
-	player->globalTextureHolder = &textures;
-	textures.load(Textures::PLAYER_RIGHT_ANIMATION, "./textures/player_right_tmp.png");
-	textures.load(Textures::PLAYER_JUMPING, "./textures/player_jumping.png");
-    textures.load (Textures::PLAYER_RIGHT, "./textures/player_right.png");
-	textures.load(Textures::PLAYER_LEFT, "./textures/player_left.png");
-	textures.load(Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
-    player->setTexture (textures.get (Textures::PLAYER_RIGHT));
-    player->setOrigin (player->getTextureRect ().width / 2.f, player->getTextureRect ().height / 2.f);
-    textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
-    root.setTexture (textures.get (Textures::GAME_BACKGROUND));
-    root.setOrigin (root.getTextureRect ().width / 2.f, root.getTextureRect ().height / 2.f);
-    root.setPosition (1120.f / 2.f, 630.f / 2.f);
-    world->SetAllowSleeping (doSleep);
-	player->globalWorld = world;
-	player->globalRoot = &root;
-	player->globalQueuedForDeletion = &queuedForDeletion;
-	player->globalQueuedForInsertion = &queuedForInsertion;
-	/////////////////////////////////
-	//Creating Player in Box2d///////
-	/////////////////////////////////
-
-    myBodyDef.type = b2_dynamicBody;
-    myBodyDef.position.Set (100.f*PIXELTOMETER, 100.f*PIXELTOMETER);
-    myBodyDef.angle = 0;
-
-    b2Body* dynamicBody = world->CreateBody (&myBodyDef);
-
-    boxShape.SetAsBox ((player->getTextureRect ().width / 2.f)*PIXELTOMETER, (player->getTextureRect ().height / 2.f)*PIXELTOMETER);
-
-    boxFixtureDef.shape = &boxShape;
-    boxFixtureDef.density = 1;
-    boxFixtureDef.friction = 0;
-    dynamicBody->CreateFixture (&boxFixtureDef);
-    dynamicBody->SetFixedRotation (true);
-	dynamicBody->SetUserData(player.get());
-    player->myBody = dynamicBody;
-    dynamicBody->SetLinearVelocity (b2Vec2 (30.f, -10.f));
 
 
 	/////////////////////////////////
 	//Setting up collisions//////////
 	/////////////////////////////////
 	world->SetContactListener(&myContactListenerInstance);
-
-
-
-
-
-
-
-
 
     
     /////////////////////////////////
@@ -98,7 +83,7 @@ void GameState::draw (sf::RenderTarget& target) {
 
 bool GameState::handleEvent (const sf::Event& event) {
     
-        switch (event.type) {
+        /*switch (event.type) {
 
             case sf::Event::KeyPressed:
                 if (event.key.code == sf::Keyboard::Space)
@@ -107,7 +92,7 @@ bool GameState::handleEvent (const sf::Event& event) {
 
             case sf::Event::KeyReleased:
                 break;
-    }
+    }*/
     player->handleEvent (event);
 
 
@@ -138,7 +123,7 @@ bool GameState::update (sf::Time dt) {
     return true;
 }
 
-void GameState::createBot () {
+/*void GameState::createBot () {
     Player::Ptr tmp (new SceneNode);
     tmp->setTexture (textures.get (Textures::PLAYER_LEFT));
     root.attachChild (tmp);
@@ -167,4 +152,4 @@ void GameState::createBot () {
     tmp->myBody = tempDynamicBody;
 
 
-}
+}*/

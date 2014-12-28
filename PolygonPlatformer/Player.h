@@ -32,4 +32,6 @@ public:
 	bool isShooting;
 	sf::Time timeSinceLastShot;
 	int animationCounter;
+	Ptr healthbar_red;
+	Ptr healthbar_green;
 };

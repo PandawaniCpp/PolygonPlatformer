@@ -12,20 +12,16 @@ FriendlyBullet::~FriendlyBullet(){
 
 
 
-FriendlyBullet::FriendlyBullet(b2World *world, TextureHolder *texture, float positionX, float positionY, SceneNode *root, std::vector<SceneNode *> *queued, bool facingRight){
+FriendlyBullet::FriendlyBullet(float positionX, float positionY,bool facingRight){
 	height = positionY;
-	globalQueuedForDeletion = queued;
 	MyId = ObjectId::FRIENDLY_BULLET;
-	//velocity = 70.f;
-	globalRoot = root;
+
 	if (facingRight)
 		current_direction = 1;
 	else current_direction = -1;
 	velocity = 70.f*current_direction;
 
-	globalWorld = world;
-	globalTextureHolder = texture;
-	setTexture(texture->get(Textures::FRIENDLY_BULLET));
+	setTexture(globalTextureHolder->get(Textures::FRIENDLY_BULLET));
 	setOrigin(getTextureRect().width / 2.f, getTextureRect().height / 2.f);
 
 	b2BodyDef myBodyDef;

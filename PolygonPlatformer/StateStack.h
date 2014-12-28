@@ -35,6 +35,7 @@ public:
 	bool           isEmpty() const;
 	void           applyPendingChanges();
 	States::ID	   getCurrentStateID();
+
 private:     
 	State::Ptr     createState(States::ID stateID);        
 	

@@ -5,19 +5,27 @@
 PauseState::PauseState(StateStack & stack, Game * game)
 	: State(stack, game) {
 	stateID = States::PAUSE;
+	fontek.loadFromFile("./textures/czcionka.ttf");
 }
 
 void PauseState::draw(sf::RenderTarget& target) {
 
-	backgroundMenu.load(Textures::PAUSE, "./textures/Pause.png");
-	SceneNode::Ptr tmp(new SceneNode);
-	root.attachChild(tmp);
-	tmp->setTexture(backgroundMenu.get(Textures::PAUSE));
-	//tmp->setPosition((float)gamePtr->gameWindow.getSize().x/2, (float)gamePtr->gameWindow.getSize().y/2);
-	//tmp->setOrigin((float)gamePtr->gameWindow.getSize().x / 2, (float)gamePtr->gameWindow.getSize().y / 2);
-	//tmp->setPosition(stateStack->zmiennaX, stateStack->zmiennaY);
-	tmp->setPosition(gamePtr->gameWindow.getView().getCenter().x /2, gamePtr->gameWindow.getView().getCenter().y/2 );
-	root.draw(target);
+	
+	text.setStyle(sf::Text::Bold);
+	text.setColor(sf::Color::Green);
+	text.setCharacterSize(25);
+	text.setFont(fontek);
+	text.setString("Press ENTER to continue\n\nPress ESCAPE to exit(1)\n\n\And for God sake DO NOT PRESS SPACEBAR");
+	text.setPosition((gamePtr->gameWindow.getView().getSize().x / 2)-200, (gamePtr->gameWindow.getView().getSize().y / 2)-30);
+	
+	sf::RenderWindow& window = gamePtr->gameWindow;    
+	window.setView(window.getDefaultView());
+	sf::RectangleShape backgroundShape;    
+	backgroundShape.setFillColor(sf::Color(0, 0, 0, 150));    
+	backgroundShape.setSize(sf::Vector2f(window.getSize()));
+	window.draw(backgroundShape);
+	window.draw(text);
+	
 
 }
 
@@ -26,14 +34,21 @@ bool PauseState::update(sf::Time dt) {
 }
 
 bool PauseState::handleEvent(const sf::Event& event) {
-	//if (event.key.code == sf::Keyboard::A)  dziala
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-
-		exit(1);
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A){
+	
 	}
-	if (event.type == sf::Event::KeyPressed) {
-		requestStackPop();
+	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
 
+		//requestStackPop();
+		//requestStackPop();
+		exit(1);
+		//requestStateClear();			//not working
+		//gamePtr->gameWindow.close();	vector error
+		//requestStackPush(States::MENU);
+	}
+	
+	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return){
+		requestStackPop();
 	}
 	
 	return true;

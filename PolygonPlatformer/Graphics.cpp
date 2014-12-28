@@ -4,7 +4,7 @@
 Graphics::Graphics () : mWindowWidth (1120), mWindowHeight (630), mBitsPerPixel (32U), mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
     // Obtaining native fullscreen modes.
 	setAntialiasing(2);
-	mWindowStyle = sf::Style::Close;
+	mWindowStyle = sf::Style::Fullscreen;
     mVideoModes = sf::VideoMode::getFullscreenModes();
 	mVsync = true;
 }

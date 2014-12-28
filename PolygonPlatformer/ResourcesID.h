@@ -13,3 +13,12 @@ namespace States {
 		LIMIT
 	};
 }
+
+
+namespace Fonts {
+	enum ID {
+		F_MENU,
+		F_CONSOLE,
+		FONTS_COUNT
+	};
+}

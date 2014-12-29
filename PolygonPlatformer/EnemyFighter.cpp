@@ -22,6 +22,7 @@ EnemyFighter::EnemyFighter(float x, float y) :healthbar_red(new SceneNode), heal
 	currentHP = 20;
 	shootingCooldown = sf::seconds(1);
 	timeSinceLastShot = sf::Time::Zero;
+	ghostMode = sf::Time::Zero;
 
 
 	setTexture(globalTextureHolder->get(Textures::ENEMY_FIGHTER));
@@ -72,6 +73,20 @@ void EnemyFighter::shoot()
 
 void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
 
+	ghostMode -= dt;
+	if (ghostMode <= sf::Time::Zero)
+		ghostMode = sf::Time::Zero;
+	if (ghostMode <= sf::Time::Zero&&myBody->GetPosition().y < currentPlayer->myBody->GetPosition().y && (myBody->GetPosition().x - currentPlayer->myBody->GetPosition().x >-0.5f && myBody->GetPosition().x - currentPlayer->myBody->GetPosition().x <0.5f))
+		ghostMode = sf::seconds(1.f/3.f);
+	
+
+	if ((myBody->GetLinearVelocity().y==0)&&ghostMode <= sf::Time::Zero&&myBody->GetPosition().y > currentPlayer->myBody->GetPosition().y && (myBody->GetPosition().x - currentPlayer->myBody->GetPosition().x >-0.5f && myBody->GetPosition().x - currentPlayer->myBody->GetPosition().x <0.5f))
+	{
+		myBody->SetLinearVelocity(b2Vec2(myBody->GetLinearVelocity().x, -100.f));
+		ghostMode = sf::seconds(1.f/2.f);
+	}
+
+
 	timeSinceLastShot += dt;
 
 	if (timeSinceLastShot >= shootingCooldown)
@@ -121,4 +136,9 @@ void EnemyFighter::beginContact(SceneNode* anotherNode)
 void EnemyFighter::endContact(SceneNode* anotherNode)
 {
 	
+}
+
+void EnemyFighter::preSolve(b2Contact* contact, SceneNode* anotherNode){
+	if (anotherNode->MyId == ObjectId::PLATFORM&&ghostMode>sf::Time::Zero)
+		contact->SetEnabled(false);
 }

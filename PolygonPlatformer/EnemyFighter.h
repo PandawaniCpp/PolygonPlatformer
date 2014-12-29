@@ -7,6 +7,7 @@ public:
 	EnemyFighter(float x, float y);
 	~EnemyFighter();
 	virtual void updateCurrent(sf::Time dt, b2World* world = nullptr);
+	void preSolve(b2Contact* contact, SceneNode* anotherNode);
 	void beginContact(SceneNode* anotherNode);
 	void endContact(SceneNode* anotherNode);
 	Ptr healthbar_red;
@@ -14,5 +15,6 @@ public:
 	void shoot();
 	sf::Time shootingCooldown;
 	sf::Time timeSinceLastShot;
+	sf::Time ghostMode;
 
 };

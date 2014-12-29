@@ -12,7 +12,7 @@ TextureHolder* SceneNode::globalTextureHolder = nullptr;
 
 
 SceneNode::SceneNode (b2World* world) : mParent (nullptr),myBody(nullptr) {
-
+	needsToGetDeleted = false;
 }
 
 void SceneNode::attachChild (Ptr child) {

@@ -48,7 +48,7 @@ public:
 	static SceneNode *globalRoot;
 	static b2World *globalWorld;
 	static TextureHolder *globalTextureHolder;
-
+	bool needsToGetDeleted;
 
     b2Body* myBody;
 	ObjectId::ID MyId;

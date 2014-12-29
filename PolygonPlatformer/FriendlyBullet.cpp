@@ -51,10 +51,18 @@ FriendlyBullet::FriendlyBullet(float positionX, float positionY,bool facingRight
 
 void FriendlyBullet::beginContact(SceneNode* another){
 	if (another->MyId != ObjectId::PLAYER)
-		globalQueuedForDeletion->push_back(this);
+		//globalQueuedForDeletion->push_back(this);
+		needsToGetDeleted = true;
 }
 
 void FriendlyBullet::updateCurrent(sf::Time dt, b2World* world){
+	if (needsToGetDeleted)
+	{
+		globalQueuedForDeletion->push_back(this);
+		return;
+	}
+
+
 	
 	myBody->SetTransform(b2Vec2(myBody->GetPosition().x, height * PIXELTOMETER), 0.f);
 	myBody->SetLinearVelocity(b2Vec2(velocity, 0.f));

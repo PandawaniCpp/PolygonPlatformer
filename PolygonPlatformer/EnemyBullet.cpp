@@ -51,7 +51,8 @@ EnemyBullet::EnemyBullet(float positionX, float positionY, bool facingRight){
 
 void EnemyBullet::beginContact(SceneNode* another){
 	if (another->MyId != ObjectId::ENEMY_FIGHTER)
-		globalQueuedForDeletion->push_back(this);
+		//globalQueuedForDeletion->push_back(this);
+		needsToGetDeleted = true;
 }
 
 void EnemyBullet::preSolve(b2Contact* contact, SceneNode* anotherNode){
@@ -64,6 +65,12 @@ void EnemyBullet::preSolve(b2Contact* contact, SceneNode* anotherNode){
 
 
 void EnemyBullet::updateCurrent(sf::Time dt, b2World* world){
+	if (needsToGetDeleted)
+	{
+		globalQueuedForDeletion->push_back(this);
+		return;
+	}
+
 
 	myBody->SetTransform(b2Vec2(myBody->GetPosition().x, height * PIXELTOMETER), 0.f);
 	myBody->SetLinearVelocity(b2Vec2(velocity, 0.f));

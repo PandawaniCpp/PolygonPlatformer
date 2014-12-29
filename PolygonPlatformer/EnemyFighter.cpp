@@ -77,7 +77,6 @@ void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
 	if (timeSinceLastShot >= shootingCooldown)
 	{
 		shoot();
-		//shoot(); Uncommenting will cause apocalypse
 		timeSinceLastShot -= shootingCooldown;
 	}
 

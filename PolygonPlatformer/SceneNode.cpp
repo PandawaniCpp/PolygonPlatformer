@@ -24,10 +24,14 @@ SceneNode::Ptr SceneNode::detachChild (const SceneNode& node) {
     auto found = std::find_if (mChildren.begin (), mChildren.end (),
                                [&] (Ptr& p) -> bool { return p.get () == &node; });
    // assert (found != mChildren.end ());//To do: wyrzucaæ b³êdy do loggera
-    Ptr result = std::move (*found);
-    result->mParent = nullptr;
-    mChildren.erase (found);
-    return result;
+	//if (found != mChildren.end()){
+
+
+		Ptr result = std::move(*found);
+		result->mParent = nullptr;
+		mChildren.erase(found);
+		return result;
+	//}
 }
 
 void SceneNode::update (sf::Time dt, b2World* world) {

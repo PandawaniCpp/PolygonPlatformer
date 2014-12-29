@@ -31,3 +31,18 @@ void MyContactListener::EndContact(b2Contact* contact){
 		collidingNodeAnother->endContact(collidingNode);
 	}
 }
+
+
+void MyContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold){
+	void* bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+	void* bodyUserDataAnother = contact->GetFixtureB()->GetBody()->GetUserData();
+
+
+	if (bodyUserData&&bodyUserDataAnother)
+	{
+		SceneNode* collidingNode = static_cast<SceneNode*> (bodyUserData);
+		SceneNode* collidingNodeAnother = static_cast<SceneNode*> (bodyUserDataAnother);
+		collidingNode->preSolve(contact, collidingNodeAnother);
+		collidingNodeAnother->preSolve(contact,collidingNode);
+	}
+}

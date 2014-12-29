@@ -1,4 +1,6 @@
 #include "Creature.h"
+#include "EnemyBullet.h"
+
 
 class EnemyFighter :public Creature{
 public:
@@ -9,6 +11,8 @@ public:
 	void endContact(SceneNode* anotherNode);
 	Ptr healthbar_red;
 	Ptr healthbar_green;
-
+	void shoot();
+	sf::Time shootingCooldown;
+	sf::Time timeSinceLastShot;
 
 };

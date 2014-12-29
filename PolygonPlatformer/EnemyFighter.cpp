@@ -20,11 +20,15 @@ EnemyFighter::EnemyFighter(float x, float y) :healthbar_red(new SceneNode), heal
 
 	maxHP = 20;
 	currentHP = 20;
+	shootingCooldown = sf::seconds(1);
+	timeSinceLastShot = sf::Time::Zero;
 
 
 	setTexture(globalTextureHolder->get(Textures::ENEMY_FIGHTER));
 	setOrigin(getTextureRect().width / 2.f, getTextureRect().height / 2.f);
-	globalRoot->attachChild(Ptr(this));
+	globalQueuedForInsertion->push_back(Ptr(this));
+
+	//globalRoot->attachChild(Ptr(this));
 
 	b2FixtureDef boxFixtureDef;
 	b2PolygonShape boxShape;
@@ -58,8 +62,25 @@ EnemyFighter::EnemyFighter(float x, float y) :healthbar_red(new SceneNode), heal
 
 }
 
+void EnemyFighter::shoot()
+{
+	SceneNode::Ptr tmp(new EnemyBullet((myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER, (myBody->GetPosition().x<currentPlayer->myBody->GetPosition().x) ? true : false));
+
+	globalQueuedForInsertion->push_back(tmp);
+}
+
 
 void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
+
+	timeSinceLastShot += dt;
+
+	if (timeSinceLastShot >= shootingCooldown)
+	{
+		shoot();
+		//shoot(); Uncommenting will cause apocalypse
+		timeSinceLastShot -= shootingCooldown;
+	}
+
 
 	if (currentHP <= 0)
 	{

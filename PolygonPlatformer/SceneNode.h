@@ -41,6 +41,7 @@ public:
     };
 	virtual void beginContact(SceneNode* anotherNode){};
 	virtual void endContact(SceneNode* anotherNode){};
+	virtual void preSolve(b2Contact* contact, SceneNode* anotherNode){};
 
 	static std::vector<SceneNode *> *globalQueuedForDeletion;
 	static std::vector<Ptr> *globalQueuedForInsertion;

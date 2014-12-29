@@ -30,7 +30,11 @@ public:
 
 	void setAntialiasing(const unsigned int antialiasing);
 
+	void setWindowPtr(sf::RenderWindow& target);
+
 private:
+
+	sf::RenderWindow* windowPtr;
     // Screen resolution and color mode
     unsigned int mWindowWidth;
     unsigned int mWindowHeight;

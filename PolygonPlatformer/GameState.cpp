@@ -76,6 +76,8 @@ positionIterations (2) {
     //Camera - Viewport//////////////
     /////////////////////////////////
     view.setCenter (player->getPosition ());
+
+	game->musicPlayer.play(Music::GAMETHEME);
 }
 
 void GameState::draw (sf::RenderTarget& target) {

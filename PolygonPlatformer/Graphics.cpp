@@ -59,3 +59,7 @@ void Graphics::setAntialiasing(const unsigned int antialiasing) {
 	mContextSettings.antialiasingLevel = antialiasing;
 }
 
+void Graphics::setWindowPtr(sf::RenderWindow& target) {
+	windowPtr = &target;
+}
+

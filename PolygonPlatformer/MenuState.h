@@ -1,6 +1,7 @@
 #pragma once
 #include "State.h"
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 
 class StateStack;
 class MenuState : public State {

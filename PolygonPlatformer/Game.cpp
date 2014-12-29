@@ -3,12 +3,15 @@
 
 
 Game::Game() : gameName("Platformer"), mStateStack(this),
-gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()) {
+gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()),
+musicPlayer() {
     //Settig basic window options
 	gameWindow.setVerticalSyncEnabled(graphics.getVsync());
 	gameWindow.setMouseCursorVisible(false);
 	gameWindow.setIcon(window_icon.width, window_icon.height, window_icon.pixel_data);
 	gameWindow.setKeyRepeatEnabled(false);
+
+	graphics.setWindowPtr(gameWindow);
 	
 	//States
 	mStateStack.registerState<MenuState>(States::MENU);

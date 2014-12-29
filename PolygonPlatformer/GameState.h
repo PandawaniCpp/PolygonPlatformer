@@ -8,6 +8,8 @@
 #include <Box2D/Box2D.h>
 #include "Map.h"
 #include "MyContactListener.h"
+#include "MusicPlayer.h"
+#include "Game.h"
 
 class StateStack;
 class GameState : public State{

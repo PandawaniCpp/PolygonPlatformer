@@ -7,6 +7,7 @@
 #include <memory>
 #include "ResourcesID.h"
 #include "SceneNode.h"
+
 class StateStack;
 class Game;
 class State {

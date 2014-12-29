@@ -9,6 +9,7 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	root.attachChild(tmp);
 	tmp->setTexture(backgroundMenu.get(Textures::MENU));
 	stateID = States::MENU;
+	game->musicPlayer.play(Music::MENUTHEME);
 }
 
 void MenuState::draw (sf::RenderTarget& target) {

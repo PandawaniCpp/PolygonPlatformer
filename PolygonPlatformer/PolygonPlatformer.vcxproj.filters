@@ -81,7 +81,11 @@
     <ClCompile Include="EnemyFighter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="EnemyBullet.cpp">
+=======
+    <ClCompile Include="MusicPlayer.cpp">
+>>>>>>> Stashed changes
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +156,11 @@
     <ClInclude Include="EnemyFighter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="EnemyBullet.h">
+=======
+    <ClInclude Include="MusicPlayer.h">
+>>>>>>> Stashed changes
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

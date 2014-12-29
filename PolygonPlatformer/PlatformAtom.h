@@ -7,10 +7,10 @@
 
 class PlatformAtom : public SceneNode {
 public:
-    PlatformAtom (sf::Vector2f, TextureHolder &, b2World &);
+    PlatformAtom (sf::Vector2f = {0.f, 0.f});
     float getWidth ();      //of texture
     float getHeight ();
-    void setPosition (sf::Vector2f);    //position in pxiels not meters of course
+    void setPosition (sf::Vector2f);
 
 private:
     sf::Vector2f mPosition;     //centre of brick

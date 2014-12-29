@@ -1,10 +1,10 @@
 #include "PlatformAtom.h"
 
-PlatformAtom::PlatformAtom (sf::Vector2f position, TextureHolder &texture, b2World &braveNewWorld) : mPosition (position) {
+PlatformAtom::PlatformAtom (sf::Vector2f position) : mPosition (position) {
     groundBodyDef.position.Set (position.x * PIXELTOMETER, position.y * PIXELTOMETER);
-    texture.load (Textures::GROUND, "./textures/brick.png");
-    setTexture (texture.get (Textures::GROUND));
-    b2Body * groundBody = braveNewWorld.CreateBody (&groundBodyDef);
+    globalTextureHolder->load (Textures::GROUND, "./textures/brick.png");
+    setTexture (globalTextureHolder->get (Textures::GROUND));
+    b2Body * groundBody = globalWorld->CreateBody (&groundBodyDef);
     groundBox.SetAsBox ((getTextureRect ().width / 2.f)*PIXELTOMETER, (getTextureRect ().height / 2.f)*PIXELTOMETER);
     groundBody->CreateFixture (&groundBox, 0.0f);
 

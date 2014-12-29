@@ -23,6 +23,7 @@ public:
 
 private:
 	SceneNode*	player;
+    SceneNode * map;
     SceneNode root;
     TextureHolder textures;
     b2Vec2 gravity;

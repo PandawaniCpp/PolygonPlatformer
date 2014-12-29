@@ -70,8 +70,7 @@ positionIterations (2) {
     /////////////////////////////////
     //Scene - Setup//////////////////
     /////////////////////////////////
-    Map * sampleMap = new Map({0, 0}, {0, 0}, {0, 0}, 0, textures, *world);
-    root.attachChild (SceneNode::Ptr (sampleMap));
+    map = new Map(7);
 
     /////////////////////////////////
     //Camera - Viewport//////////////

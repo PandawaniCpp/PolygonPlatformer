@@ -13,7 +13,7 @@ public:
         float leftUp, leftDown, rigthUp, rightDown;
     };
 
-    Platform (sf::Vector2f, std::pair<int, int>, TextureHolder &, b2World &);   //vector specifies left upper corner of the platform
+    Platform (sf::Vector2f = {0.f, 0.f}, std::pair<int, int> = {0, 0});   //vector specifies left upper corner of the platform
     ~Platform ();
 
     Corner getCorner ();

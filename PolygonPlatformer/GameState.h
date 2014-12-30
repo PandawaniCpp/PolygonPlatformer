@@ -10,6 +10,7 @@
 #include "MyContactListener.h"
 #include "MusicPlayer.h"
 #include "Game.h"
+#include "SoundPlayer.h"
 
 class StateStack;
 class GameState : public State{
@@ -28,6 +29,7 @@ private:
     SceneNode * map;
     SceneNode root;
     TextureHolder textures;
+	SoundPlayer soundPlayer;
     b2Vec2 gravity;
     bool doSleep;
     b2World *world;

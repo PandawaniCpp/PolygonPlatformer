@@ -6,7 +6,8 @@
 GameState::GameState(StateStack & stack, Game * game) : State(stack, game), doSleep(true),
 timeStep (1.0f / 60.0f),
 velocityIterations (6),
-positionIterations (2) {
+positionIterations (2),
+soundPlayer() {
 
 	//stateStack = &stack;
 	stateID = States::GAME;
@@ -28,6 +29,7 @@ positionIterations (2) {
 	SceneNode::globalQueuedForDeletion = &queuedForDeletion;
 	SceneNode::globalQueuedForInsertion = &queuedForInsertion;
 	SceneNode::globalTextureHolder = &textures;
+	SceneNode::soundPlayer = &soundPlayer;
 
    
 	///////////////////////////
@@ -129,6 +131,8 @@ bool GameState::update (sf::Time dt) {
 
     root.update (dt, world);
     view.setCenter (player->getPosition ());
+
+	soundPlayer.removeStoppedSounds();
 
     return true;
 }

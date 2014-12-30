@@ -95,12 +95,14 @@ void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
 	if (timeSinceLastShot >= shootingCooldown)
 	{
 		shoot();
+		soundPlayer->play(SoundEffect::ENEMY_SHOOT);
 		timeSinceLastShot -= shootingCooldown;
 	}
 
 
 	if (currentHP <= 0)
 	{
+		soundPlayer->play(SoundEffect::ENEMY_DIES);
 		globalQueuedForDeletion->push_back(this);
 		SceneNode *tmp;
 		tmp = new NonPhysical(Textures::ENEMY_FIGHTER, sf::IntRect(0, 25, 30, 25), 0, 0, 0, getPosition().x, getPosition().y + 13, 50, 0);
@@ -136,8 +138,10 @@ void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
 
 void EnemyFighter::beginContact(SceneNode* anotherNode)
 {
-	if (anotherNode->MyId == ObjectId::FRIENDLY_BULLET)
+	if (anotherNode->MyId == ObjectId::FRIENDLY_BULLET) {
+		soundPlayer->play(SoundEffect::ENEMY_HIT);
 		damage(10);
+	}
 }
 
 

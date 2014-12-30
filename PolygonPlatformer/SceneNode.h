@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 #include "TextureHolder.h"
+#include "SoundPlayer.h"
 
 
 namespace ObjectId
@@ -48,6 +49,7 @@ public:
 	static SceneNode *globalRoot;
 	static b2World *globalWorld;
 	static TextureHolder *globalTextureHolder;
+	static SoundPlayer *soundPlayer;
 	bool needsToGetDeleted;
 
     b2Body* myBody;

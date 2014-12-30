@@ -21,6 +21,7 @@
 //Icon
 #include "./textures/window_icon.cpp"
 
+//Music
 #include "MusicPlayer.h"
 
 
@@ -57,6 +58,8 @@ private:
     sf::RenderWindow gameWindow;
 
 	MusicPlayer musicPlayer;
+
+
 
     //Player::Ptr gamePlayer;
 

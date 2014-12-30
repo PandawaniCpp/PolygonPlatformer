@@ -8,6 +8,7 @@ std::vector<SceneNode::Ptr>* SceneNode::globalQueuedForInsertion = nullptr;
 SceneNode* SceneNode::globalRoot = nullptr;
 b2World* SceneNode::globalWorld = nullptr;
 TextureHolder* SceneNode::globalTextureHolder = nullptr;
+SoundPlayer* SceneNode::soundPlayer = nullptr;
 
 
 

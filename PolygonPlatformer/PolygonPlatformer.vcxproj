@@ -99,6 +99,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="SceneNode.cpp" />
+    <ClCompile Include="SoundBufferHolder.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
@@ -127,6 +129,8 @@
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ResourcesID.h" />
     <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="SoundBufferHolder.h" />
+    <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextureHolder.h" />

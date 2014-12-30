@@ -26,6 +26,8 @@
     <ClCompile Include="TextureHolder.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="NonPhysical.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
+    <ClCompile Include="SoundBufferHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -53,5 +55,7 @@
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="NonPhysical.h" />
+    <ClInclude Include="SoundPlayer.h" />
+    <ClInclude Include="SoundBufferHolder.h" />
   </ItemGroup>
 </Project>

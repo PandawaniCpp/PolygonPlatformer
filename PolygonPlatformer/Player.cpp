@@ -92,6 +92,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 	if (timeSinceLastShot >= shootingCooldown&&isShooting)
 	{
 		shoot();
+		soundPlayer->play(SoundEffect::PLAYER_SHOOT);
 		timeSinceLastShot -= shootingCooldown;
 	}
 

@@ -44,7 +44,7 @@ FriendlyBullet::FriendlyBullet(float positionX, float positionY,bool facingRight
 	dynamicBody->SetFixedRotation(true);
 	dynamicBody->SetUserData(this);
 	myBody = dynamicBody;
-
+	setPosition(myBody->GetPosition().x / PIXELTOMETER, myBody->GetPosition().y / PIXELTOMETER);
 }
 
 
@@ -53,6 +53,18 @@ void FriendlyBullet::beginContact(SceneNode* another){
 	if (another->MyId != ObjectId::PLAYER)
 		//globalQueuedForDeletion->push_back(this);
 		needsToGetDeleted = true;
+	if (another->MyId == ObjectId::ENEMY_FIGHTER)
+	{
+		SceneNode *tmp;
+		int size;
+		for (int i = (rand() % 7)-3; i < 9; ++i)
+		{
+			size = rand() % 5;
+			tmp = new NonPhysical(Textures::BLOOD, sf::IntRect(0, 0, size, size), ((rand() % 200) / 100.f)-1.f, ((rand() % 200) / 100.f)-1.f,20, getPosition().x, getPosition().y, 80);
+			globalQueuedForInsertion->push_back(Ptr(tmp));
+		}
+
+	}
 }
 
 void FriendlyBullet::updateCurrent(sf::Time dt, b2World* world){

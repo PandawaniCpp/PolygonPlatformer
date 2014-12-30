@@ -2,7 +2,7 @@
 
 #include "SceneNode.h"
 #include "TextureHolder.h"
-
+#include "NonPhysical.h"
 
 class EnemyBullet : public SceneNode{
 public:

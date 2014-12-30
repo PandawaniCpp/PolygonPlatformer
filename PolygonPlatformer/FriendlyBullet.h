@@ -1,5 +1,6 @@
 #include "SceneNode.h"
 #include "TextureHolder.h"
+#include "NonPhysical.h"
 
 
 class FriendlyBullet : public SceneNode{

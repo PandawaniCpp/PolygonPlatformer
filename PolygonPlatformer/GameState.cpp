@@ -43,6 +43,7 @@ positionIterations (2) {
 	textures.load(Textures::ENEMY_BULLET, "./textures/enemy_bullet.png");
 	textures.load(Textures::GAME_BACKGROUND, "./textures/game_background.png");
 	textures.load(Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
+	textures.load(Textures::BLOOD, "./textures/blood.png");
 
 
 	/////////////////////////////////

@@ -92,6 +92,7 @@
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MusicPlayer.cpp" />
     <ClCompile Include="MyContactListener.cpp" />
+    <ClCompile Include="NonPhysical.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlatformAtom.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MusicPlayer.h" />
     <ClInclude Include="MyContactListener.h" />
+    <ClInclude Include="NonPhysical.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlatformAtom.h" />

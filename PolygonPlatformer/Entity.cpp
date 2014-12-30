@@ -14,6 +14,6 @@ void Entity::setPosition (float x, float y) {
     mPosition.y = y;
 }*/
 
-sf::Vector2f Entity::getPosition () {
+/*sf::Vector2f Entity::getPosition () {
     return mPosition;
-}
+}*/

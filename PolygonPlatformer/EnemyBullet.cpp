@@ -53,6 +53,18 @@ void EnemyBullet::beginContact(SceneNode* another){
 	if (another->MyId != ObjectId::ENEMY_FIGHTER)
 		//globalQueuedForDeletion->push_back(this);
 		needsToGetDeleted = true;
+	if (another->MyId == ObjectId::PLAYER)
+	{
+		SceneNode *tmp;
+		int size;
+		for (int i = (rand() % 7) - 3; i < 9; ++i)
+		{
+			size = rand() % 5;
+			tmp = new NonPhysical(Textures::BLOOD, sf::IntRect(0, 0, size, size), ((rand() % 200) / 100.f) - 1.f, ((rand() % 200) / 100.f) - 1.f, 20, getPosition().x, getPosition().y, 80);
+			globalQueuedForInsertion->push_back(Ptr(tmp));
+		}
+
+	}
 }
 
 void EnemyBullet::preSolve(b2Contact* contact, SceneNode* anotherNode){

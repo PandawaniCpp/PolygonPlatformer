@@ -7,6 +7,9 @@
 
 EnemyFighter::~EnemyFighter(){
 	globalWorld->DestroyBody(myBody);
+	
+
+
 }
 
 
@@ -99,7 +102,12 @@ void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
 	if (currentHP <= 0)
 	{
 		globalQueuedForDeletion->push_back(this);
-		return;
+		SceneNode *tmp;
+		tmp = new NonPhysical(Textures::ENEMY_FIGHTER, sf::IntRect(0, 25, 30, 25), 0, 0, 0, getPosition().x, getPosition().y + 13, 50, 0);
+		globalQueuedForInsertion->push_back(Ptr(tmp));
+		tmp = new NonPhysical(Textures::ENEMY_FIGHTER, sf::IntRect(0, 0, 30, 25), ((rand() % 200) / 100.f) - 1.f, ((rand() % 200) / 100.f) - 2.f, (rand() % 20) - 10.f, getPosition().x, getPosition().y - 13, 50);
+		globalQueuedForInsertion->push_back(Ptr(tmp));
+		//return;
 	}
 
 	setPosition(myBody->GetPosition().x / PIXELTOMETER, myBody->GetPosition().y / PIXELTOMETER);

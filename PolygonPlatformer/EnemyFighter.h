@@ -1,5 +1,6 @@
 #include "Creature.h"
 #include "EnemyBullet.h"
+#include "NonPhysical.h"
 
 
 class EnemyFighter :public Creature{

@@ -8,7 +8,7 @@ public:
 
     void heal (unsigned amount);
 
-    void damage (unsigned amount);
+    virtual void damage (unsigned amount);
 
 	static SceneNode* currentPlayer;
 protected:

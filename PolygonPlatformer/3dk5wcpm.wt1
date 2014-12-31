@@ -106,7 +106,6 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 	if (timeSinceLastDamage >= touchingDamageCooldown&&contactCounter>0)
 	{
 		damage(1);
-		timeSinceLastDamage -= touchingDamageCooldown;
 	}
 
 
@@ -196,8 +195,6 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 	healthbar_green->setTextureRect(sf::IntRect(0, 0, static_cast<int>(25 * (currentHP / maxHP)), 4));
 	if (currentHP < 0)
 		currentHP = 0;
-	if (currentHP>maxHP)
-		currentHP = maxHP;
 }
 
 bool Player::handleEvent (const sf::Event& event) {
@@ -213,7 +210,7 @@ bool Player::handleEvent (const sf::Event& event) {
 			}
 			if (event.key.code == sf::Keyboard::P)
 			{
-				heal(100);
+				damage(10);
 			}
 
             currentState->handleEvent (this, event);

@@ -20,6 +20,7 @@ public:
 	void endContact(SceneNode* anotherNode);
     bool handleEvent (const sf::Event& event);
 	void shoot();
+	void damage(unsigned amount);
     bool isMovingLeft;
     bool isMovingRight;
     bool isJumping;
@@ -29,6 +30,8 @@ public:
 	int contactCounter;
 	bool isFacingRight;
 	sf::Time shootingCooldown;
+	sf::Time touchingDamageCooldown;
+	sf::Time timeSinceLastDamage;
 	bool isShooting;
 	sf::Time timeSinceLastShot;
 	int animationCounter;

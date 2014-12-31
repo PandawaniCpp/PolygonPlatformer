@@ -9,12 +9,9 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	isFacingRight = true;
 	isShooting = false;
 	shootingCooldown = sf::seconds (1.f / 5.f);
-	touchingDamageCooldown = sf::seconds(1.f);
 	animationCounter = 0;
 	maxHP = 100;
 	currentHP = 100;
-	timeSinceLastDamage = sf::seconds(1.f);
-	timeSinceLastShot = sf::seconds(1.f / 5.f);
 
 
 	setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT_ANIMATION));
@@ -55,16 +52,13 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 
 void Player::beginContact(SceneNode* anotherNode)
 {
-	if (anotherNode->MyId == ObjectId::ENEMY_FIGHTER)
+	if (anotherNode->MyId == ObjectId::PLATFORM)
 		contactCounter++;
-
-	if (anotherNode->MyId == ObjectId::ENEMY_BULLET)
-		damage(5);
 }
 
 void Player::endContact(SceneNode* anotherNode)
 {
-	if (anotherNode->MyId == ObjectId::ENEMY_FIGHTER)
+	if (anotherNode->MyId == ObjectId::PLATFORM)
 		contactCounter--;
 }
 
@@ -96,18 +90,6 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
         delete currentState;
         currentState = new OnGroundState;
     }
-
-
-	timeSinceLastDamage += dt;
-	if (contactCounter==0&&timeSinceLastDamage >= touchingDamageCooldown)
-		timeSinceLastDamage = touchingDamageCooldown;
-
-
-	if (timeSinceLastDamage >= touchingDamageCooldown&&contactCounter>0)
-	{
-		damage(1);
-		timeSinceLastDamage -= touchingDamageCooldown;
-	}
 
 
 	timeSinceLastShot += dt;
@@ -196,8 +178,6 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 	healthbar_green->setTextureRect(sf::IntRect(0, 0, static_cast<int>(25 * (currentHP / maxHP)), 4));
 	if (currentHP < 0)
 		currentHP = 0;
-	if (currentHP>maxHP)
-		currentHP = maxHP;
 }
 
 bool Player::handleEvent (const sf::Event& event) {
@@ -213,7 +193,7 @@ bool Player::handleEvent (const sf::Event& event) {
 			}
 			if (event.key.code == sf::Keyboard::P)
 			{
-				heal(100);
+				damage(10);
 			}
 
             currentState->handleEvent (this, event);

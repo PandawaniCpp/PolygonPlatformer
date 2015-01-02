@@ -76,7 +76,6 @@ void StateStack::applyPendingChanges() {
 			break;
 
 		case CLEAR:
-			for (State::Ptr & state : stateStack)
 				stateStack.clear();
 			break;
 		}

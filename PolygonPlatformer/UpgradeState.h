@@ -2,11 +2,12 @@
 #include "State.h"
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+
 class StateStack;
-class PauseState : public State {
+class UpgradeState : public State {
 public:
 
-	PauseState(StateStack & stack, Game * game);
+	UpgradeState(StateStack & stack, Game * game);
 
 	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
@@ -14,10 +15,8 @@ public:
 
 
 private:
+	//gamePtr
 	SceneNode root;
 	TextureHolder backgroundMenu;
-	sf::Text text;
-	sf::Texture texture;
-	sf::Sprite background;
-	sf::Font   font;
+
 };

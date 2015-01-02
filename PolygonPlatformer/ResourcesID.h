@@ -10,6 +10,7 @@ namespace States {
 		GAME = 1 << 3,
 		PAUSE = 1 << 4,
 		EXIT = 1 << 5,
+		UPGRADE = 1 << 6 ,
 		LIMIT
 	};
 }

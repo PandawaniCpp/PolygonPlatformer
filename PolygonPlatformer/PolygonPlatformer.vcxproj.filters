@@ -28,6 +28,7 @@
     <ClCompile Include="NonPhysical.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SoundBufferHolder.cpp" />
+    <ClCompile Include="UpgradeState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -57,5 +58,6 @@
     <ClInclude Include="NonPhysical.h" />
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SoundBufferHolder.h" />
+    <ClInclude Include="UpgradeState.h" />
   </ItemGroup>
 </Project>

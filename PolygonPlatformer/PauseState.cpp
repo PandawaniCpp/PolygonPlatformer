@@ -5,18 +5,18 @@
 PauseState::PauseState(StateStack & stack, Game * game)
 	: State(stack, game) {
 	stateID = States::PAUSE;
-	fontek.loadFromFile("./textures/czcionka.ttf");
+	font.loadFromFile("./textures/coolFont.ttf");
 }
 
 void PauseState::draw(sf::RenderTarget& target) {
 
 	
 	text.setStyle(sf::Text::Bold);
-	text.setColor(sf::Color::Green);
-	text.setCharacterSize(25);
-	text.setFont(fontek);
-	text.setString("Press ENTER to continue\n\nPress ESCAPE to exit(1)\n\n\And for God sake DO NOT PRESS SPACEBAR");
-	text.setPosition((gamePtr->gameWindow.getView().getSize().x / 2)-200, (gamePtr->gameWindow.getView().getSize().y / 2)-30);
+	text.setColor(sf::Color::White);
+	text.setCharacterSize(45);
+	text.setFont(font);
+	text.setString("Press ENTER to continue\n\n    Press ESCAPE to exit\n\n\  Press R to restart game");
+	text.setPosition((gamePtr->gameWindow.getView().getSize().x / 2) - 170, (gamePtr->gameWindow.getView().getSize().y / 2) - 130);
 	
 	sf::RenderWindow& window = gamePtr->gameWindow;    
 	window.setView(window.getDefaultView());
@@ -34,19 +34,14 @@ bool PauseState::update(sf::Time dt) {
 }
 
 bool PauseState::handleEvent(const sf::Event& event) {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A){
-	
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R){
+		requestStateClear();
+		stateStack->pushState(States::GAME);
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-
-		//requestStackPop();
-		//requestStackPop();
-		exit(1);
-		//requestStateClear();			//not working
-		//gamePtr->gameWindow.close();	vector error
-		//requestStackPush(States::MENU);
+		requestStateClear();			
+		gamePtr->gameWindow.close();		
 	}
-	
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return){
 		requestStackPop();
 	}

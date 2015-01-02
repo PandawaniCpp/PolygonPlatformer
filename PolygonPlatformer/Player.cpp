@@ -211,7 +211,7 @@ bool Player::handleEvent (const sf::Event& event) {
 				globalRoot->attachChild(tmp);*/
 				//globalRoot->detachChild(*(tmp.get()));
 			}
-			if (event.key.code == sf::Keyboard::P)
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				heal(100);
 			}

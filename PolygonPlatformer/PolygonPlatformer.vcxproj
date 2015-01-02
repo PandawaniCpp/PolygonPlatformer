@@ -106,6 +106,7 @@
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TextureHolder.cpp" />
     <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="UpgradeState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -135,6 +136,7 @@
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextureHolder.h" />
     <ClInclude Include="TitleState.h" />
+    <ClInclude Include="UpgradeState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

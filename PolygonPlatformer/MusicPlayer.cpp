@@ -2,7 +2,7 @@
 
 
 MusicPlayer::MusicPlayer() : mMusic(), mFilenames(), mVolume(20.f) {
-	mFilenames[Music::MENUTHEME] = "./sounds/music/Benu.ogg";
+	mFilenames[Music::MENUTHEME] = "./sounds/music/Boss.ogg";
 	mFilenames[Music::GAMETHEME] = "./sounds/music/Main.ogg";
 };
 

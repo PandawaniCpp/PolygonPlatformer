@@ -8,7 +8,7 @@ UpgradeState::UpgradeState(StateStack & stack, Game * game)
 }
 
 void UpgradeState::draw(sf::RenderTarget& target) {
-
+	
 }
 
 bool UpgradeState::update(sf::Time dt) {

@@ -13,7 +13,8 @@ class Game;
 class State {
 public:        
 	typedef std::unique_ptr <State> Ptr;        
-	 	
+	StateStack*     stateStack;
+
 	State(StateStack& stack, Game *game);
 	virtual         ~State();						   
     virtual void    draw (sf::RenderTarget& target) = 0;
@@ -28,6 +29,5 @@ protected:
 	
 
 	States::ID stateID;
-	StateStack*     stateStack;
-
+	
 };

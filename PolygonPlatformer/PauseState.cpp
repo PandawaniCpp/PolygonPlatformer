@@ -23,7 +23,7 @@ void PauseState::draw(sf::RenderTarget& target) {
 }
 
 bool PauseState::update(sf::Time dt) {
-	
+
 	text.setCharacterSize(45);
 
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());

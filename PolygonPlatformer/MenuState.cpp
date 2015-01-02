@@ -14,6 +14,7 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	backgroundShape.setFillColor(sf::Color(0, 0, 0, 150));
 	backgroundShape.setSize(sf::Vector2f(10000, 10000));
 	
+	
 }
 
 void MenuState::draw (sf::RenderTarget& target) {
@@ -25,6 +26,8 @@ void MenuState::draw (sf::RenderTarget& target) {
 
 bool MenuState::update(sf::Time dt) {
 	
+
+
 	text.setCharacterSize(gamePtr->graphics.getWindowHeight() / 4);
 
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());

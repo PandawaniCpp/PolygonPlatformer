@@ -11,7 +11,7 @@
 #include "ResourcesID.h"
 #include "Graphics.h"
 
-
+class GameState;
 
 class StateStack {
 public:        
@@ -36,6 +36,8 @@ public:
 	void           applyPendingChanges();
 	States::ID	   getCurrentStateID();
 
+	GameState			*gameStatePtr;
+
 private:     
 	State::Ptr     createState(States::ID stateID);        
 	
@@ -50,6 +52,7 @@ private:
 	std::vector<PendingChange>     pendingList;        
 	std::map<States::ID, std::function<State::Ptr()>>    factories;
 	Game *							game;
+	
 };
 
 

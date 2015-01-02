@@ -6,7 +6,7 @@ StateStack::~StateStack() {
 }
 
 StateStack::StateStack(Game * game)
-	: stateStack(), pendingList(), game(game), factories() {
+	: stateStack(),gameStatePtr(nullptr), pendingList(), game(game), factories() {
 }
 
 void StateStack::update(sf::Time dt) {
@@ -14,14 +14,13 @@ void StateStack::update(sf::Time dt) {
 		stateStack.back()->update(dt);
 
 	applyPendingChanges();
-
+	
 }
 States::ID StateStack::getCurrentStateID() {	
 	if (stateStack.empty())
 		return States::NONE;
 	else		
 		return stateStack.back()->getStateID();
-
 	}
 
 void StateStack::draw (sf::RenderTarget& target) {

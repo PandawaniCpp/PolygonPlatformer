@@ -7,6 +7,9 @@ class StateStack;
 class MenuState : public State {
 public:
 	
+	enum OptionNames { Play , Options , Exit , };
+
+
 	MenuState(StateStack & stack, Game * game);
 
     virtual void draw (sf::RenderTarget& target);
@@ -19,5 +22,7 @@ private:
 	sf::RectangleShape backgroundShape;
 	sf::Text text;
 	sf::Font   font;
+	std::vector<sf::Text>    mOptions; 
+	std::size_t              mOptionIndex;
 
 };

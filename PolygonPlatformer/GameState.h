@@ -17,16 +17,16 @@ class GameState : public State{
 public:
 	
 	GameState(StateStack & stack, Game * gamePtr);
-
+	virtual			~GameState();
 	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);  
     /*void createBot ();*/
 	void spawnEnemyFighter(float x, float y);
 
-private:
 	SceneNode*	player;
-    SceneNode * map;
+private:
+	SceneNode * map;
     SceneNode root;
     TextureHolder textures;
 	SoundPlayer soundPlayer;

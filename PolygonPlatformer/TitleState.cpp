@@ -35,6 +35,12 @@ bool TitleState::update(sf::Time dt) {
 }
 
 bool TitleState::handleEvent(const sf::Event& event) {
+	
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
+		requestStackPop();
+		requestStackPush(States::MENU);
+	}
+	/*
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A){
 		gamePtr->graphics.setWindowHeight(630);
 		gamePtr->graphics.setWindowWidth(1120);
@@ -48,15 +54,13 @@ bool TitleState::handleEvent(const sf::Event& event) {
         text.setOrigin (text.getLocalBounds ().width / 2, text.getLocalBounds ().height / 2);
 
         gamePtr->gameWindow.setView (gamePtr->view);
-      
+    }
+	*/
 		//requestStackPop();
 		//requestStackPush(States::TITLE);
-	}
+	
 
-	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
-		requestStackPop();
-		requestStackPush(States::MENU);
-	}
+	
 	return true;
 }
 

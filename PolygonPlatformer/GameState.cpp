@@ -11,7 +11,11 @@ soundPlayer() {
 
 	//stateStack = &stack;
 	stateID = States::GAME;
-
+	////////////////////////////////
+	//////////LOL//////////////////
+	///////////////////////////////
+	stateStack->gameStatePtr = this;
+	
 	/////////////////////////////////
 	//Setting up Box2d world/////////
 	/////////////////////////////////
@@ -140,7 +144,9 @@ void GameState::spawnEnemyFighter(float x, float y){
 	new EnemyFighter(x,y);
 }
 
-
+GameState::~GameState(){
+	stateStack->gameStatePtr = nullptr;
+}
 /*void GameState::createBot () {
     Player::Ptr tmp (new SceneNode);
     tmp->setTexture (textures.get (Textures::PLAYER_LEFT));

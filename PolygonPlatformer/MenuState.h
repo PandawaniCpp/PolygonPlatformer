@@ -16,10 +16,8 @@ public:
 
 private:
 	SceneNode root;
-	TextureHolder backgroundMenu;
+	sf::RectangleShape backgroundShape;
 	sf::Text text;
-	sf::Texture texture;
-	sf::Sprite background;
 	sf::Font   font;
 
 };

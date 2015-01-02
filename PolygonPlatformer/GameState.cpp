@@ -78,15 +78,15 @@ soundPlayer() {
     /////////////////////////////////
     //Camera - Viewport//////////////
     /////////////////////////////////
-    view.setCenter (player->getPosition ());
+    gamePtr->view.setCenter (player->getPosition ());
 
 	game->musicPlayer.play(Music::GAMETHEME);
 }
 
 void GameState::draw (sf::RenderTarget& target) {
     sf::Vector2u size = target.getSize ();
-    view.setSize (size.x, size.y);
-    target.setView (view);
+    gamePtr->view.setSize (size.x, size.y);
+    target.setView (gamePtr->view);
     root.draw (target);
 }
 
@@ -129,7 +129,7 @@ bool GameState::update (sf::Time dt) {
 	
 
     root.update (dt, world);
-    view.setCenter (player->getPosition ());
+    gamePtr->view.setCenter (player->getPosition ());
 
 	soundPlayer.removeStoppedSounds();
 

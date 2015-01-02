@@ -1,10 +1,10 @@
 #include "Graphics.h"
 
-
-Graphics::Graphics () : mWindowWidth (1120), mWindowHeight (630), mBitsPerPixel (32U), mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
+//1120 630
+Graphics::Graphics () : mWindowWidth (800), mWindowHeight (600), mBitsPerPixel (32U), mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
     // Obtaining native fullscreen modes.
 	setAntialiasing(2);
-	mWindowStyle = sf::Style::Fullscreen;
+	mWindowStyle = sf::Style::Close;
     mVideoModes = sf::VideoMode::getFullscreenModes();
 	mVsync = true;
 }

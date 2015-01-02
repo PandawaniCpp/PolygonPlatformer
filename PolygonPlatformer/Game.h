@@ -59,7 +59,8 @@ private:
     sf::RenderWindow gameWindow;
 
 	MusicPlayer musicPlayer;
-
+	
+	sf::View view;
 
 
     //Player::Ptr gamePlayer;

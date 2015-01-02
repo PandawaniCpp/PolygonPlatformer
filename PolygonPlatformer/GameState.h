@@ -42,7 +42,7 @@ private:
 	std::vector<SceneNode *> queuedForDeletion;
 	std::vector<SceneNode::Ptr> queuedForInsertion;
 	//Window View
-	sf::View view;
+	
 
 
 };

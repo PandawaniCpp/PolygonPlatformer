@@ -39,6 +39,7 @@ soundPlayer() {
 	///////////////////////////
 	//Loading textures/////////
 	///////////////////////////
+	textures.load(Textures::ENEMY_KAMIKAZE, "./textures/enemy_kamikaze.png");
 	textures.load(Textures::ENEMY_SWARM, "./textures/enemy_swarm.png");
 	textures.load(Textures::ENEMY_FAT, "./textures/enemy_fat.png");
 	textures.load(Textures::PLAYER_HIT, "./textures/player_hit.png");
@@ -107,6 +108,8 @@ bool GameState::handleEvent (const sf::Event& event) {
 					spawnEnemyFat(rand() % 800, rand() % 300);
 				if (event.key.code == sf::Keyboard::N)
 					spawnEnemySwarm(rand() % 800, rand() % 300);
+				if (event.key.code == sf::Keyboard::B)
+					spawnEnemyKamikaze(rand() % 800, rand() % 300);
 
                 break;
 
@@ -158,6 +161,10 @@ void GameState::spawnEnemyFat(float x, float y){
 void GameState::spawnEnemySwarm(float x, float y){
 	for (int i = 0; i < 10;++i)
 	new EnemySwarm(x, y);
+}
+
+void GameState::spawnEnemyKamikaze(float x, float y){
+	new EnemyKamikaze(x, y);
 }
 
 GameState::~GameState(){

@@ -13,6 +13,7 @@
 #include "SoundPlayer.h"
 #include "EnemyFat.h"
 #include "EnemySwarm.h"
+#include "EnemyKamikaze.h"
 
 class StateStack;
 class GameState : public State{
@@ -27,6 +28,7 @@ public:
 	void spawnEnemyFighter(float x, float y);
 	void spawnEnemyFat(float x, float y);
 	void spawnEnemySwarm(float x, float y);
+	void spawnEnemyKamikaze(float x, float y);
 
 	SceneNode*	player;
 private:

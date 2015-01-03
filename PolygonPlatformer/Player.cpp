@@ -67,6 +67,9 @@ void Player::beginContact(SceneNode* anotherNode)
 	if (anotherNode->MyId == ObjectId::ENEMY_SWARM)
 		damage(5);
 
+	if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE)
+		damage(40);
+
 }
 
 void Player::endContact(SceneNode* anotherNode)
@@ -169,7 +172,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     }
 
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
-        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -50.f));
+        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -70.f));//Height of player jump
 
 	if (!isMovingLeft&&isMovingRight)
 	{

@@ -82,6 +82,7 @@
     <ClCompile Include="EnemyBullet.cpp" />
     <ClCompile Include="EnemyFat.cpp" />
     <ClCompile Include="EnemyFighter.cpp" />
+    <ClCompile Include="EnemyKamikaze.cpp" />
     <ClCompile Include="EnemySwarm.cpp" />
     <ClCompile Include="FriendlyBullet.cpp" />
     <ClCompile Include="Creature.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="EnemyBullet.h" />
     <ClInclude Include="EnemyFat.h" />
     <ClInclude Include="EnemyFighter.h" />
+    <ClInclude Include="EnemyKamikaze.h" />
     <ClInclude Include="EnemySwarm.h" />
     <ClInclude Include="FriendlyBullet.h" />
     <ClInclude Include="Entity.h" />

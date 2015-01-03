@@ -15,6 +15,7 @@ namespace Textures {
 		ENEMY_BULLET,
 		BLOOD,
 		ENEMY_FIGHTER,
+		ENEMY_FAT,
 		GAME_BACKGROUND,
 		GROUND,
 		MENU,

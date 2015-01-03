@@ -13,6 +13,7 @@ namespace ObjectId
 		PLAYER,
 		PLATFORM,
 		ENEMY_FIGHTER,
+		ENEMY_FAT,
 		FRIENDLY_BULLET,
 		ENEMY_BULLET
 	};

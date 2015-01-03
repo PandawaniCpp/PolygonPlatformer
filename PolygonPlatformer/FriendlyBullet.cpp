@@ -53,7 +53,7 @@ void FriendlyBullet::beginContact(SceneNode* another){
 	if (another->MyId != ObjectId::PLAYER)
 		//globalQueuedForDeletion->push_back(this);
 		needsToGetDeleted = true;
-	if (another->MyId == ObjectId::ENEMY_FIGHTER)
+	if (another->MyId == ObjectId::ENEMY_FIGHTER || another->MyId == ObjectId::ENEMY_FAT)
 	{
 		SceneNode *tmp;
 		int size;

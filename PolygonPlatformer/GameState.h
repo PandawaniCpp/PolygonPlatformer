@@ -11,6 +11,7 @@
 #include "MusicPlayer.h"
 #include "Game.h"
 #include "SoundPlayer.h"
+#include "EnemyFat.h"
 
 class StateStack;
 class GameState : public State{
@@ -23,6 +24,7 @@ public:
 	virtual bool handleEvent(const sf::Event& event);  
     /*void createBot ();*/
 	void spawnEnemyFighter(float x, float y);
+	void spawnEnemyFat(float x, float y);
 
 	SceneNode*	player;
 private:

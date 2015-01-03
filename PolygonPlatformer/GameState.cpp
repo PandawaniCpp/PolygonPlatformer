@@ -39,6 +39,7 @@ soundPlayer() {
 	///////////////////////////
 	//Loading textures/////////
 	///////////////////////////
+	textures.load(Textures::ENEMY_FAT, "./textures/enemy_fat.png");
 	textures.load(Textures::PLAYER_HIT, "./textures/player_hit.png");
 	textures.load(Textures::HEALTHBAR_RED, "./textures/healthbar_red.png");
 	textures.load(Textures::HEALTHBAR_GREEN, "./textures/healthbar_green.png");
@@ -101,6 +102,8 @@ bool GameState::handleEvent (const sf::Event& event) {
             case sf::Event::KeyPressed:
 				if (event.key.code == sf::Keyboard::Space)
 					spawnEnemyFighter(rand()%800,rand()%300);
+				if (event.key.code == sf::Keyboard::M)
+					spawnEnemyFat(rand() % 800, rand() % 300);
                 break;
 
             case sf::Event::KeyReleased:
@@ -143,6 +146,11 @@ bool GameState::update (sf::Time dt) {
 void GameState::spawnEnemyFighter(float x, float y){
 	new EnemyFighter(x,y);
 }
+
+void GameState::spawnEnemyFat(float x, float y){
+	new EnemyFat(x, y);
+}
+
 
 GameState::~GameState(){
 	stateStack->gameStatePtr = nullptr;

@@ -29,6 +29,7 @@
     <ClCompile Include="SoundPlayer.cpp" />
     <ClCompile Include="SoundBufferHolder.cpp" />
     <ClCompile Include="UpgradeState.cpp" />
+    <ClCompile Include="EnemyFat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -59,5 +60,6 @@
     <ClInclude Include="SoundPlayer.h" />
     <ClInclude Include="SoundBufferHolder.h" />
     <ClInclude Include="UpgradeState.h" />
+    <ClInclude Include="EnemyFat.h" />
   </ItemGroup>
 </Project>

@@ -60,6 +60,10 @@ void Player::beginContact(SceneNode* anotherNode)
 
 	if (anotherNode->MyId == ObjectId::ENEMY_BULLET)
 		damage(5);
+
+	if (anotherNode->MyId == ObjectId::ENEMY_FAT)
+		damage(30);
+
 }
 
 void Player::endContact(SceneNode* anotherNode)

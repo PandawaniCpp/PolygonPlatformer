@@ -39,6 +39,7 @@ soundPlayer() {
 	///////////////////////////
 	//Loading textures/////////
 	///////////////////////////
+	textures.load(Textures::ENEMY_SWARM, "./textures/enemy_swarm.png");
 	textures.load(Textures::ENEMY_FAT, "./textures/enemy_fat.png");
 	textures.load(Textures::PLAYER_HIT, "./textures/player_hit.png");
 	textures.load(Textures::HEALTHBAR_RED, "./textures/healthbar_red.png");
@@ -104,6 +105,9 @@ bool GameState::handleEvent (const sf::Event& event) {
 					spawnEnemyFighter(rand()%800,rand()%300);
 				if (event.key.code == sf::Keyboard::M)
 					spawnEnemyFat(rand() % 800, rand() % 300);
+				if (event.key.code == sf::Keyboard::N)
+					spawnEnemySwarm(rand() % 800, rand() % 300);
+
                 break;
 
             case sf::Event::KeyReleased:
@@ -151,6 +155,10 @@ void GameState::spawnEnemyFat(float x, float y){
 	new EnemyFat(x, y);
 }
 
+void GameState::spawnEnemySwarm(float x, float y){
+	for (int i = 0; i < 10;++i)
+	new EnemySwarm(x, y);
+}
 
 GameState::~GameState(){
 	stateStack->gameStatePtr = nullptr;

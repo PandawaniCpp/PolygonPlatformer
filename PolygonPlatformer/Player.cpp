@@ -64,6 +64,9 @@ void Player::beginContact(SceneNode* anotherNode)
 	if (anotherNode->MyId == ObjectId::ENEMY_FAT)
 		damage(30);
 
+	if (anotherNode->MyId == ObjectId::ENEMY_SWARM)
+		damage(5);
+
 }
 
 void Player::endContact(SceneNode* anotherNode)

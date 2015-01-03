@@ -12,6 +12,7 @@
 #include "Game.h"
 #include "SoundPlayer.h"
 #include "EnemyFat.h"
+#include "EnemySwarm.h"
 
 class StateStack;
 class GameState : public State{
@@ -25,6 +26,7 @@ public:
     /*void createBot ();*/
 	void spawnEnemyFighter(float x, float y);
 	void spawnEnemyFat(float x, float y);
+	void spawnEnemySwarm(float x, float y);
 
 	SceneNode*	player;
 private:

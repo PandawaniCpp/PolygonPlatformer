@@ -47,8 +47,6 @@ bool PauseState::handleEvent(const sf::Event& event) {
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return){
 		requestStackPop();
 	}
-	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A){
-		gamePtr->graphics.setWindowHeight(400);
-	}
+	
 	return true;
 }

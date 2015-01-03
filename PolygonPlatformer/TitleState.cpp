@@ -40,7 +40,7 @@ bool TitleState::handleEvent(const sf::Event& event) {
 		requestStackPop();
 		requestStackPush(States::MENU);
 	}
-	/*
+	
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A){
 		gamePtr->graphics.setWindowHeight(630);
 		gamePtr->graphics.setWindowWidth(1120);
@@ -55,7 +55,7 @@ bool TitleState::handleEvent(const sf::Event& event) {
 
         gamePtr->gameWindow.setView (gamePtr->view);
     }
-	*/
+	
 		//requestStackPop();
 		//requestStackPush(States::TITLE);
 	

@@ -4,6 +4,18 @@
 #include "Game.h"
 
 class StateStack;
+
+
+	
+	enum button
+	{
+		BUTTON1=0,
+		BUTTON2,
+		BUTTON3,
+		BUTTON4,
+		BUTTON5,
+	};
+
 class UpgradeState : public State {
 public:
 
@@ -17,6 +29,11 @@ public:
 private:
 	//gamePtr
 	SceneNode root;
-	TextureHolder backgroundMenu;
+	TextureHolder buttons;
+	button			whichButton;
+	int				klawisz;
+	sf::RectangleShape backgroundShape;
+	sf::Text text[5];
+	sf::Font   font;
 
 };

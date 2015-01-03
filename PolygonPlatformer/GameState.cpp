@@ -110,7 +110,6 @@ void GameState::draw (sf::RenderTarget& target) {
 }
 
 bool GameState::handleEvent (const sf::Event& event) {
-    
         switch (event.type) {
 
             case sf::Event::KeyPressed:
@@ -124,19 +123,19 @@ bool GameState::handleEvent (const sf::Event& event) {
 					spawnEnemyKamikaze(rand() % 800, rand() % 300);
 				if (event.key.code == sf::Keyboard::Num1)
 					++enemiesNumber;
-
+				if (event.key.code == sf::Keyboard::I)
+					requestStackPush(States::UPGRADE);
+				if (event.key.code == sf::Keyboard::Escape)
+					requestStackPush(States::PAUSE);
+				
                 break;
 
             case sf::Event::KeyReleased:
                 break;
     }
-    player->handleEvent (event);
+		player->handleEvent (event);
 
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-        requestStackPush (States::PAUSE);
-    }
-
-
+  
     return true;
 }
 

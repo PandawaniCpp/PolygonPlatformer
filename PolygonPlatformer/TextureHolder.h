@@ -22,7 +22,8 @@ namespace Textures {
 		GROUND,
 		MENU,
 		TITLE,
-		PAUSE
+		PAUSE,
+		UPGRADE
     };
 }
 

@@ -6,6 +6,11 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	: State(stack, game) {
 	game->musicPlayer.play(Music::MENUTHEME);
 	stateID = States::MENU;
+	
+	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
+	gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
+	gamePtr->gameWindow.setView(gamePtr->view);
+
 	font.loadFromFile("./textures/coolFont.ttf");
 	text.setStyle(sf::Text::Italic);
 	text.setColor(sf::Color::White);
@@ -26,15 +31,11 @@ void MenuState::draw (sf::RenderTarget& target) {
 
 bool MenuState::update(sf::Time dt) {
 	
-
-
 	text.setCharacterSize(gamePtr->graphics.getWindowHeight() / 4);
-
-	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
-	gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
-
 	text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
 	text.setPosition(gamePtr->view.getCenter().x, gamePtr->view.getCenter().y);
+	//gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
+	//gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
 	return true;
 }
 

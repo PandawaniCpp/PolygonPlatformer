@@ -38,11 +38,7 @@ State::Ptr StateStack::createState(States::ID stateID) {
 }
 // Czemu to odpala gdy wszystkie są true?
 void StateStack::handleEvent(const sf::Event& event) {
-	for (auto itr = stateStack.rbegin(); itr != stateStack.rend(); ++itr)   
-	{ 
-		if (!(*itr)->handleEvent(event))           
-		return; 
-	}
+	stateStack.back()->handleEvent(event);
 	applyPendingChanges();
 }
 

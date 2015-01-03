@@ -7,6 +7,7 @@ GameState::GameState(StateStack & stack, Game * game) : State(stack, game), doSl
 timeStep (1.0f / 60.0f),
 velocityIterations (6),
 positionIterations (2),
+enemiesNumber(0), 
 soundPlayer() {
 
 	//stateStack = &stack;
@@ -88,6 +89,16 @@ soundPlayer() {
     gamePtr->view.setCenter (player->getPosition ());
 
 	game->musicPlayer.play(Music::GAMETHEME);
+
+	font.loadFromFile("./textures/coolFont.ttf");
+	text.setStyle(sf::Text::Italic);
+	text.setColor(sf::Color::Red);
+	text.setFont(font);
+	enemiesOnMap << "Enemies: " << enemiesNumber;
+	text.setString(enemiesOnMap.str());
+	text.setCharacterSize(game->graphics.getWindowHeight() / 10);
+	text.setPosition(sf::Vector2f(game->view.getCenter().x - (game->graphics.getWindowWidth() / 2) + 10,
+		game->view.getCenter().y - (game->graphics.getWindowHeight() /2) + 10));
 }
 
 void GameState::draw (sf::RenderTarget& target) {
@@ -95,6 +106,7 @@ void GameState::draw (sf::RenderTarget& target) {
     gamePtr->view.setSize (size.x, size.y);
     target.setView (gamePtr->view);
     root.draw (target);
+	target.draw(text);
 }
 
 bool GameState::handleEvent (const sf::Event& event) {
@@ -110,6 +122,8 @@ bool GameState::handleEvent (const sf::Event& event) {
 					spawnEnemySwarm(rand() % 800, rand() % 300);
 				if (event.key.code == sf::Keyboard::B)
 					spawnEnemyKamikaze(rand() % 800, rand() % 300);
+				if (event.key.code == sf::Keyboard::Num1)
+					++enemiesNumber;
 
                 break;
 
@@ -147,6 +161,14 @@ bool GameState::update (sf::Time dt) {
 
 	soundPlayer.removeStoppedSounds();
 
+	enemiesOnMap.str(std::string());
+	enemiesOnMap.clear();
+	enemiesOnMap << "Enemies: " << enemiesNumber;
+	text.setString(enemiesOnMap.str());
+
+	text.setPosition(sf::Vector2f(gamePtr->view.getCenter().x - (gamePtr->graphics.getWindowWidth() / 2) + 10,
+		gamePtr->view.getCenter().y - (gamePtr->graphics.getWindowHeight() / 2) + 10));
+
     return true;
 }
 
@@ -169,6 +191,14 @@ void GameState::spawnEnemyKamikaze(float x, float y){
 
 GameState::~GameState(){
 	stateStack->gameStatePtr = nullptr;
+}
+
+void GameState::setEnemiesOnMap(unsigned int number) {
+	enemiesNumber = number;
+}
+
+unsigned int GameState::getEnemiesOnMap() {
+	return enemiesNumber;
 }
 /*void GameState::createBot () {
     Player::Ptr tmp (new SceneNode);

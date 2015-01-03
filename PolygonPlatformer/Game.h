@@ -7,6 +7,7 @@
 #include "SceneNode.h"
 #include "TextureHolder.h"
 #include "Player.h"
+#include <sstream>
 
 //States
 #include "StateStack.h"

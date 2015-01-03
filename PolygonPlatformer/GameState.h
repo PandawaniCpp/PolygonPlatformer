@@ -30,8 +30,16 @@ public:
 	void spawnEnemySwarm(float x, float y);
 	void spawnEnemyKamikaze(float x, float y);
 
+	void setEnemiesOnMap(unsigned int number);
+	unsigned int getEnemiesOnMap();
+
 	SceneNode*	player;
 private:
+	unsigned int enemiesNumber;
+	sf::Font font;
+	sf::Text text;
+	std::ostringstream enemiesOnMap;
+
 	SceneNode * map;
     SceneNode root;
     TextureHolder textures;

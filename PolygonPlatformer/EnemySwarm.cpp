@@ -1,8 +1,8 @@
 #include "EnemySwarm.h"
 
 #define PIXELTOMETER (1.f/10.f)
-
-
+#define RADIANTODEGREE 57.2957795f
+#define DEGREETORADIAN 0.0174532925f
 
 
 EnemySwarm::~EnemySwarm(){
@@ -71,6 +71,10 @@ void EnemySwarm::updateCurrent(sf::Time dt, b2World* world){
 	pointingToPlayer.x = currentPlayer->getPosition().x - getPosition().x;
 	pointingToPlayer.y = currentPlayer->getPosition().y - getPosition().y;
 	pointingToPlayer.Normalize();
+	
+	myBody->SetTransform(b2Vec2(myBody->GetPosition()),atan(pointingToPlayer.y/pointingToPlayer.x));
+
+
 	pointingToPlayer *= currentVelocity;
 
 
@@ -94,7 +98,7 @@ void EnemySwarm::updateCurrent(sf::Time dt, b2World* world){
 	}
 
 	setPosition(myBody->GetPosition().x / PIXELTOMETER, myBody->GetPosition().y / PIXELTOMETER);
-
+	setRotation(myBody->GetAngle()*RADIANTODEGREE);
 
 
 	

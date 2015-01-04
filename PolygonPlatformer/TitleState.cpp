@@ -41,27 +41,5 @@ bool TitleState::handleEvent(const sf::Event& event) {
 		requestStackPush(States::MENU);
 	}
 	
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A){
-		gamePtr->graphics.setWindowHeight(630);
-		gamePtr->graphics.setWindowWidth(1120);
-
-		gamePtr->gameWindow.setSize(sf::Vector2u(gamePtr->graphics.getWindowWidth (), gamePtr->graphics.getWindowHeight ()));
-        
-        gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
-        gamePtr->view.setCenter (gamePtr->graphics.getWindowWidth () / 2, gamePtr->graphics.getWindowHeight () / 2);
-
-        text.setCharacterSize (gamePtr->graphics.getWindowHeight () / 4);
-        text.setOrigin (text.getLocalBounds ().width / 2, text.getLocalBounds ().height / 2);
-
-        gamePtr->gameWindow.setView (gamePtr->view);
-    }
-	
-		//requestStackPop();
-		//requestStackPush(States::TITLE);
-	
-
-	
 	return true;
 }
-
-//text.setPosition(gamePtr->graphics.getWindowWidth()/2, gamePtr->graphics.getWindowHeight()/2);

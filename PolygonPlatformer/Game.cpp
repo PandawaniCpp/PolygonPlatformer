@@ -19,6 +19,7 @@ musicPlayer() {
 	mStateStack.registerState<GameState>(States::GAME);
 	mStateStack.registerState<PauseState>(States::PAUSE);
 	mStateStack.registerState<UpgradeState>(States::UPGRADE);
+	mStateStack.registerState<OptionsState>(States::OPTIONS);
 	mStateStack.pushState(States::TITLE);
 	mStateStack.applyPendingChanges();
 

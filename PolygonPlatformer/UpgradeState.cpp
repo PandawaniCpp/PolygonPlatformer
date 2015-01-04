@@ -4,19 +4,11 @@
 
 UpgradeState::UpgradeState(StateStack & stack, Game * game)
 	: State(stack, game) {
-	stateID = States::UPGRADE;	
-	whichButton = BUTTON1;
-	klawisz = 0;
-	/*buttons.load(Textures::BUTTON1, "./textures/button1.png");
-	buttons.load(Textures::BUTTON2, "./textures/button2.png");
-	buttons.load(Textures::BUTTON3, "./textures/button3.png");
-	buttons.load(Textures::BUTTON4, "./textures/button4.png");
-	buttons.load(Textures::BUTTON5, "./textures/button5.png");
 	
-	SceneNode::Ptr tmp(new SceneNode);
-	tmp->setTexture(buttons.get(Textures::UPGRADE));
-	root.attachChild(tmp);*/
-
+	stateID = States::UPGRADE;	
+	
+	klawisz = 4;
+	
 	font.loadFromFile("./textures/coolFont.ttf");
 	for (int i = 0; i < 5; i++){
 		text[i].setStyle(sf::Text::Bold);
@@ -42,13 +34,14 @@ void UpgradeState::draw(sf::RenderTarget& target) {
 
 bool UpgradeState::update(sf::Time dt) {
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
-	for (int i = 0; i < 5; i++){
+	unsigned center = gamePtr->view.getCenter().y + gamePtr->graphics.getWindowHeight() / 5;
+	for (int i = 4; i >=0; --i){
 		text[i].setCharacterSize(45);
 		text[i].setColor(sf::Color::White);
 
 		text[i].setOrigin(text[i].getLocalBounds().width / 2, text[i].getLocalBounds().height / 2);
 
-		text[i].setPosition(gamePtr->view.getCenter().x, (gamePtr->graphics.getWindowHeight()/8)+100*i);
+		text[i].setPosition(gamePtr->view.getCenter().x, center-50*i);
 
 	}
 	text[klawisz].setColor(sf::Color::Red);
@@ -58,17 +51,18 @@ bool UpgradeState::update(sf::Time dt) {
 bool UpgradeState::handleEvent(const sf::Event& event) {
 	
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return){
+		if (klawisz==4)
 		requestStackPop();
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
-		++klawisz;
-		if (klawisz >4)
-			klawisz = 0;
-	}
-	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
 		--klawisz;
 		if (klawisz < 0)
 			klawisz = 4;
+	}
+	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
+		++klawisz;
+		if (klawisz > 4)
+			klawisz = 0;
 	}
 	return true;
 	/*

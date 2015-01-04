@@ -19,10 +19,9 @@ public:
 
 private:
 	SceneNode root;
+	int				klawisz;
 	sf::RectangleShape backgroundShape;
-	sf::Text text;
+	sf::Text text[3];
 	sf::Font   font;
-	std::vector<sf::Text>    mOptions; 
-	std::size_t              mOptionIndex;
 
 };

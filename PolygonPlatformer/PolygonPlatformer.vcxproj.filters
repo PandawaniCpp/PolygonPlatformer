@@ -32,6 +32,7 @@
     <ClCompile Include="EnemyFat.cpp" />
     <ClCompile Include="EnemySwarm.cpp" />
     <ClCompile Include="EnemyKamikaze.cpp" />
+    <ClCompile Include="OptionsState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -65,5 +66,6 @@
     <ClInclude Include="EnemyFat.h" />
     <ClInclude Include="EnemySwarm.h" />
     <ClInclude Include="EnemyKamikaze.h" />
+    <ClInclude Include="OptionsState.h" />
   </ItemGroup>
 </Project>

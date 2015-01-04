@@ -53,7 +53,8 @@ soundPlayer() {
 	textures.load(Textures::ENEMY_BULLET, "./textures/enemy_bullet.png");
 	textures.load(Textures::GAME_BACKGROUND, "./textures/game_background.png");
 	textures.load(Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
-	textures.load(Textures::BLOOD, "./textures/blood.png");
+    textures.load (Textures::BLOOD, "./textures/blood.png");
+    textures.load (Textures::GROUND, "./textures/brick.png");
 
 
 	/////////////////////////////////
@@ -81,7 +82,7 @@ soundPlayer() {
     /////////////////////////////////
     //Scene - Setup//////////////////
     /////////////////////////////////
-    map = new Map(7);
+    map = new Map (7, {32, 21});
 
     /////////////////////////////////
     //Camera - Viewport//////////////

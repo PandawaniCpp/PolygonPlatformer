@@ -1,13 +1,12 @@
 #include "PlatformAtom.h"
 
 PlatformAtom::PlatformAtom (sf::Vector2f position) : mPosition (position) {
+    groundBodyDef.type = b2_kinematicBody;
     groundBodyDef.position.Set (position.x * PIXELTOMETER, position.y * PIXELTOMETER);
-    globalTextureHolder->load (Textures::GROUND, "./textures/brick.png");
     setTexture (globalTextureHolder->get (Textures::GROUND));
     b2Body * groundBody = globalWorld->CreateBody (&groundBodyDef);
     groundBox.SetAsBox ((getTextureRect ().width / 2.f)*PIXELTOMETER, (getTextureRect ().height / 2.f)*PIXELTOMETER);
     groundBody->CreateFixture (&groundBox, 0.0f);
-
 
 	// Krecik - added it.
 	MyId = ObjectId::PLATFORM;

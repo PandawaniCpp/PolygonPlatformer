@@ -18,12 +18,16 @@ public:
     typedef std::pair<int, int> Dimensions;     //1. int specifies the width, 2. - heigth. In PlatformAtoms
     typedef std::vector<sf::Vector2f> PositionsVector;
 
-    Map (unsigned int numberOfEnemies = 0, Dimensions size = {0, 0}, Dimensions biggestPlatform = {0, 0}, Dimensions smallestPlatform = {0, 0}, unsigned int numberOfPlatforms = 0);
+    Map (unsigned int numberOfSpawns = 0, Dimensions size = {0, 0}, Dimensions biggestPlatform = {0, 0}, Dimensions smallestPlatform = {0, 0}, unsigned int numberOfPlatforms = 0);
     ~Map ();
 
     void generate ();
-    PositionsVector * getSpawnList () { return &mSpawnList; };
-    unsigned int getNumberOfEnemies () { return mNumberOfEnemies; };
+    PositionsVector * getSpawnList () {
+        return &mSpawnList;
+    };
+    unsigned int getNumberOfSpawns () {
+        return mSpawnList.size ();
+    };
 
 private:
     PositionsVector mSpawnList;
@@ -31,7 +35,7 @@ private:
     Dimensions mBiggestPlatform;
     Dimensions mSmallestPlatform;
     unsigned int mNumberOfPlatforms;
-    unsigned int mNumberOfEnemies;
+    unsigned int mNumberOfSpawns;
 
 
     b2BodyDef mWallBodyDef;      //kk i dont know how this works yet

@@ -1,43 +1,37 @@
 #include "Map.h"
 
 
-Map::Map (unsigned int numberOfEnemies, Dimensions size, Dimensions biggestPlatform, Dimensions smallestPlatform, unsigned int numberOfPlatforms) : mSize (size), mBiggestPlatform (biggestPlatform), mSmallestPlatform (smallestPlatform), mNumberOfPlatforms (numberOfPlatforms), mNumberOfEnemies (numberOfEnemies) {
+Map::Map (unsigned int numberOfSpawns, Dimensions size, Dimensions biggestPlatform, Dimensions smallestPlatform, unsigned int numberOfPlatforms) : mSize (size), mBiggestPlatform (biggestPlatform), mSmallestPlatform (smallestPlatform), mNumberOfPlatforms (numberOfPlatforms), mNumberOfSpawns (numberOfSpawns) {
     generate ();
     globalRoot->attachChild (SceneNode::Ptr (this));
 }
 
-Map::~Map () {}
+Map::~Map () {
+}
 
 
 void Map::generate () {
-    attachChild (SceneNode::Ptr (new Platform ({10.f, 250.f}, {20, 1})));
-    attachChild (SceneNode::Ptr (new Platform ({500.f, 350.f}, {13, 2})));
-    attachChild (SceneNode::Ptr (new Platform ({50.f, 500.f}, {13, 2})));
-    attachChild (SceneNode::Ptr (new Platform ({600.f, 550.f}, {13, 2})));
-    attachChild (SceneNode::Ptr (new Platform ({600.f, 150.f}, {3, 2})));
-    attachChild (SceneNode::Ptr (new Platform ({600.f, 70.f}, {1, 2})));
+    //walls
+    Platform * ceiling = new Platform ({0.f, 0.f}, {mSize.first - 1, 1});
+    Platform * rightWall = new Platform ({ceiling->getCorner (2).x, 0.f}, {1, mSize.second - 1});
+    Platform * leftWall = new Platform ({0.f, ceiling->getCorner (2).y}, {1, mSize.second - 1});
+    Platform * floor = new Platform ({0.f, leftWall->getCorner (3).y}, {mSize.first, 1});
 
-    mWallBodyDef.position.Set ((1120.0f / 2.f)*PIXELTOMETER, 630.f*PIXELTOMETER);
-    b2Body* groundBodyDown = globalWorld->CreateBody (&mWallBodyDef);
-    mWallLine.SetAsBox ((1120.0f / 2.f)*PIXELTOMETER, 0);
-    groundBodyDown->CreateFixture (&mWallLine, 0.0f);
+    attachChild (SceneNode::Ptr (ceiling));
+    attachChild (SceneNode::Ptr (leftWall));
+    attachChild (SceneNode::Ptr (rightWall));
+    attachChild (SceneNode::Ptr (floor));
 
-    mWallBodyDef.position.Set ((1120.0f / 2.f)*PIXELTOMETER, 0.f*PIXELTOMETER);
-    b2Body* groundBodyUp = globalWorld->CreateBody (&mWallBodyDef);
-    mWallLine.SetAsBox ((1120.0f / 2.f)*PIXELTOMETER, 0);
-    groundBodyUp->CreateFixture (&mWallLine, 0.0f);
+    //platforms
+    attachChild (SceneNode::Ptr (new Platform ({70.f, 250.f}, {20, 1})));
+    attachChild (SceneNode::Ptr (new Platform ({500.f, 350.f}, {13, 1})));
+    attachChild (SceneNode::Ptr (new Platform ({50.f, 500.f}, {13, 1})));
+    attachChild (SceneNode::Ptr (new Platform ({600.f, 550.f}, {13, 1})));
+    attachChild (SceneNode::Ptr (new Platform ({600.f, 150.f}, {3, 1})));
+    attachChild (SceneNode::Ptr (new Platform ({800.f, 70.f}, {1, 5})));
 
-    mWallBodyDef.position.Set ((0.f / 2.f)*PIXELTOMETER, (630.f / 2.f)*PIXELTOMETER);
-    b2Body* groundBodyLeft = globalWorld->CreateBody (&mWallBodyDef);
-    mWallLine.SetAsBox (0, (630.0f / 2.f)*PIXELTOMETER);
-    groundBodyLeft->CreateFixture (&mWallLine, 0.0f);
-
-    mWallBodyDef.position.Set ((1120.0f)*PIXELTOMETER, (630.f / 2.f)*PIXELTOMETER);
-    b2Body* groundBodyRight = globalWorld->CreateBody (&mWallBodyDef);
-    mWallLine.SetAsBox (0, (630.0f / 2.f)*PIXELTOMETER);
-    groundBodyRight->CreateFixture (&mWallLine, 0.0f);
-
-    for (int i = 0; i < mNumberOfEnemies; i++) {
-        mSpawnList.push_back ({float(rand () % 600), float(rand () % 1200)});
+    //spawns
+    for (int i = 0; i < mNumberOfSpawns; i++) {
+        mSpawnList.push_back ({float (rand () % 600), float (rand () % 1200)});
     }
 }

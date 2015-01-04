@@ -7,7 +7,7 @@
 
 class PlatformAtom : public SceneNode {
 public:
-    PlatformAtom (sf::Vector2f = {0.f, 0.f});
+    PlatformAtom (sf::Vector2f position = {0.f, 0.f});
     float getWidth ();      //of texture
     float getHeight ();
     void setPosition (sf::Vector2f);

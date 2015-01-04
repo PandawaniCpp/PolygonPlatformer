@@ -10,11 +10,11 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	isShooting = false;
 	shootingCooldown = sf::seconds (1.f / 5.f);
 	touchingDamageCooldown = sf::seconds(1.f);
-	animationCounter = 0;
+	animationCounter = 11;
 	maxHP = 100;
 	currentHP = 100;
 	timeSinceLastDamage = sf::seconds(1.f);
-	timeSinceLastShot = sf::seconds(1.f / 5.f);
+	timeSinceLastShot = sf::seconds(16.f / 60.f);
 
 
 	setTexture(globalTextureHolder->get(Textures::PLAYER_RIGHT_ANIMATION));
@@ -132,6 +132,18 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 		timeSinceLastShot -= shootingCooldown;
 	}
 
+	animationCounter %= 16;
+	if (isShooting)
+		++animationCounter;
+	if (!isShooting&&animationCounter !=11)
+		++animationCounter;
+	animationCounter %= 16;
+
+	if (isFacingRight)
+	setTextureRect(sf::IntRect(30 * (animationCounter / 2), 0, 30, 50));
+	else 
+		setTextureRect(sf::IntRect(30 * (animationCounter / 2), 50, 30, 50));
+
 
 
 	if (isMovingLeft&&!isMovingRight)
@@ -174,7 +186,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
         myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -70.f));//Height of player jump
 
-	if (!isMovingLeft&&isMovingRight)
+	/*if (!isMovingLeft&&isMovingRight)
 	{
 		
 		setTextureRect(sf::IntRect(30 * (animationCounter/2), 0, 30, 50));
@@ -191,7 +203,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 		if (animationCounter < 0)
 			animationCounter = 15;
 
-	}
+	}*/
 	/*if (contactCounter == 0)
 	{
 		setTexture(globalTextureHolder->get(Textures::PLAYER_JUMPING));

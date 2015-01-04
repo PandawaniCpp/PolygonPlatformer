@@ -98,8 +98,31 @@ void EnemyKamikaze::updateCurrent(sf::Time dt, b2World* world){
 		soundPlayer->play(SoundEffect::ENEMY_DIES);
 		globalQueuedForDeletion->push_back(this);
 
+		b2Vec2 poiningToCenter;
 		SceneNode *tmp;
+		for (int i = 0; i < 5; i++)
+		{
 
+			for (int j = 0; j < 3; j++)
+			{
+				poiningToCenter = b2Vec2(getPosition().x - getPosition().x + (10 * (j - 1)), getPosition().y - getPosition().y + (10 * (i - 2)));
+				poiningToCenter.Normalize();
+				poiningToCenter *= 4;
+
+				tmp = new NonPhysical(Textures::ENEMY_KAMIKAZE, sf::IntRect(j * 10, i * 10, 10, 10), ((rand() % 200) / 100.f) - 1.f +poiningToCenter.x, ((rand() % 200) / 100.f) - 1.f+poiningToCenter.y, rand() % 5, getPosition().x + (10 * (j - 1)), getPosition().y + (10 * (i - 2)), 40);
+				globalQueuedForInsertion->push_back(Ptr(tmp));
+
+				int size;
+				for (int k = (rand() % 7) - 3; k < 9; ++k)
+				{
+					size = rand() % 5;
+					tmp = new NonPhysical(Textures::BLOOD, sf::IntRect(0, 0, size, size), ((rand() % 400) / 100.f) - 2.f, ((rand() % 400) / 100.f) - 2.f, 20, getPosition().x + (10 * (j - 1)), getPosition().y + (10 * (i - 2)), 50);
+					globalQueuedForInsertion->push_back(Ptr(tmp));
+				}
+
+			}
+
+		}
 
 		/*tmp = new NonPhysical(Textures::ENEMY_FIGHTER, sf::IntRect(0, 25, 30, 25), 0, 0, 0, getPosition().x, getPosition().y + 13, 50, 0);
 		globalQueuedForInsertion->push_back(Ptr(tmp));

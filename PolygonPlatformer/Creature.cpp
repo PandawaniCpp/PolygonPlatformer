@@ -4,11 +4,11 @@ SceneNode* Creature::currentPlayer = nullptr;
 
 
 
-void Creature::damage (unsigned amount) {
+void Creature::damage (float amount) {
     currentHP -= amount;
 }
 
-void Creature::heal (unsigned amount) {
+void Creature::heal (float amount) {
 	currentHP += amount;
 }
 

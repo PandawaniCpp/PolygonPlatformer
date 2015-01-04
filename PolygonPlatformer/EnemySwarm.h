@@ -19,5 +19,6 @@ public:
 	//sf::Time ghostMode;
 	float currentVelocity;
 	b2Vec2 pointingToPlayer;
+	bool destoyedOnContact;
 
 };

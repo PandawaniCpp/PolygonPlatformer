@@ -46,6 +46,10 @@ public:
 	virtual void beginContact(SceneNode* anotherNode){};
 	virtual void endContact(SceneNode* anotherNode){};
 	virtual void preSolve(b2Contact* contact, SceneNode* anotherNode){};
+	virtual float getDamage(){
+		return 0;
+	};
+
 
 	static std::vector<SceneNode *> *globalQueuedForDeletion;
 	static std::vector<Ptr> *globalQueuedForInsertion;
@@ -57,6 +61,7 @@ public:
 	static int fatOnMap;
 	static int kamikazeOnMap;
 	static int swarmOnMap;
+
 
 	bool needsToGetDeleted;
 

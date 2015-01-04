@@ -1,4 +1,5 @@
 #include "EnemyKamikaze.h"
+#include "Player.h"
 
 #define PIXELTOMETER (1.f/10.f)
 
@@ -8,7 +9,8 @@
 EnemyKamikaze::~EnemyKamikaze(){
 	globalWorld->DestroyBody(myBody);
 	--kamikazeOnMap;
-
+	if(!destroyedOnContact)
+		Player::me->heal(Player::me->hpPerMob);
 
 }
 
@@ -20,7 +22,7 @@ EnemyKamikaze::~EnemyKamikaze(){
 EnemyKamikaze::EnemyKamikaze(float x, float y) :healthbar_red(new SceneNode), healthbar_green(new SceneNode){
 	++kamikazeOnMap;
 
-
+	destroyedOnContact = false;
 
 	MyId = ObjectId::ENEMY_KAMIKAZE;
 
@@ -163,12 +165,13 @@ void EnemyKamikaze::beginContact(SceneNode* anotherNode)
 {
 	if (anotherNode->MyId == ObjectId::FRIENDLY_BULLET) {
 		soundPlayer->play(SoundEffect::ENEMY_HIT);
-		damage(10);
+		damage(anotherNode->getDamage());
 	}
 
 	if (anotherNode->MyId == ObjectId::PLAYER) {
 		//soundPlayer->play(SoundEffect::ENEMY_HIT);
 		damage(maxHP);
+		destroyedOnContact = true;
 	}
 }
 

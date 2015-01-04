@@ -12,7 +12,12 @@ FriendlyBullet::~FriendlyBullet(){
 
 
 
-FriendlyBullet::FriendlyBullet(float positionX, float positionY,bool facingRight){
+FriendlyBullet::FriendlyBullet(float positionX, float positionY, bool facingRight, bool isPiercingArg, float bulletDamageArg){
+
+	isPiercing = isPiercingArg;
+	bulletDamage = bulletDamageArg;
+
+
 	height = positionY;
 	MyId = ObjectId::FRIENDLY_BULLET;
 
@@ -51,9 +56,12 @@ FriendlyBullet::FriendlyBullet(float positionX, float positionY,bool facingRight
 
 void FriendlyBullet::beginContact(SceneNode* another){
 	if (another->MyId != ObjectId::PLAYER)
-		//globalQueuedForDeletion->push_back(this);
 		needsToGetDeleted = true;
-	if (another->MyId == ObjectId::ENEMY_FIGHTER || another->MyId == ObjectId::ENEMY_FAT)
+
+	if (isPiercing && (another->MyId == ObjectId::ENEMY_BULLET || another->MyId == ObjectId::ENEMY_SWARM))
+		needsToGetDeleted = false;
+
+	if (another->MyId == ObjectId::ENEMY_FIGHTER || another->MyId == ObjectId::ENEMY_FAT || another->MyId == ObjectId::ENEMY_KAMIKAZE)
 	{
 		SceneNode *tmp;
 		int size;

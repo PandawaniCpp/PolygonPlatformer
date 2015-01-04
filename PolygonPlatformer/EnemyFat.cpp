@@ -1,4 +1,5 @@
 #include "EnemyFat.h"
+#include "Player.h"
 
 #define PIXELTOMETER (1.f/10.f)
 
@@ -8,7 +9,7 @@
 EnemyFat::~EnemyFat(){
 	globalWorld->DestroyBody(myBody);
 	--fatOnMap;
-
+	Player::me->heal(Player::me->hpPerMob*5);
 
 }
 
@@ -150,7 +151,7 @@ void EnemyFat::beginContact(SceneNode* anotherNode)
 {
 	if (anotherNode->MyId == ObjectId::FRIENDLY_BULLET) {
 		soundPlayer->play(SoundEffect::ENEMY_HIT);
-		damage(10);
+		damage(anotherNode->getDamage());
 	}
 }
 

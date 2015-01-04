@@ -1,8 +1,16 @@
 #include "Player.h"
 
+Player* Player::me = nullptr;
+
 #define PIXELTOMETER (1.f/10.f)
 
 Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), healthbar_green(new SceneNode)  {
+
+	me = this;
+
+	bulletDamageVar = 10;
+	hpPerMob = 5;
+	piercingBullets = true;
 
 	MyId = ObjectId::PLAYER;
 	contactCounter = 0;
@@ -79,7 +87,7 @@ void Player::endContact(SceneNode* anotherNode)
 }
 
 void Player::shoot(){
-	SceneNode::Ptr tmp(new FriendlyBullet((myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,isFacingRight));
+	SceneNode::Ptr tmp(new FriendlyBullet((myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,isFacingRight,piercingBullets,bulletDamageVar));
 	globalQueuedForInsertion->push_back(tmp);
 }
 

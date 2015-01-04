@@ -6,9 +6,9 @@ class Creature :public Entity {
 public:
     Creature ();
 
-    void heal (unsigned amount);
+    void heal (float amount);
 
-    virtual void damage (unsigned amount);
+    virtual void damage (float amount);
 
 	static SceneNode* currentPlayer;
 protected:

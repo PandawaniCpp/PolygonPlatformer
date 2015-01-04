@@ -1,5 +1,5 @@
 #include "EnemyFighter.h"
-
+#include "Player.h"
 #define PIXELTOMETER (1.f/10.f)
 
 
@@ -8,7 +8,7 @@
 EnemyFighter::~EnemyFighter(){
 	globalWorld->DestroyBody(myBody);
 	--fighterOnMap;
-
+	Player::me->heal(Player::me->hpPerMob);
 
 }
 
@@ -143,7 +143,7 @@ void EnemyFighter::beginContact(SceneNode* anotherNode)
 {
 	if (anotherNode->MyId == ObjectId::FRIENDLY_BULLET) {
 		soundPlayer->play(SoundEffect::ENEMY_HIT);
-		damage(10);
+		damage(anotherNode->getDamage());
 	}
 }
 

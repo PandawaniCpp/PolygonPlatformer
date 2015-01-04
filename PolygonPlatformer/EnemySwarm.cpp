@@ -1,5 +1,5 @@
 #include "EnemySwarm.h"
-
+#include "Player.h"
 #define PIXELTOMETER (1.f/10.f)
 #define RADIANTODEGREE 57.2957795f
 #define DEGREETORADIAN 0.0174532925f
@@ -9,7 +9,8 @@ EnemySwarm::~EnemySwarm(){
 	globalWorld->DestroyBody(myBody);
 
 	--swarmOnMap;
-
+	if (!destoyedOnContact)
+	Player::me->heal(Player::me->hpPerMob /5);
 }
 
 
@@ -18,8 +19,8 @@ EnemySwarm::~EnemySwarm(){
 
 
 EnemySwarm::EnemySwarm(float x, float y){
-
-	++kamikazeOnMap;
+	destoyedOnContact = false;
+	++swarmOnMap;
 
 
 	MyId = ObjectId::ENEMY_SWARM;
@@ -129,7 +130,8 @@ void EnemySwarm::beginContact(SceneNode* anotherNode)
 	}
 	if (anotherNode->MyId == ObjectId::PLAYER) {
 		//soundPlayer->play(SoundEffect::ENEMY_HIT);
-		damage(10);
+		damage(maxHP);
+		destoyedOnContact = true;
 	}
 }
 

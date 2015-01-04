@@ -17,5 +17,6 @@ public:
 	//sf::Time shootingCooldown;
 	//sf::Time timeSinceLastShot;
 	sf::Time ghostMode;
+	bool destroyedOnContact;
 
 };

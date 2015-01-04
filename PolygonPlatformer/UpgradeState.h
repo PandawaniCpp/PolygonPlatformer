@@ -2,7 +2,7 @@
 #include "State.h"
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-
+#include "Player.h"
 class StateStack;
 class UpgradeState : public State {
 public:
@@ -15,9 +15,11 @@ public:
 
 
 private:
-	//gamePtr
+	
 	SceneNode root;
 	int				klawisz;
+	int				wasPressed;
+	bool			choose;
 	sf::RectangleShape backgroundShape;
 	sf::Text text[5];
 	sf::Font   font;

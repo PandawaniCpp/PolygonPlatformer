@@ -9,7 +9,7 @@ velocityIterations (6),
 positionIterations (2),
 enemiesNumber(0), 
 soundPlayer() {
-
+	
 	//stateStack = &stack;
 	stateID = States::GAME;
 	////////////////////////////////

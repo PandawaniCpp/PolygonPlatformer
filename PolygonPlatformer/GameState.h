@@ -32,8 +32,8 @@ public:
 
 	void setEnemiesOnMap(unsigned int number);
 	unsigned int getEnemiesOnMap();
-
 	SceneNode*	player;
+	
 private:
 	unsigned int enemiesNumber;
 	sf::Font font;

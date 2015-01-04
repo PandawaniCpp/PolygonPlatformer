@@ -10,7 +10,7 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 
 	bulletDamageVar = 10;
 	hpPerMob = 5;
-	piercingBullets = true;
+	piercingBullets = false;
 
 	MyId = ObjectId::PLAYER;
 	contactCounter = 0;

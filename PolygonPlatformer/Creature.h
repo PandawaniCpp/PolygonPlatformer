@@ -11,8 +11,8 @@ public:
     virtual void damage (float amount);
 
 	static SceneNode* currentPlayer;
+	float maxHP;
 protected:
-    float maxHP;
 	float currentHP;
 
 };

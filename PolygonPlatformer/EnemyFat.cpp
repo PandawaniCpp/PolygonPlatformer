@@ -7,7 +7,7 @@
 
 EnemyFat::~EnemyFat(){
 	globalWorld->DestroyBody(myBody);
-
+	--fatOnMap;
 
 
 }
@@ -18,6 +18,9 @@ EnemyFat::~EnemyFat(){
 
 
 EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_green(new SceneNode){
+
+	++fatOnMap;
+
 
 	MyId = ObjectId::ENEMY_FAT;
 

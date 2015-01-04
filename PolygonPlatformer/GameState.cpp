@@ -143,6 +143,7 @@ bool GameState::handleEvent (const sf::Event& event) {
 bool GameState::update (sf::Time dt) {
     world->Step (timeStep, velocityIterations, positionIterations);
 
+
 	for (std::vector<SceneNode::Ptr>::iterator it = queuedForInsertion.begin(); it != queuedForInsertion.end(); ++it)
 		root.attachChild(*it);
 	queuedForInsertion.clear();
@@ -153,6 +154,12 @@ bool GameState::update (sf::Time dt) {
 		root.detachChild(*(*it));
 	queuedForDeletion.clear();
 
+	
+	enemiesNumber = 0;
+	enemiesNumber += SceneNode::fighterOnMap;
+	enemiesNumber += SceneNode::fatOnMap;
+	enemiesNumber += SceneNode::kamikazeOnMap;
+	enemiesNumber += SceneNode::swarmOnMap;
 	
 
     root.update (dt, world);

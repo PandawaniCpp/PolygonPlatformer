@@ -53,6 +53,11 @@ public:
 	static b2World *globalWorld;
 	static TextureHolder *globalTextureHolder;
 	static SoundPlayer *soundPlayer;
+	static int fighterOnMap;
+	static int fatOnMap;
+	static int kamikazeOnMap;
+	static int swarmOnMap;
+
 	bool needsToGetDeleted;
 
     b2Body* myBody;

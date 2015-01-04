@@ -10,6 +10,11 @@ b2World* SceneNode::globalWorld = nullptr;
 TextureHolder* SceneNode::globalTextureHolder = nullptr;
 SoundPlayer* SceneNode::soundPlayer = nullptr;
 
+int SceneNode::fighterOnMap = 0;
+int SceneNode::fatOnMap = 0;
+int SceneNode::kamikazeOnMap = 0;
+int SceneNode::swarmOnMap = 0;
+
 
 
 SceneNode::SceneNode (b2World* world) : mParent (nullptr),myBody(nullptr) {

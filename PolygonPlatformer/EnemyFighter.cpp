@@ -7,7 +7,7 @@
 
 EnemyFighter::~EnemyFighter(){
 	globalWorld->DestroyBody(myBody);
-	
+	--fighterOnMap;
 
 
 }
@@ -18,6 +18,9 @@ EnemyFighter::~EnemyFighter(){
 
 
 EnemyFighter::EnemyFighter(float x, float y) :healthbar_red(new SceneNode), healthbar_green(new SceneNode){
+
+	++fighterOnMap;
+
 
 	MyId = ObjectId::ENEMY_FIGHTER;
 

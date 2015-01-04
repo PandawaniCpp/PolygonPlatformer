@@ -7,7 +7,7 @@
 
 EnemyKamikaze::~EnemyKamikaze(){
 	globalWorld->DestroyBody(myBody);
-
+	--kamikazeOnMap;
 
 
 }
@@ -18,6 +18,9 @@ EnemyKamikaze::~EnemyKamikaze(){
 
 
 EnemyKamikaze::EnemyKamikaze(float x, float y) :healthbar_red(new SceneNode), healthbar_green(new SceneNode){
+	++kamikazeOnMap;
+
+
 
 	MyId = ObjectId::ENEMY_KAMIKAZE;
 

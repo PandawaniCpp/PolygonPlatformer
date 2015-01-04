@@ -8,7 +8,7 @@
 EnemySwarm::~EnemySwarm(){
 	globalWorld->DestroyBody(myBody);
 
-
+	--swarmOnMap;
 
 }
 
@@ -18,6 +18,9 @@ EnemySwarm::~EnemySwarm(){
 
 
 EnemySwarm::EnemySwarm(float x, float y){
+
+	++kamikazeOnMap;
+
 
 	MyId = ObjectId::ENEMY_SWARM;
 

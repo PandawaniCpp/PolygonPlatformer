@@ -61,6 +61,7 @@ public:
 	static int fatOnMap;
 	static int kamikazeOnMap;
 	static int swarmOnMap;
+	static int currentWave;
 
 
 	bool needsToGetDeleted;

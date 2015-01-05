@@ -56,7 +56,9 @@ private:
 	std::vector<SceneNode *> queuedForDeletion;
 	std::vector<SceneNode::Ptr> queuedForInsertion;
 	//Window View
-	
-
+	int fighterToSpawn;
+	int fatToSpawn;
+	int kamikazeToSpawn;
+	int swarmToSpawn;
 
 };

@@ -10,6 +10,12 @@ positionIterations (2),
 enemiesNumber(0), 
 soundPlayer() {
 	
+	fighterToSpawn = 5;
+	fatToSpawn = 1;
+	swarmToSpawn = 1;
+	kamikazeToSpawn = 3;
+
+
 	//stateStack = &stack;
 	stateID = States::GAME;
 	////////////////////////////////
@@ -142,6 +148,49 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 
 bool GameState::update (sf::Time dt) {
+
+	
+	if (fighterToSpawn>=0)
+	while (SceneNode::fighterOnMap <= SceneNode::currentWave * 3)
+	{
+		if (fighterToSpawn <= 0)
+			break;
+		spawnEnemyFighter((rand() % 800 + 100), (rand() % 300) + 100);
+		--fighterToSpawn;
+	}
+
+
+	if (fatToSpawn >= 0)
+	while (SceneNode::fatOnMap <= SceneNode::currentWave)
+	{
+		if (fatToSpawn <= 0)
+			break;
+		spawnEnemyFat((rand() % 800 + 100), (rand() % 300) + 100);
+		--fatToSpawn;
+	}
+
+	if (swarmToSpawn >= 0)
+	while (SceneNode::swarmOnMap <= SceneNode::currentWave)
+	{
+		if (swarmToSpawn <= 0)
+			break;
+		spawnEnemySwarm((rand() % 800+100), (rand() % 300)+100);
+		--swarmToSpawn;
+	}
+
+	if (kamikazeToSpawn >= 0)
+	while (SceneNode::kamikazeOnMap <= SceneNode::currentWave )
+	{
+		if (kamikazeToSpawn <= 0)
+			break;
+		spawnEnemyKamikaze((rand() % 800 + 100), (rand() % 300) + 100);
+		--kamikazeToSpawn;
+	}
+
+
+
+
+
     world->Step (timeStep, velocityIterations, positionIterations);
 
 
@@ -164,6 +213,22 @@ bool GameState::update (sf::Time dt) {
 	
 
     root.update (dt, world);
+
+
+	if (enemiesNumber == 0)
+	{
+		++SceneNode::currentWave;
+		fighterToSpawn = 5 * SceneNode::currentWave;
+		fatToSpawn = SceneNode::currentWave;
+		swarmToSpawn = SceneNode::currentWave;
+		kamikazeToSpawn = 2 * SceneNode::currentWave;
+		requestStackPush(States::UPGRADE);
+
+	}
+
+
+
+
     gamePtr->view.setCenter (player->getPosition ());
 
 	soundPlayer.removeStoppedSounds();

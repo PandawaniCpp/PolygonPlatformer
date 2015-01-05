@@ -50,6 +50,10 @@ public:
 		return 0;
 	};
 
+    virtual void moveBrick (sf::Vector2f) {};
+    virtual void moveBrickRelative (sf::Vector2f) {};
+    virtual sf::Vector2f getBrickCenter () { return{0,0}; };
+
 
 	static std::vector<SceneNode *> *globalQueuedForDeletion;
 	static std::vector<Ptr> *globalQueuedForInsertion;

@@ -48,8 +48,10 @@ public:
 private:
 	unsigned int enemiesNumber;
 	sf::Font font;
-	sf::Text text;
+	sf::Text enemiesCounter;
+	sf::Text moneyCounter;
 	std::ostringstream enemiesOnMap;
+	std::ostringstream moneyString;
 
 	SceneNode * map;
     SceneNode root;

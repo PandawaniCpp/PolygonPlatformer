@@ -98,15 +98,37 @@ soundPlayer() {
 
 	game->musicPlayer.play(Music::GAMETHEME);
 
+	////////////////////////////////
+	//Loading font//////////////////
+	////////////////////////////////
+
 	font.loadFromFile("./textures/coolFont.ttf");
-	text.setStyle(sf::Text::Italic);
-	text.setColor(sf::Color::Red);
-	text.setFont(font);
+
+	///////////////////////////////
+	//Setting enemies counter//////
+	///////////////////////////////
+
+	enemiesCounter.setStyle(sf::Text::Italic);
+	enemiesCounter.setColor(sf::Color::Red);
+	enemiesCounter.setFont(font);
 	enemiesOnMap << "Enemies: " << enemiesNumber;
-	text.setString(enemiesOnMap.str());
-	text.setCharacterSize(game->graphics.getWindowHeight() / 10);
-	text.setPosition(sf::Vector2f(game->view.getCenter().x - (game->graphics.getWindowWidth() / 2) + 10,
+	enemiesCounter.setString(enemiesOnMap.str());
+	enemiesCounter.setCharacterSize(game->graphics.getWindowHeight() / 10);
+	enemiesCounter.setPosition(sf::Vector2f(game->view.getCenter().x - (game->graphics.getWindowWidth() / 2) + 10,
 		game->view.getCenter().y - (game->graphics.getWindowHeight() /2) + 10));
+
+	///////////////////////////////
+	//Setting money counter////////
+	///////////////////////////////
+
+	moneyCounter.setStyle(sf::Text::Italic);
+	moneyCounter.setColor(sf::Color::Yellow);
+	moneyCounter.setFont(font);
+	moneyString << "Money: " << money;
+	moneyCounter.setString(moneyString.str());
+	moneyCounter.setCharacterSize(game->graphics.getWindowHeight() / 10);
+	moneyCounter.setPosition(sf::Vector2f(game->view.getCenter().x - (game->graphics.getWindowWidth() / 2) + 10,
+		game->view.getCenter().y + (game->graphics.getWindowHeight() / 2) - 10 - moneyCounter.getLocalBounds().height));
 
 
 	//Help
@@ -126,7 +148,8 @@ void GameState::draw (sf::RenderTarget& target) {
 		gamePtr->view.setSize(size.x, size.y);
 		target.setView(gamePtr->view);
 		root.draw(target);
-		target.draw(text);
+		target.draw(enemiesCounter);
+		target.draw(moneyCounter);
 		
 		if (helpPressed)
 		{
@@ -187,9 +210,9 @@ bool GameState::handleEvent (const sf::Event& event) {
 bool GameState::update (sf::Time dt) {
 
 	help.setCharacterSize(gamePtr->graphics.getWindowHeight() / 15);
-	help.setOrigin(0, text.getLocalBounds().height);
+	help.setOrigin(0, enemiesCounter.getLocalBounds().height);
 
-	help.setPosition(gamePtr->view.getCenter().x + text.getLocalBounds().width, gamePtr->view.getCenter().y - text.getLocalBounds().height);
+	help.setPosition(gamePtr->view.getCenter().x + enemiesCounter.getLocalBounds().width, gamePtr->view.getCenter().y - enemiesCounter.getLocalBounds().height);
 
 	if (fighterToSpawn>=0)
 	while (SceneNode::fighterOnMap <= SceneNode::currentWave * 3)
@@ -277,10 +300,16 @@ bool GameState::update (sf::Time dt) {
 	enemiesOnMap.str(std::string());
 	enemiesOnMap.clear();
 	enemiesOnMap << "Enemies: " << enemiesNumber;
-	text.setString(enemiesOnMap.str());
-
-	text.setPosition(sf::Vector2f(gamePtr->view.getCenter().x - (gamePtr->graphics.getWindowWidth() / 2) + 10,
+	enemiesCounter.setString(enemiesOnMap.str());
+	enemiesCounter.setPosition(sf::Vector2f(gamePtr->view.getCenter().x - (gamePtr->graphics.getWindowWidth() / 2) + 10,
 		gamePtr->view.getCenter().y - (gamePtr->graphics.getWindowHeight() / 2) + 10));
+
+	moneyString.str(std::string());
+	moneyString.clear();
+	moneyString << "Money: " << money;
+	moneyCounter.setString(moneyString.str());
+	moneyCounter.setPosition(sf::Vector2f(gamePtr->view.getCenter().x - (gamePtr->graphics.getWindowWidth() / 2) + 10,
+		gamePtr->view.getCenter().y + (gamePtr->graphics.getWindowHeight() / 2) - 10 - moneyCounter.getLocalBounds().height));
 
     return true;
 }

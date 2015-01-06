@@ -4,7 +4,7 @@
 Graphics::Graphics() : mWindowWidth(1366),
 mWindowHeight(768),
 mBitsPerPixel(32U),
-mFullscreen(1),
+mFullscreen(0),
 gameName("Polygon Platformer"),
 mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
     // Obtaining native fullscreen modes.

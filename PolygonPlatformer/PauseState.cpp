@@ -63,7 +63,9 @@ bool PauseState::handleEvent(const sf::Event& event) {
 			requestStateClear();
 			requestStackPush(States::MENU);
 		}
-		else if (klawisz == 0){   //leave the game
+		else if (klawisz == 0){ 
+			//leave the game
+			exit(1);
 			requestStateClear();
 			gamePtr->gameWindow.close();
 		}

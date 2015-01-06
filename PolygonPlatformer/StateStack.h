@@ -35,7 +35,7 @@ public:
 	bool           isEmpty() const;
 	void           applyPendingChanges();
 	States::ID	   getCurrentStateID();
-
+	short			awesomeness;
 	GameState			*gameStatePtr;
 
 private:     

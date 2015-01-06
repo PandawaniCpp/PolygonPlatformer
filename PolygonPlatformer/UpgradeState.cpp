@@ -48,6 +48,7 @@ bool UpgradeState::update(sf::Time dt) {
 	}
 	if (choose)
 		text[wasPressed].setColor(sf::Color::Blue);
+
 	text[klawisz].setColor(sf::Color::Red);
 
 	if (Player::me->piercingBullets)

@@ -4,19 +4,20 @@
 #include "Game.h"
 
 class StateStack;
-class TitleState : public State {
+class Credits : public State {
 public:
 
-	TitleState(StateStack & stack, Game * game);
+	Credits(StateStack & stack, Game * game);
 
 	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);
-
+	float			x;
+	float			y;
 
 private:
 
-	sf::Text text;
+	sf::Text text[6];
 	sf::Font   font;
 	sf::Texture texture;
 	sf::Sprite background;

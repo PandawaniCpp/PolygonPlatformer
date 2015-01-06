@@ -13,11 +13,16 @@ public:
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);
 
-
+	
 private:
-	SceneNode root;
-	sf::RectangleShape backgroundShape;
-	sf::Text text;
+	int				klawisz;
+	int				risk;
+	bool			isCute;
+	sf::Text text[4];
 	sf::Font   font;
+	sf::Texture texture;
+	sf::Texture	cute;
+	sf::Sprite background;
+	sf::Time textEffectTime;
 
 };

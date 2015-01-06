@@ -17,6 +17,7 @@
 #include "PauseState.h"
 #include "UpgradeState.h"
 #include "OptionsState.h"
+#include "Credits.h"
 // enumerators
 #include "ResourcesID.h"
 
@@ -36,6 +37,7 @@ class Game {
 	friend class PauseState;
 	friend class UpgradeState;
 	friend class OptionsState;
+	friend class Credits;
 public:
     Game ();
 

@@ -6,22 +6,24 @@
 class StateStack;
 class MenuState : public State {
 public:
-	
-	enum OptionNames { Play , Options , Exit , };
+
+	enum OptionNames { Play, Options, Exit, };
 
 
 	MenuState(StateStack & stack, Game * game);
 
-    virtual void draw (sf::RenderTarget& target);
+	virtual void draw(sf::RenderTarget& target);
 	virtual bool update(sf::Time dt);
-	virtual bool handleEvent(const sf::Event& event); 
+	virtual bool handleEvent(const sf::Event& event);
 
 
 private:
-	SceneNode root;
 	int				klawisz;
-	sf::RectangleShape backgroundShape;
 	sf::Text text[3];
 	sf::Font   font;
+	sf::Texture texture;
+	sf::Sprite background;
+	sf::Time textEffectTime;
+
 
 };

@@ -6,7 +6,7 @@ StateStack::~StateStack() {
 }
 
 StateStack::StateStack(Game * game)
-	: stateStack(),gameStatePtr(nullptr), pendingList(), game(game), factories() {
+	: stateStack(),gameStatePtr(nullptr), pendingList(), game(game), factories(),awesomeness(7) {
 }
 
 void StateStack::update(sf::Time dt) {

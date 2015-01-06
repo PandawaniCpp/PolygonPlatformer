@@ -6,12 +6,15 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	: State(stack, game) {
 	game->musicPlayer.play(Music::MENUTHEME);
 	stateID = States::MENU;
-	
-	//gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
-	//gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
-	//gamePtr->gameWindow.setView(gamePtr->view);
-
 	klawisz = 2;
+	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
+	gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
+	gamePtr->gameWindow.setView(gamePtr->view);
+
+
+	texture.loadFromFile("./textures/title4.jpg");
+	background.setTexture(texture);
+	background.setPosition(0.f, 0.f);
 
 	font.loadFromFile("./textures/coolFont.ttf");
 	for (int i = 0; i < 3; i++){
@@ -22,22 +25,19 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	text[0].setString("Leave");
 	text[1].setString("Options");
 	text[2].setString("Play");
-	backgroundShape.setFillColor(sf::Color(0, 0, 0, 150));
-	backgroundShape.setSize(sf::Vector2f(10000, 10000));
-	
-	
+
 }
 
-void MenuState::draw (sf::RenderTarget& target) {
+void MenuState::draw(sf::RenderTarget& target) {
 
-	gamePtr->gameWindow.draw(backgroundShape);
+	gamePtr->gameWindow.draw(background);
 	for (int i = 0; i < 3; ++i)
 		gamePtr->gameWindow.draw(text[i]);
-	
+
 }
 
 bool MenuState::update(sf::Time dt) {
-	
+
 	//text.setCharacterSize(gamePtr->graphics.getWindowHeight() / 4);
 	//text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
 	//text.setPosition(gamePtr->view.getCenter().x, gamePtr->view.getCenter().y);
@@ -45,6 +45,8 @@ bool MenuState::update(sf::Time dt) {
 	////gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
 
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
+	background.setScale((float)gamePtr->graphics.getWindowWidth() / texture.getSize().x,
+		(float)gamePtr->graphics.getWindowHeight() / texture.getSize().y);
 	unsigned center = gamePtr->view.getCenter().y + gamePtr->graphics.getWindowHeight() / 6;
 	for (int i = 2; i >= 0; --i){
 		text[i].setCharacterSize(65);
@@ -52,7 +54,7 @@ bool MenuState::update(sf::Time dt) {
 
 		text[i].setOrigin(text[i].getLocalBounds().width / 2, text[i].getLocalBounds().height / 2);
 
-		text[i].setPosition(gamePtr->view.getCenter().x, center - 75* i);
+		text[i].setPosition(gamePtr->view.getCenter().x, center - 75 * i);
 
 	}
 	text[klawisz].setColor(sf::Color::Red);
@@ -61,7 +63,7 @@ bool MenuState::update(sf::Time dt) {
 }
 
 bool MenuState::handleEvent(const sf::Event& event) {
-	
+
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return){
 		if (klawisz == 2)
 		{
@@ -74,6 +76,7 @@ bool MenuState::handleEvent(const sf::Event& event) {
 		}
 		else if (klawisz == 0)
 		{
+			exit(1);
 			requestStateClear();
 			gamePtr->gameWindow.close();
 		}
@@ -81,11 +84,11 @@ bool MenuState::handleEvent(const sf::Event& event) {
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
 		--klawisz;
 		if (klawisz < 0)
-			klawisz = 3;
+			klawisz = 2;
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
 		++klawisz;
-		if (klawisz > 3)
+		if (klawisz > 2)
 			klawisz = 0;
 	}
 	return true;

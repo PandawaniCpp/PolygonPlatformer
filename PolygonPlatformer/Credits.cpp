@@ -16,7 +16,7 @@ Credits::Credits(StateStack & stack, Game * game)
 	background.setTexture(texture);
 	background.setPosition(0.f, 0.f);
 
-	for (int i = 0; i < 6; i++){
+	for (int i = 0; i < 5; i++){
 		text[i].setStyle(sf::Text::Bold);
 		text[i].setColor(sf::Color::Red);
 		text[i].setFont(font);
@@ -24,16 +24,16 @@ Credits::Credits(StateStack & stack, Game * game)
 	}
 	
 	text[0].setString("Tomasz Kogowski");
-	text[1].setString("Marcin Jarzębski");
+	text[1].setString("Marcin Jarzebski");
 	text[2].setString("Jakub Kierejsza");
 	text[3].setString("Jakub Nietubski");
-	text[4].setString("Pod nadzorem\n Pawła Kaczyńskiego");
-	text[5].setString("Hubert Jatkowski");
+	text[4].setString("Pod nadzorem\n Pawla \"Pandy\" Kaczynskiego");
+
 }
 
 void Credits::draw(sf::RenderTarget& target) {
 	gamePtr->gameWindow.draw(background);
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 5; ++i)
 		gamePtr->gameWindow.draw(text[i]);
 }
 
@@ -62,9 +62,7 @@ bool Credits::update(sf::Time dt) {
 	text[3].setPosition( 300, y);
 	if (x<450)
 	text[4].setPosition(x ,600- y);
-	if (x<600)
-	text[5].setPosition(x, y);
-	
+
 	if (x > 1000)
 	{
 		requestStateClear();
@@ -76,7 +74,10 @@ bool Credits::update(sf::Time dt) {
 
 bool Credits::handleEvent(const sf::Event& event) {
 
-	
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
+		requestStateClear();
+		requestStackPush(States::TITLE);
+	}
 
 	return true;
 }

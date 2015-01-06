@@ -28,6 +28,7 @@ void UpgradeState::draw(sf::RenderTarget& target) {
 }
 
 bool UpgradeState::update(sf::Time dt) {
+	stateStack->gameStatePtr->helpPressed = false;
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
 	unsigned center = gamePtr->view.getCenter().y + gamePtr->graphics.getWindowHeight() / 5;
 

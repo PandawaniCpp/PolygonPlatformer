@@ -106,14 +106,33 @@ soundPlayer() {
 	text.setCharacterSize(game->graphics.getWindowHeight() / 10);
 	text.setPosition(sf::Vector2f(game->view.getCenter().x - (game->graphics.getWindowWidth() / 2) + 10,
 		game->view.getCenter().y - (game->graphics.getWindowHeight() /2) + 10));
+
+
+	//Help
+	helpPressed = false;
+	help.setStyle(sf::Text::Italic);
+	help.setFont(font);
+	help.setColor(sf::Color::Yellow);
+	help.setString(" To move left press Left Key\n  To move right press Right Key\n To jump press Up Key\nTo shoot press K");
+	backgroundShape.setFillColor(sf::Color(0, 0, 0, 150));
+	backgroundShape.setSize(sf::Vector2f(10000, 10000));
+	
 }
 
 void GameState::draw (sf::RenderTarget& target) {
-    sf::Vector2u size = target.getSize ();
-    gamePtr->view.setSize (size.x, size.y);
-    target.setView (gamePtr->view);
-    root.draw (target);
-	target.draw(text);
+   
+		sf::Vector2u size = target.getSize();
+		gamePtr->view.setSize(size.x, size.y);
+		target.setView(gamePtr->view);
+		root.draw(target);
+		target.draw(text);
+		
+		if (helpPressed)
+		{
+			gamePtr->gameWindow.draw(backgroundShape);
+			gamePtr->gameWindow.draw(help);
+		}
+	
 }
 
 bool GameState::handleEvent (const sf::Event& event) {
@@ -131,16 +150,33 @@ bool GameState::handleEvent (const sf::Event& event) {
 				if (event.key.code == sf::Keyboard::Num1)
 					++enemiesNumber;
 				if (event.key.code == sf::Keyboard::I)
-					requestStackPush(States::UPGRADE);
-				if (event.key.code == sf::Keyboard::Escape)
-					requestStackPush(States::PAUSE);
+				{
+					requestStackPush(States::UPGRADE); 
+					Player::me->isMovingLeft = false;
+					Player::me->isMovingRight = false;
+					Player::me->isShooting = false;
+					Player::me->isJumping = false;
+					Player::me->isAscending = false;
+				}
 				
+				if (event.key.code == sf::Keyboard::Escape)
+				{
+					requestStackPush(States::PAUSE);
+					Player::me->isMovingLeft = false;
+					Player::me->isMovingRight = false;
+					Player::me->isShooting = false;
+					Player::me->isJumping = false;
+					Player::me->isAscending = false;
+				}
+				if (event.key.code == sf::Keyboard::F1)
+					helpPressed = !helpPressed;
                 break;
 
             case sf::Event::KeyReleased:
                 break;
     }
-		player->handleEvent (event);
+		
+			player->handleEvent (event);
 
   
     return true;
@@ -149,7 +185,11 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 bool GameState::update (sf::Time dt) {
 
-	
+	help.setCharacterSize(gamePtr->graphics.getWindowHeight() / 15);
+	help.setOrigin(0, text.getLocalBounds().height);
+
+	help.setPosition(gamePtr->view.getCenter().x + text.getLocalBounds().width, gamePtr->view.getCenter().y - text.getLocalBounds().height);
+
 	if (fighterToSpawn>=0)
 	while (SceneNode::fighterOnMap <= SceneNode::currentWave * 3)
 	{

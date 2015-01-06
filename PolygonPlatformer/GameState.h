@@ -33,6 +33,16 @@ public:
 	void setEnemiesOnMap(unsigned int number);
 	unsigned int getEnemiesOnMap();
 	SceneNode*	player;
+
+	// HELP
+	sf::Text help;
+	sf::Sprite background;
+	sf::Texture texture;
+	bool      helpPressed;
+	sf::RectangleShape backgroundShape;
+
+
+
 private:
 	unsigned int enemiesNumber;
 	sf::Font font;
@@ -59,5 +69,6 @@ private:
 	int fatToSpawn;
 	int kamikazeToSpawn;
 	int swarmToSpawn;
+
 
 };

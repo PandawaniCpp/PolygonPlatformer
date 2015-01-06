@@ -17,7 +17,7 @@ public:
 
 private:
 
-	sf::Text text[6];
+	sf::Text text[5];
 	sf::Font   font;
 	sf::Texture texture;
 	sf::Sprite background;

@@ -2,8 +2,8 @@
 #include "Game.h"
 
 
-Game::Game() : gameName("Platformer"), mStateStack(this),
-gameWindow (graphics.getVideoMode (), gameName, graphics.getWindowStyle (), graphics.getContextSettings()),
+Game::Game() : mStateStack(this),
+gameWindow (graphics.getVideoMode (), graphics.getGameName(), graphics.getWindowStyle (), graphics.getContextSettings()),
 musicPlayer() {
     //Settig basic window options
 	gameWindow.setVerticalSyncEnabled(graphics.getVsync());

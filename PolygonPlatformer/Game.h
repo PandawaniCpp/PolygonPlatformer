@@ -21,8 +21,6 @@
 // enumerators
 #include "ResourcesID.h"
 
-//Icon
-#include "./textures/window_icon.cpp"
 
 //Music
 #include "MusicPlayer.h"
@@ -58,8 +56,6 @@ private:
     Graphics graphics;
 
     ErrorHandler errorHandler;
-
-    std::string gameName;
 
     sf::RenderWindow gameWindow;
 

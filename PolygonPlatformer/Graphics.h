@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "./textures/window_icon.cpp"
 #include <vector>
 
 class Graphics {
@@ -20,6 +21,10 @@ public:
 
 	sf::ContextSettings getContextSettings();
 
+	bool getFullscreen();
+
+	std::string getGameName();
+
     void setWindowWidth (const unsigned int width);
 
     void setWindowHeight (const unsigned int height);
@@ -32,9 +37,18 @@ public:
 
 	void setWindowPtr(sf::RenderWindow& target);
 
+	void setFullscreen(bool fullscreen);
+
+	void changeFullscreen();
+
 private:
 
 	sf::RenderWindow* windowPtr;
+
+	bool mFullscreen;
+
+	std::string gameName;
+
     // Screen resolution and color mode
     unsigned int mWindowWidth;
     unsigned int mWindowHeight;

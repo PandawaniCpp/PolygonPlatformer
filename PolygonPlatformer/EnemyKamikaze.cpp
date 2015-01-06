@@ -11,7 +11,7 @@ EnemyKamikaze::~EnemyKamikaze(){
 	--kamikazeOnMap;
 	if(!destroyedOnContact)
 		Player::me->heal(Player::me->hpPerMob);
-
+    globalMoney += 15 + (5 * currentWave);
 }
 
 

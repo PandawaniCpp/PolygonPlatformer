@@ -18,6 +18,12 @@ UpgradeState::UpgradeState(StateStack & stack, Game * game)
 	backgroundShape.setFillColor(sf::Color(0, 0, 0, 150));
 	backgroundShape.setSize(sf::Vector2f(10000, 10000));
 
+    text[0].setString ("Piercing Bulltes     " + std::to_string (5000));
+    text[1].setString ("Health               " + std::to_string (stateStack->gameStatePtr->upgrade[0]));
+    text[2].setString ("Cannibalism          " + std::to_string (stateStack->gameStatePtr->upgrade[1]));
+    text[3].setString ("Damage               " + std::to_string (stateStack->gameStatePtr->upgrade[2]));
+    text[4].setString ("Ready");
+
 }
 
 void UpgradeState::draw(sf::RenderTarget& target) {
@@ -35,11 +41,8 @@ bool UpgradeState::update(sf::Time dt) {
 	unsigned center = gamePtr->view.getCenter().y + gamePtr->graphics.getWindowHeight() / 5;
 
 	//+std::to_string()
-	text[0].setString("Piercing Bulltes cost"+std::to_string(5000));
-	text[1].setString("Health cost "+std::to_string(100*stateStack->gameStatePtr->upgrade[0]*1.5));
-	text[2].setString("Wysys hp z moba cost" + std::to_string(100 * stateStack->gameStatePtr->upgrade[1]*1.5));
-	text[3].setString("Damage cost" + std::to_string(100 * stateStack->gameStatePtr->upgrade[2]*1.5));
-	text[4].setString("Ready" + std::to_string(stateStack->gameStatePtr->money));
+
+    
 	
 	for (int i = 4; i >= 0; --i)
 	{

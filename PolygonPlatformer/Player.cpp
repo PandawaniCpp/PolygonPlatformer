@@ -67,16 +67,16 @@ void Player::beginContact(SceneNode* anotherNode)
 		contactCounter++;
 
 	if (anotherNode->MyId == ObjectId::ENEMY_BULLET)
-		damage(5);
+		damage(5+(3*currentWave));
 
 	if (anotherNode->MyId == ObjectId::ENEMY_FAT)
-		damage(30);
+		damage(20+(10*currentWave));
 
 	if (anotherNode->MyId == ObjectId::ENEMY_SWARM)
-		damage(5);
+		damage(2+(2*currentWave));
 
 	if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE)
-		damage(40);
+		damage(20+(15*currentWave));
 
 }
 
@@ -123,7 +123,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 
 	if (timeSinceLastDamage >= touchingDamageCooldown&&contactCounter>0)
 	{
-		damage(1);
+		damage(1+(2*currentWave));
 		timeSinceLastDamage -= touchingDamageCooldown;
 	}
 

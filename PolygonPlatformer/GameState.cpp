@@ -22,8 +22,8 @@ soundPlayer() {
 	//////////LOL//////////////////
 	///////////////////////////////
 	stateStack->gameStatePtr = this;
-	upgrade[0] = upgrade[1] = upgrade[2] = 0;
-	money = 1000;
+	upgrade[0] = upgrade[1] = upgrade[2] = 100;
+	money = 0;
 	/////////////////////////////////
 	//Setting up Box2d world/////////
 	/////////////////////////////////
@@ -274,6 +274,8 @@ bool GameState::update (sf::Time dt) {
 	enemiesNumber += SceneNode::fatOnMap;
 	enemiesNumber += SceneNode::kamikazeOnMap;
 	enemiesNumber += SceneNode::swarmOnMap;
+
+    money = SceneNode::globalMoney;
 	
 
     root.update (dt, world);

@@ -11,6 +11,8 @@ EnemySwarm::~EnemySwarm(){
 	--swarmOnMap;
 	if (!destoyedOnContact)
 	Player::me->heal(Player::me->hpPerMob /5);
+
+    globalMoney += 3 + currentWave;
 }
 
 

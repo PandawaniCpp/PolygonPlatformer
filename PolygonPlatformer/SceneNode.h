@@ -62,6 +62,7 @@ public:
 	static int kamikazeOnMap;
 	static int swarmOnMap;
 	static int currentWave;
+    static int globalMoney;
 
 
 	bool needsToGetDeleted;

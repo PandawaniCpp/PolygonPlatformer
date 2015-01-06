@@ -11,6 +11,8 @@ EnemyFat::~EnemyFat(){
 	--fatOnMap;
 	Player::me->heal(Player::me->hpPerMob*5);
 
+
+    globalMoney += 30 + (10 * currentWave);
 }
 
 
@@ -25,7 +27,7 @@ EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_gr
 
 	MyId = ObjectId::ENEMY_FAT;
 
-	maxHP = 200;
+	maxHP = 200+(20*currentWave*currentWave);
 	currentHP = 200;
 	jumpingCooldown = sf::seconds(2);
 	timeSinceLastJump = sf::Time::Zero;

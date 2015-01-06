@@ -60,7 +60,9 @@ bool PauseState::handleEvent(const sf::Event& event) {
 			requestStackPush(States::OPTIONS);
 		else if (klawisz == 1)
 		{
-			requestStateClear();
+			//requestStateClear();
+			requestStackPop();
+			requestStackPop();
 			requestStackPush(States::MENU);
 		}
 		else if (klawisz == 0){ 

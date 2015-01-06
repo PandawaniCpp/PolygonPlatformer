@@ -40,7 +40,9 @@ public:
 	sf::Texture texture;
 	bool      helpPressed;
 	sf::RectangleShape backgroundShape;
-
+	
+	unsigned		upgrade[3];
+	unsigned		money;
 
 
 private:

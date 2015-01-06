@@ -24,9 +24,9 @@ Credits::Credits(StateStack & stack, Game * game)
 	}
 	
 	text[0].setString("Tomasz Kogowski");
-	text[1].setString("Marcin Jarzebski");
+	text[1].setString("Marcin \"Krecik\" Jarzebski");
 	text[2].setString("Jakub Kierejsza");
-	text[3].setString("Jakub Nietubski");
+	text[3].setString("Jakub \"Nietup\" Nietupski");
 	text[4].setString("Pod nadzorem\n Pawla \"Pandy\" Kaczynskiego");
 
 }

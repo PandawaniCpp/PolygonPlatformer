@@ -28,17 +28,19 @@ void UpgradeState::draw(sf::RenderTarget& target) {
 }
 
 bool UpgradeState::update(sf::Time dt) {
+	if (stateStack->gameStatePtr->money <= 0)
+		stateStack->gameStatePtr->money = 0;
 	stateStack->gameStatePtr->helpPressed = false;
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
 	unsigned center = gamePtr->view.getCenter().y + gamePtr->graphics.getWindowHeight() / 5;
 
 	//+std::to_string()
-	text[0].setString("Piercing Bulltes");
-	text[1].setString("Health");
-	text[2].setString("Wysys hp z moba");
-	text[3].setString("Damage");
-	text[4].setString("Ready");
-
+	text[0].setString("Piercing Bulltes cost"+std::to_string(5000));
+	text[1].setString("Health cost "+std::to_string(100*stateStack->gameStatePtr->upgrade[0]*1.5));
+	text[2].setString("Wysys hp z moba cost" + std::to_string(100 * stateStack->gameStatePtr->upgrade[1]*1.5));
+	text[3].setString("Damage cost" + std::to_string(100 * stateStack->gameStatePtr->upgrade[2]*1.5));
+	text[4].setString("Ready" + std::to_string(stateStack->gameStatePtr->money));
+	
 	for (int i = 4; i >= 0; --i)
 	{
 		text[i].setCharacterSize(45);
@@ -91,10 +93,46 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		{
 			switch (wasPressed)
 			{
-			case 0: Player::me->piercingBullets = true; choose = true; break;
-			case 1: Player::me->maxHP = Player::me->maxHP*1.2; choose = true; break;
-			case 2: choose = true; break;
-			case 3:Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.3; choose = true; break;
+			case 0: if (stateStack->gameStatePtr->money >= 5000) { 
+				Player::me->piercingBullets = true; 
+				choose = true;
+				stateStack->gameStatePtr->money -= 5000;
+				if (stateStack->gameStatePtr->money <= 0)
+					stateStack->gameStatePtr->money = 0;
+			}
+					else choose = false; break;
+			case 1: if (stateStack->gameStatePtr->money >= 100 * stateStack->gameStatePtr->upgrade[0] * 1.5)
+			{
+				Player::me->maxHP = Player::me->maxHP*1.2;
+				choose = true;
+				stateStack->gameStatePtr->money -= 100 * stateStack->gameStatePtr->upgrade[0] * 1.5;
+				stateStack->gameStatePtr->upgrade[0]++;
+				if (stateStack->gameStatePtr->money <= 0)
+					stateStack->gameStatePtr->money = 0;
+			} else choose = false; break;
+			
+			case 2: if (stateStack->gameStatePtr->money >= 100 * stateStack->gameStatePtr->upgrade[1] * 1.5)
+			{
+				choose = true;
+				stateStack->gameStatePtr->money -= 100 * stateStack->gameStatePtr->upgrade[1] * 1.5;
+				stateStack->gameStatePtr->upgrade[1]++;
+				if (stateStack->gameStatePtr->money <= 0)
+					stateStack->gameStatePtr->money = 0;
+				break;
+			}
+					else choose = false; break;
+			case 3:
+				if (stateStack->gameStatePtr->money >= (100 * stateStack->gameStatePtr->upgrade[2] * 1.5))
+				{
+					Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.3; 
+					choose = true;
+					stateStack->gameStatePtr->money -= 100 * stateStack->gameStatePtr->upgrade[2] * 1.5;
+					stateStack->gameStatePtr->upgrade[2]++;
+					if (stateStack->gameStatePtr->money < 0)
+						stateStack->gameStatePtr->money = 0;
+				}
+				else choose = false; break;
+				
 			default:
 				break;
 			}

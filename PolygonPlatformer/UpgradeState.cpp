@@ -93,7 +93,7 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		case 1:
 		{
                   if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[0]) {
-                      Player::me->maxHP = Player::me->maxHP*1.2;
+                      Player::me->maxHP = Player::me->maxHP*1.5;
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[0];
                       stateStack->gameStatePtr->upgrade[0] *= 1.5;
@@ -108,7 +108,8 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		{
 
                   if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[1]) {
-                      Player::me->hpPerMob *= 1.2;
+                      Player::me->hpPerMob *= 1.7;
+                      Player::me->hpPerMob += 1;
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[1];
                       stateStack->gameStatePtr->upgrade[1] *= 1.5;
@@ -123,7 +124,8 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		case 3:
 		{
                   if (SceneNode::globalMoney >= (stateStack->gameStatePtr->upgrade[2])) {
-                      Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.3;
+                      Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.5;
+                      Player::me->bulletDamageVar += 2;
                       //choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[2];
                       stateStack->gameStatePtr->upgrade[2] *= 1.5;

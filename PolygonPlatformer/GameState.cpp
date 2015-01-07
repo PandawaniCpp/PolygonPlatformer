@@ -221,7 +221,7 @@ bool GameState::update (sf::Time dt) {
 
 
     if (Player::me->currentHP <= 0) {
-        //requestStackPush(States::END);
+        requestStackPush(States::END);
     }
     help.setCharacterSize (gamePtr->graphics.getWindowHeight () / 15);
     help.setOrigin (0, enemiesCounter.getLocalBounds ().height);
@@ -232,11 +232,12 @@ bool GameState::update (sf::Time dt) {
     if (spawnCooldown <= sf::Time::Zero) {
 
 
+
         if (fighterToSpawn >= 0)
         while (SceneNode::fighterOnMap <= SceneNode::currentWave * 3) {
             if (fighterToSpawn <= 0)
                 break;
-            spawnEnemyFighter ((rand () % 800 + 100), (rand () % 300) + 100);
+            spawnEnemyFighter ((rand () % 1100 + 200), (rand () % 1200) + 100);
             --fighterToSpawn;
         }
 
@@ -245,7 +246,7 @@ bool GameState::update (sf::Time dt) {
         while (SceneNode::fatOnMap <= SceneNode::currentWave) {
             if (fatToSpawn <= 0)
                 break;
-            spawnEnemyFat ((rand () % 800 + 100), (rand () % 300) + 100);
+            spawnEnemyFat ((rand () % 1100 + 200), (rand () % 1200) + 100);
             --fatToSpawn;
         }
 
@@ -253,7 +254,7 @@ bool GameState::update (sf::Time dt) {
         while (SceneNode::swarmOnMap <= SceneNode::currentWave) {
             if (swarmToSpawn <= 0)
                 break;
-            spawnEnemySwarm ((rand () % 800 + 100), (rand () % 300) + 100);
+            spawnEnemySwarm ((rand () % 1100 + 200), (rand () % 1200) + 100);
             --swarmToSpawn;
         }
 
@@ -261,7 +262,7 @@ bool GameState::update (sf::Time dt) {
         while (SceneNode::kamikazeOnMap <= SceneNode::currentWave) {
             if (kamikazeToSpawn <= 0)
                 break;
-            spawnEnemyKamikaze ((rand () % 800 + 100), (rand () % 300) + 100);
+            spawnEnemyKamikaze ((rand () % 1100 + 200), (rand () % 1200) + 100);
             --kamikazeToSpawn;
         }
 
@@ -289,7 +290,7 @@ bool GameState::update (sf::Time dt) {
     enemiesNumber += SceneNode::kamikazeOnMap;
     enemiesNumber += SceneNode::swarmOnMap;
 
-    enemiesNumber = Player::me->getPosition ().x;
+    
 
 
     money = SceneNode::globalMoney;

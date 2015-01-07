@@ -50,9 +50,10 @@ EnemyBullet::EnemyBullet(float positionX, float positionY, bool facingRight){
 
 
 void EnemyBullet::beginContact(SceneNode* another){
-	if (another->MyId != ObjectId::ENEMY_FIGHTER)
+    needsToGetDeleted = true;
+    if (another->MyId == ObjectId::ENEMY_FIGHTER || another->MyId == ObjectId::ENEMY_FAT || another->MyId == ObjectId::ENEMY_SWARM || another->MyId == ObjectId::ENEMY_KAMIKAZE)
 		//globalQueuedForDeletion->push_back(this);
-		needsToGetDeleted = true;
+		needsToGetDeleted = false;
 	if (another->MyId == ObjectId::PLAYER)
 	{
 		SceneNode *tmp;

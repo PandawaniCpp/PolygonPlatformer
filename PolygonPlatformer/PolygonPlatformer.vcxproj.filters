@@ -34,6 +34,7 @@
     <ClCompile Include="EnemyKamikaze.cpp" />
     <ClCompile Include="OptionsState.cpp" />
     <ClCompile Include="Credits.cpp" />
+    <ClCompile Include="EndState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -69,5 +70,6 @@
     <ClInclude Include="EnemyKamikaze.h" />
     <ClInclude Include="OptionsState.h" />
     <ClInclude Include="Credits.h" />
+    <ClInclude Include="EndState.h" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,8 @@ public:
 
 	static SceneNode* currentPlayer;
 	float maxHP;
-protected:
 	float currentHP;
+
+
 
 };

@@ -209,6 +209,9 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 bool GameState::update (sf::Time dt) {
 
+	if (Player::me->currentHP <= 0){
+		requestStackPush(States::END);
+	}
 	help.setCharacterSize(gamePtr->graphics.getWindowHeight() / 15);
 	help.setOrigin(0, enemiesCounter.getLocalBounds().height);
 

@@ -42,6 +42,7 @@ EnemyKamikaze::EnemyKamikaze(float x, float y) :healthbar_red(new SceneNode), he
 	b2FixtureDef boxFixtureDef;
 	b2PolygonShape boxShape;
 	b2BodyDef myBodyDef;
+    myBodyDef.gravityScale = 0.5f;
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.position.Set(x*PIXELTOMETER, y*PIXELTOMETER);
 	myBodyDef.angle = 0;
@@ -80,6 +81,9 @@ EnemyKamikaze::EnemyKamikaze(float x, float y) :healthbar_red(new SceneNode), he
 
 
 void EnemyKamikaze::updateCurrent(sf::Time dt, b2World* world){
+
+    if (getPosition ().y >= 6000)
+        damage (maxHP);
 
 	ghostMode -= dt;
 	if (ghostMode <= sf::Time::Zero)

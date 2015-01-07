@@ -12,7 +12,7 @@ EnemySwarm::~EnemySwarm(){
 	if (!destoyedOnContact)
 	Player::me->heal(Player::me->hpPerMob /5);
 
-    globalMoney += 3 + currentWave;
+    globalMoney += 2 + currentWave/2;
 }
 
 
@@ -68,6 +68,9 @@ EnemySwarm::EnemySwarm(float x, float y){
 
 
 void EnemySwarm::updateCurrent(sf::Time dt, b2World* world){
+
+    if (getPosition ().y >= 6000)
+        damage (maxHP);
 
 	currentVelocity *= 1.01;
 	if (currentVelocity >= 20.f)

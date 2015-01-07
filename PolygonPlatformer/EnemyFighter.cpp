@@ -9,7 +9,7 @@ EnemyFighter::~EnemyFighter(){
 	globalWorld->DestroyBody(myBody);
 	--fighterOnMap;
 	Player::me->heal(Player::me->hpPerMob);
-    globalMoney += 10 + (5 * currentWave);
+    globalMoney += 10 + (2 * currentWave);
 
 }
 
@@ -79,6 +79,9 @@ void EnemyFighter::shoot()
 
 
 void EnemyFighter::updateCurrent(sf::Time dt, b2World* world){
+
+    if (getPosition ().y >=6000)
+        damage (maxHP);
 
 	ghostMode -= dt;
 	if (ghostMode <= sf::Time::Zero)

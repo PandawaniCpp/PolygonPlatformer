@@ -23,10 +23,20 @@ UpgradeState::UpgradeState(StateStack & stack, Game * game)
 }
 
 void UpgradeState::draw(sf::RenderTarget& target) {
+    stateStack->gameStatePtr->money = SceneNode::globalMoney;
 
 	gamePtr->gameWindow.draw(backgroundShape);
+
 	for (int i = 0; i < 5; ++i)
 		gamePtr->gameWindow.draw(text[i]);
+
+    stateStack->gameStatePtr->moneyString.str (std::string ());
+    stateStack->gameStatePtr->moneyString.clear ();
+    stateStack->gameStatePtr->moneyString << "Money: " << stateStack->gameStatePtr->money;
+    stateStack->gameStatePtr->moneyCounter.setString (stateStack->gameStatePtr->moneyString.str ());
+    stateStack->gameStatePtr->moneyCounter.setPosition (sf::Vector2f (gamePtr->view.getCenter ().x - (gamePtr->graphics.getWindowWidth () / 2) + 10,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 10 - stateStack->gameStatePtr->moneyCounter.getLocalBounds ().height));
+    gamePtr->gameWindow.draw (stateStack->gameStatePtr->moneyCounter);
 }
 
 bool UpgradeState::update(sf::Time dt) {
@@ -68,78 +78,65 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		switch (klawisz){
 		case 0:
 		{
-			wasPressed = 0;
-			choose = true;
-			break;
+
+                  if (SceneNode::globalMoney >= 5000) {
+                      Player::me->piercingBullets = true;
+                     // choose = true;
+                      SceneNode::globalMoney -= 5000;
+                      if (SceneNode::globalMoney <= 0)
+                          SceneNode::globalMoney = 0;
+                  }
+			
+		
+                  break;
 		}
 		case 1:
 		{
-
+                  if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[0]) {
+                      Player::me->maxHP = Player::me->maxHP*1.2;
+                     // choose = true;
+                      SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[0];
+                      stateStack->gameStatePtr->upgrade[0] *= 1.5;
+                      if (SceneNode::globalMoney <= 0)
+                          SceneNode::globalMoney = 0;
+                  }
 			wasPressed = 1;
-			choose = true;
-			break;
+			
+            break;
 		}
 		case 2:
 		{
+
+                  if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[1]) {
+                      Player::me->hpPerMob *= 1.2;
+                     // choose = true;
+                      SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[1];
+                      stateStack->gameStatePtr->upgrade[1] *= 1.5;
+                      if (SceneNode::globalMoney <= 0)
+                          SceneNode::globalMoney = 0;
+                    
+                  }
 			wasPressed = 2;
-			choose = true;
-			break;
+			
+            break;
 		}
 		case 3:
 		{
-
+                  if (SceneNode::globalMoney >= (stateStack->gameStatePtr->upgrade[2])) {
+                      Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.3;
+                      //choose = true;
+                      SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[2];
+                      stateStack->gameStatePtr->upgrade[2] *= 1.5;
+                      if (SceneNode::globalMoney < 0)
+                          SceneNode::globalMoney = 0;
+                  }
 			wasPressed = 3;
-			choose = true;
-			break;
+			
+            break;
 		}
 		case 4:
 		{
-			switch (wasPressed)
-			{
-			case 0: if(SceneNode::globalMoney >= 5000) {
-				Player::me->piercingBullets = true; 
-				choose = true;
-				SceneNode::globalMoney -= 5000;
-				if (SceneNode::globalMoney <= 0)
-					SceneNode::globalMoney = 0;
-			}
-					else choose = false; break;
-			case 1: if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[0])
-			{
-				Player::me->maxHP = Player::me->maxHP*1.2;
-				choose = true;
-				SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[0];
-				stateStack->gameStatePtr->upgrade[0]*=1.5;
-				if (SceneNode::globalMoney <= 0)
-					SceneNode::globalMoney = 0;
-			} else choose = false; break;
 			
-			case 2: if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[1])
-			{
-				choose = true;
-				SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[1];
-				stateStack->gameStatePtr->upgrade[1] *= 1.5;
-				if (SceneNode::globalMoney <= 0)
-					SceneNode::globalMoney = 0;
-				break;
-			}
-					else choose = false; break;
-			case 3:
-				if (SceneNode::globalMoney >= (stateStack->gameStatePtr->upgrade[2]))
-				{
-					Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.3; 
-					choose = true;
-					SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[2];
-					stateStack->gameStatePtr->upgrade[2] *= 1.5;
-					if (SceneNode::globalMoney < 0)
-						SceneNode::globalMoney = 0;
-				}
-				else choose = false; break;
-				
-			default:
-				break;
-			}
-
 			requestStackPop();
 		}
 			break;

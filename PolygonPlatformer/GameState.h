@@ -43,13 +43,13 @@ public:
 	
 	unsigned		upgrade[3];
 	unsigned		money;
+    sf::Time spawnCooldown;
+    sf::Text moneyCounter;
 
-
-private:
 	unsigned int enemiesNumber;
 	sf::Font font;
 	sf::Text enemiesCounter;
-	sf::Text moneyCounter;
+	
 	std::ostringstream enemiesOnMap;
 	std::ostringstream moneyString;
 

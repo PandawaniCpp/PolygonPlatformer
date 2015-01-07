@@ -12,7 +12,7 @@ EnemyFat::~EnemyFat(){
 	Player::me->heal(Player::me->hpPerMob*5);
 
 
-    globalMoney += 30 + (10 * currentWave);
+    globalMoney += 20 + (10 * currentWave);
 }
 
 
@@ -27,8 +27,8 @@ EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_gr
 
 	MyId = ObjectId::ENEMY_FAT;
 
-	maxHP = 200+(20*currentWave*currentWave);
-	currentHP = 200;
+	maxHP = 200+(20*currentWave);
+	currentHP = maxHP;
 	jumpingCooldown = sf::seconds(2);
 	timeSinceLastJump = sf::Time::Zero;
 	//ghostMode = sf::Time::Zero;
@@ -50,7 +50,7 @@ EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_gr
 	boxShape.SetAsBox((getTextureRect().width / 2.f)*PIXELTOMETER, (getTextureRect().height / 2.f)*PIXELTOMETER);
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
-	boxFixtureDef.friction = 100;
+	boxFixtureDef.friction = 0.5;
 	dynamicBody->CreateFixture(&boxFixtureDef);
 	dynamicBody->SetFixedRotation(true);
 	dynamicBody->SetUserData(this);
@@ -85,6 +85,9 @@ void EnemyFat::jump()
 void EnemyFat::updateCurrent(sf::Time dt, b2World* world){
 
 	
+    if (getPosition ().y >= 6000)
+        damage (maxHP);
+
 
 
 	timeSinceLastJump += dt;

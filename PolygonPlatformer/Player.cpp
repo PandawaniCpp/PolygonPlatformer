@@ -33,6 +33,7 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	b2FixtureDef boxFixtureDef;
 	b2PolygonShape boxShape;
 	b2BodyDef myBodyDef;
+    myBodyDef.gravityScale = 2.f;
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.position.Set(100.f*PIXELTOMETER, 100.f*PIXELTOMETER);
 	myBodyDef.angle = 0;
@@ -67,16 +68,16 @@ void Player::beginContact(SceneNode* anotherNode)
 		contactCounter++;
 
 	if (anotherNode->MyId == ObjectId::ENEMY_BULLET)
-		damage(5+(3*currentWave));
+		damage(5+(currentWave));
 
 	if (anotherNode->MyId == ObjectId::ENEMY_FAT)
-		damage(20+(10*currentWave));
+		damage(20+(5*currentWave));
 
 	if (anotherNode->MyId == ObjectId::ENEMY_SWARM)
-		damage(2+(2*currentWave));
+		damage(3+(2*currentWave/3));
 
 	if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE)
-		damage(20+(15*currentWave));
+		damage(20+(10*currentWave));
 
 }
 
@@ -175,9 +176,9 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     if (!(isMovingLeft&&isMovingRight)) {
 
         if (isMovingLeft)
-            myBody->SetLinearVelocity (b2Vec2 (-30.f, myBody->GetLinearVelocity ().y));
+            myBody->SetLinearVelocity (b2Vec2 (-50.f, myBody->GetLinearVelocity ().y));
         if (isMovingRight)
-            myBody->SetLinearVelocity (b2Vec2 (30.f, myBody->GetLinearVelocity ().y));
+            myBody->SetLinearVelocity (b2Vec2 (50.f, myBody->GetLinearVelocity ().y));
     }
 
     if (myBody->GetLinearVelocity ().y > 0) {
@@ -192,7 +193,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
     }
 
     if (isJumping&&currentState->id == PlayerStateType::ON_GROUND&&isAscending==false)
-        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -70.f));//Height of player jump
+        myBody->SetLinearVelocity (b2Vec2 (myBody->GetLinearVelocity ().x, -130.f));//Height of player jump
 
 	/*if (!isMovingLeft&&isMovingRight)
 	{

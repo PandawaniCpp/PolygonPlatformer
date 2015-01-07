@@ -9,13 +9,12 @@ gameName("Polygon Platformer"),
 mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
     // Obtaining native fullscreen modes.
 	setAntialiasing(2);
-<<<<<<< HEAD
+
 	if (mFullscreen) {
 		mWindowStyle = sf::Style::Fullscreen;
-=======
-    mWindowStyle = sf::Style::Fullscreen;
-	if (mWindowStyle == sf::Style::Fullscreen) {
->>>>>>> origin/platform_motion
+
+	//if (mWindowStyle == sf::Style::Fullscreen) {
+
 		mWindowWidth = sf::VideoMode::getDesktopMode().width;
 		mWindowHeight = sf::VideoMode::getDesktopMode().height;
 		mCurrentVideoMode = sf::VideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel);

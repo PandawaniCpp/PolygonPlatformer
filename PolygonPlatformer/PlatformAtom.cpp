@@ -15,6 +15,8 @@ PlatformAtom::PlatformAtom (sf::Vector2f position) : mPosition (position) {
 
     myBody = groundBody;
     setOrigin (getTextureRect ().width / 2.f, getTextureRect ().height / 2.f);
+
+    this->setColor (sf::Color (rand() % 255, rand () % 255, rand () % 255));
 }
 
 PlatformAtom::~PlatformAtom () {

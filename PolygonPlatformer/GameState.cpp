@@ -233,7 +233,7 @@ bool GameState::update (sf::Time dt) {
 
 
         if (fighterToSpawn >= 0)
-        while (SceneNode::fighterOnMap <= SceneNode::currentWave * 3) {
+        while ((15* SceneNode::fighterOnMap <= SceneNode::currentWave /10)+1) {
             if (fighterToSpawn <= 0)
                 break;
             spawnEnemyFighter ((rand () % 1100 + 200), (rand () % 1200) + 100);

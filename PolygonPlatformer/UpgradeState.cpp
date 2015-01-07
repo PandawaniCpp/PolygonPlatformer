@@ -97,6 +97,7 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[0];
                       stateStack->gameStatePtr->upgrade[0] *= 1.5;
+                      stateStack->gameStatePtr->upgrade[0] += 20;;
                       if (SceneNode::globalMoney <= 0)
                           SceneNode::globalMoney = 0;
                   }
@@ -113,6 +114,7 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[1];
                       stateStack->gameStatePtr->upgrade[1] *= 1.5;
+                      stateStack->gameStatePtr->upgrade[1] +=20;
                       if (SceneNode::globalMoney <= 0)
                           SceneNode::globalMoney = 0;
                     
@@ -129,6 +131,7 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
                       //choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[2];
                       stateStack->gameStatePtr->upgrade[2] *= 1.5;
+                      stateStack->gameStatePtr->upgrade[2] += 20;
                       if (SceneNode::globalMoney < 0)
                           SceneNode::globalMoney = 0;
                   }

@@ -1,9 +1,9 @@
 #include "MusicPlayer.h"
 
 
-MusicPlayer::MusicPlayer() : mMusic(), mFilenames(), mVolume(20.f) {
-	mFilenames[Music::MENUTHEME] = "./sounds/music/Boss.ogg";
-	mFilenames[Music::GAMETHEME] = "./sounds/music/Main.ogg";
+MusicPlayer::MusicPlayer() : mMusic(), mFilenames(), mVolume(40.f) {
+	mFilenames[Music::GAMETHEME] = "./sounds/music/Boss.ogg";
+	mFilenames[Music::MENUTHEME] = "./sounds/music/Main.ogg";
 };
 
 MusicPlayer::~MusicPlayer() {};

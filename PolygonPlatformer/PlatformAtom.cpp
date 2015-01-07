@@ -31,9 +31,11 @@ float PlatformAtom::getHeight () {
 
 void PlatformAtom::moveBrick (sf::Vector2f newPosition) {
     myBody->SetTransform ({newPosition.x*PIXELTOMETER, newPosition.y*PIXELTOMETER}, myBody->GetAngle ());
+    mPosition = newPosition; 
 }
 
 void PlatformAtom::moveBrickRelative (sf::Vector2f transformation) {
     sf::Vector2f temp = transformation + mPosition;
+    mPosition = temp;
     myBody->SetTransform ({temp.x*PIXELTOMETER, temp.y*PIXELTOMETER}, myBody->GetAngle ());
 }

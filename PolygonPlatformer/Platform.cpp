@@ -1,10 +1,12 @@
 #include "Platform.h"
 
-Platform::Platform (sf::Vector2f position, std::pair<int, int> dimensions) : mDimensions(dimensions) {
+Platform::Platform (sf::Vector2f position, std::pair<int, int> dimensions, bool wall) : mDimensions (dimensions), mWall(wall) {
     mCorners.leftUp = position;
+    if (!mDimensions.first) mDimensions.first = 1;
+    if (!mDimensions.second) mDimensions.second = 1;
 
-    for (int i = 0; i < dimensions.first; i++) {
-        for (int j = 0; j < dimensions.second; j++) {
+    for (int i = 0; i < mDimensions.first; i++) {
+        for (int j = 0; j < mDimensions.second; j++) {
             PlatformAtom * temporary = new PlatformAtom ();
             brickWidth = temporary->getWidth ();
             brickHeight = temporary->getHeight ();
@@ -14,36 +16,39 @@ Platform::Platform (sf::Vector2f position, std::pair<int, int> dimensions) : mDi
     }
 
     mCorners.leftDown = mCorners.rigthUp = mCorners.leftUp;
-    mCorners.leftDown.y += brickHeight * dimensions.second;
-    mCorners.rigthUp.x += brickWidth * dimensions.first;
+    mCorners.leftDown.y += brickHeight * mDimensions.second;
+    mCorners.rigthUp.x += brickWidth * mDimensions.first;
     mCorners.rightDown = mCorners.rigthUp;
-    mCorners.rightDown.y += brickHeight * dimensions.second;
+    mCorners.rightDown.y += brickHeight * mDimensions.second;
+
+     mHeight = mCorners.leftDown - mCorners.leftUp;
+     mWidth = mCorners.rightDown - mCorners.leftDown;
 
     //box2d stuff
-//    platformBodyDef.type = b2_kinematicBody;
-//    platformBodyDef.position.Set (((mCorners.leftDown.x + mCorners.rightDown.x) / 2.f) * PIXELTOMETER, ((mCorners.leftUp.y + mCorners.leftDown.y) / 2.f) * PIXELTOMETER);
-//
-//    b2Body * platformBody = globalWorld->CreateBody (&platformBodyDef);
-//
-//    b2Vec2 vertices[4];
-//    vertices[0].Set (mCorners.leftUp.x * PIXELTOMETER, mCorners.leftUp.y * PIXELTOMETER);
-//    vertices[1].Set (mCorners.rigthUp.x * PIXELTOMETER, mCorners.rigthUp.y * PIXELTOMETER);
-//    vertices[2].Set (mCorners.rightDown.x * PIXELTOMETER, mCorners.rightDown.y * PIXELTOMETER);
-//    vertices[3].Set (mCorners.leftDown.x * PIXELTOMETER, mCorners.leftDown.y * PIXELTOMETER);
-//
-//    platformBox.Set (vertices, 4); //pass array to the shape
-//    platformBody->CreateFixture (&platformBox, 0.f);
-//
-//
-////    platformBodyDef.position.Set ();
-//
-//    //myFixtureDef.shape = &polygonShape; //change the shape of the fixture
-//    //myBodyDef.position.Set (0, 20); //in the middle
-//    //b2Body* dynamicBody2 = m_world->CreateBody (&myBodyDef);
-//    //dynamicBody2->CreateFixture (&myFixtureDef); //add a fixture to the body
-//
-//    myBody = platformBody;
-//    setOrigin (((mCorners.leftDown.x + mCorners.rightDown.x) / 2.f) * PIXELTOMETER, ((mCorners.leftUp.y + mCorners.leftDown.y) / 2.f) * PIXELTOMETER);
+    //    platformBodyDef.type = b2_kinematicBody;
+    //    platformBodyDef.position.Set (((mCorners.leftDown.x + mCorners.rightDown.x) / 2.f) * PIXELTOMETER, ((mCorners.leftUp.y + mCorners.leftDown.y) / 2.f) * PIXELTOMETER);
+    //
+    //    b2Body * platformBody = globalWorld->CreateBody (&platformBodyDef);
+    //
+    //    b2Vec2 vertices[4];
+    //    vertices[0].Set (mCorners.leftUp.x * PIXELTOMETER, mCorners.leftUp.y * PIXELTOMETER);
+    //    vertices[1].Set (mCorners.rigthUp.x * PIXELTOMETER, mCorners.rigthUp.y * PIXELTOMETER);
+    //    vertices[2].Set (mCorners.rightDown.x * PIXELTOMETER, mCorners.rightDown.y * PIXELTOMETER);
+    //    vertices[3].Set (mCorners.leftDown.x * PIXELTOMETER, mCorners.leftDown.y * PIXELTOMETER);
+    //
+    //    platformBox.Set (vertices, 4); //pass array to the shape
+    //    platformBody->CreateFixture (&platformBox, 0.f);
+    //
+    //
+    ////    platformBodyDef.position.Set ();
+    //
+    //    //myFixtureDef.shape = &polygonShape; //change the shape of the fixture
+    //    //myBodyDef.position.Set (0, 20); //in the middle
+    //    //b2Body* dynamicBody2 = m_world->CreateBody (&myBodyDef);
+    //    //dynamicBody2->CreateFixture (&myFixtureDef); //add a fixture to the body
+    //
+    //    myBody = platformBody;
+    //    setOrigin (((mCorners.leftDown.x + mCorners.rightDown.x) / 2.f) * PIXELTOMETER, ((mCorners.leftUp.y + mCorners.leftDown.y) / 2.f) * PIXELTOMETER);
 }
 
 
@@ -51,8 +56,7 @@ Platform::~Platform () {
 }
 
 Platform::Corner Platform::getCorner () {
-    Corner temporary = mCorners;
-    return temporary;
+    return mCorners;
 }
 
 sf::Vector2f Platform::getCorner (int corner) {
@@ -68,12 +72,35 @@ sf::Vector2f Platform::getCorner (int corner) {
     }
 }
 
+void Platform::updateCorners (sf::Vector2f leftUp) {
+    mCorners.leftUp = leftUp;
+    mCorners.leftDown = leftUp + mHeight;
+    mCorners.rigthUp = leftUp + mWidth;
+    mCorners.rightDown = mCorners.leftDown + mWidth;
+}
+
 void Platform::movePlatform (sf::Vector2f position) {
 
-    //0 0 vector for testing purpose, it shouldn't change PlatformAtoms position then
-    sf::Vector2f transformation = {0.f, 0.f};// {position.x - mCorners.leftUp.x, position.y - mCorners.leftUp.y};
+    sf::Vector2f transformation = {position.x - mCorners.leftUp.x, position.y - mCorners.leftUp.y};
 
     for (auto itr = mChildren.begin (); itr != mChildren.end (); ++itr) {
         (*itr).get ()->moveBrickRelative (transformation);
     }
+
+    updateCorners (position);
+}
+
+void Platform::movePlatformRelative (sf::Vector2f transformation) {
+
+    sf::Vector2f position = transformation + mCorners.leftUp;
+
+    for (auto itr = mChildren.begin (); itr != mChildren.end (); ++itr) {
+        (*itr).get ()->moveBrickRelative (transformation);
+    }
+
+    updateCorners (position);
+}
+
+void Platform::setAsWall () {
+    mWall = true;
 }

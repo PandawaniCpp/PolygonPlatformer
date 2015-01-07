@@ -59,7 +59,7 @@ soundPlayer () {
     textures.load (Textures::PLAYER_LEFT, "./textures/player_left.png");
     textures.load (Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
     textures.load (Textures::ENEMY_BULLET, "./textures/enemy_bullet.png");
-    textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
+    textures.load (Textures::GAME_BACKGROUND, "./textures/gameBackground.png");
     textures.load (Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
     textures.load (Textures::BLOOD, "./textures/blood.png");
     textures.load (Textures::GROUND, "./textures/brick.png");
@@ -79,7 +79,7 @@ soundPlayer () {
     /////////////////////////////////
     //Setting up background//////////
     /////////////////////////////////
-    root.setTexture (textures.get (Textures::GAME_BACKGROUND));
+    //root.setTexture (textures.get (Textures::GAME_BACKGROUND));
     root.setOrigin (0.f, 0.f);
     root.setPosition (0.f, 0.f);
 
@@ -146,11 +146,14 @@ soundPlayer () {
     backgroundShape.setFillColor (sf::Color (0, 0, 0, 150));
     backgroundShape.setSize (sf::Vector2f (10000, 10000));
 
+    gameBackground = new SceneNode ();
+    gameBackground->setTexture (textures.get (Textures::GAME_BACKGROUND));
 
+    root.setScale (sf::Vector2f(0.75,0.75));
 }
 
 void GameState::draw (sf::RenderTarget& target) {
-
+    gamePtr->gameWindow.draw (*gameBackground);
     sf::Vector2u size = target.getSize ();
     gamePtr->view.setSize (size.x, size.y);
     target.setView (gamePtr->view);
@@ -159,7 +162,8 @@ void GameState::draw (sf::RenderTarget& target) {
     target.draw (moneyCounter);
 
     if (helpPressed) {
-        gamePtr->gameWindow.draw (backgroundShape);
+        //gamePtr->gameWindow.draw (backgroundShape);
+       
         gamePtr->gameWindow.draw (help);
     }
 
@@ -212,7 +216,7 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 
 bool GameState::update (sf::Time dt) {
-
+    gameBackground->setPosition (gamePtr->view.getCenter ().x - gamePtr->view.getSize ().x / 2.f - 30.f, gamePtr->view.getCenter ().y - gamePtr->view.getSize ().y / 2.f - 30.f);
     spawnCooldown -= dt;
 
     if (spawnCooldown <= sf::Time::Zero)

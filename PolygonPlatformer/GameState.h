@@ -74,5 +74,7 @@ public:
 	int kamikazeToSpawn;
 	int swarmToSpawn;
 
+    SceneNode * gameBackground;
+
 
 };

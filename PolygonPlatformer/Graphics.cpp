@@ -13,8 +13,6 @@ mCurrentVideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel){
 	if (mFullscreen) {
 		mWindowStyle = sf::Style::Fullscreen;
 
-	//if (mWindowStyle == sf::Style::Fullscreen) {
-
 		mWindowWidth = sf::VideoMode::getDesktopMode().width;
 		mWindowHeight = sf::VideoMode::getDesktopMode().height;
 		mCurrentVideoMode = sf::VideoMode(mWindowWidth, mWindowHeight, mBitsPerPixel);

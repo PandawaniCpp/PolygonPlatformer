@@ -232,7 +232,6 @@ bool GameState::update (sf::Time dt) {
     if (spawnCooldown <= sf::Time::Zero) {
 
 
-
         if (fighterToSpawn >= 0)
         while (SceneNode::fighterOnMap <= SceneNode::currentWave * 3) {
             if (fighterToSpawn <= 0)

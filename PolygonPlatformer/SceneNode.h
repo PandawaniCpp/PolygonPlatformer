@@ -21,7 +21,7 @@ namespace ObjectId
 	};
 }
 
-
+class Platform;
 
 
 
@@ -49,6 +49,10 @@ public:
 	virtual float getDamage(){
 		return 0;
 	};
+
+    virtual void moveBrick (sf::Vector2f) {};
+    virtual void moveBrickRelative (sf::Vector2f) {};
+    virtual sf::Vector2f getBrickCenter (Platform *, Platform *) { return{0,0}; };
 
 
 	static std::vector<SceneNode *> *globalQueuedForDeletion;

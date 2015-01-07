@@ -1,4 +1,4 @@
-#include "GameState.h"
+﻿#include "GameState.h"
 
 #define PIXELTOMETER (1.f/10.f)
 
@@ -63,13 +63,24 @@ soundPlayer() {
     textures.load (Textures::BLOOD, "./textures/blood.png");
     textures.load (Textures::GROUND, "./textures/brick.png");
 
+    /////////////////////////////////
+    //Scene - Setup//////////////////
+    /////////////////////////////////
+    //List of variables:
+    //number of places of spawn (not working yet)
+    //size of map (in bricks)
+    //number of platforms
+    //size of biggest platform
+    //size of smallest platform
+    //minimal distance between platforms
+    map = new Map (7, {45, 45}, 17, {14, 2}, {5, 1}, 50.f);
 
 	/////////////////////////////////
 	//Setting up background//////////
 	/////////////////////////////////
 	root.setTexture(textures.get(Textures::GAME_BACKGROUND));
-	root.setOrigin(root.getTextureRect().width / 2.f, root.getTextureRect().height / 2.f);
-	root.setPosition(1120.f / 2.f, 630.f / 2.f);
+	root.setOrigin(0.f, 0.f);
+	root.setPosition(0.f, 0.f);
 
 
 	/////////////////////////////////
@@ -84,12 +95,6 @@ soundPlayer() {
 	//Setting up collisions//////////
 	/////////////////////////////////
 	world->SetContactListener(&myContactListenerInstance);
-
-    
-    /////////////////////////////////
-    //Scene - Setup//////////////////
-    /////////////////////////////////
-    map = new Map (7, {32, 21});
 
     /////////////////////////////////
     //Camera - Viewport//////////////

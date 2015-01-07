@@ -1,6 +1,7 @@
 #include <exception>
 #include "Game.h"
-
+#include <stdlib.h>
+#include <time.h>
 
 Game::Game() : mStateStack(this),
 gameWindow (graphics.getVideoMode (), graphics.getGameName(), graphics.getWindowStyle (), graphics.getContextSettings()),
@@ -25,6 +26,7 @@ musicPlayer() {
 	mStateStack.pushState(States::CREDITS);
 	mStateStack.applyPendingChanges();
 
+    srand (time (NULL));
 	//Player
     /*mRootNode.attachChild (gamePlayer);
     textures.load (Textures::PLAYER, "./textures/player.png");

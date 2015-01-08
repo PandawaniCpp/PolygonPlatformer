@@ -10,6 +10,9 @@ positionIterations (2),
 enemiesNumber (0),
 soundPlayer () {
 
+    for (int i = 0; i < 4; i++)
+        upgradeCounter[i] = 0;
+
     fighterToSpawn = 6;
     fatToSpawn = 0;
     swarmToSpawn = 0;
@@ -59,7 +62,7 @@ soundPlayer () {
     textures.load (Textures::PLAYER_LEFT, "./textures/player_left.png");
     textures.load (Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
     textures.load (Textures::ENEMY_BULLET, "./textures/enemy_bullet.png");
-    textures.load (Textures::GAME_BACKGROUND, "./textures/gameBackground.png");
+    textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
     textures.load (Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
     textures.load (Textures::BLOOD, "./textures/blood.png");
     textures.load (Textures::GROUND, "./textures/brick.png");
@@ -123,6 +126,18 @@ soundPlayer () {
     enemiesCounter.setPosition (sf::Vector2f (game->view.getCenter ().x - (game->graphics.getWindowWidth () / 2) + 10,
         game->view.getCenter ().y - (game->graphics.getWindowHeight () / 2) + 10));
 
+
+
+
+    waveCounter.setStyle (sf::Text::Italic);
+    waveCounter.setColor (sf::Color::Red);
+    waveCounter.setFont (font);
+    waveString << "Wave: " << SceneNode::currentWave;
+    waveCounter.setString (waveString.str ());
+    waveCounter.setCharacterSize (game->graphics.getWindowHeight () / 10);
+    waveCounter.setPosition (sf::Vector2f (game->view.getCenter ().x + (game->graphics.getWindowWidth () / 2) - 10,
+        game->view.getCenter ().y - (game->graphics.getWindowHeight () / 2) + 10));
+
     ///////////////////////////////
     //Setting money counter////////
     ///////////////////////////////
@@ -146,20 +161,21 @@ soundPlayer () {
     backgroundShape.setFillColor (sf::Color (0, 0, 0, 150));
     backgroundShape.setSize (sf::Vector2f (10000, 10000));
 
-    gameBackground = new SceneNode ();
-    gameBackground->setTexture (textures.get (Textures::GAME_BACKGROUND));
+    //gameBackground = new SceneNode ();
+   // gameBackground->setTexture (textures.get (Textures::GAME_BACKGROUND));
 
-    root.setScale (sf::Vector2f(0.75,0.75));
+    //root.setScale (sf::Vector2f(0.75,0.75));
 }
 
 void GameState::draw (sf::RenderTarget& target) {
-    gamePtr->gameWindow.draw (*gameBackground);
+    //gamePtr->gameWindow.draw (*gameBackground);
     sf::Vector2u size = target.getSize ();
     gamePtr->view.setSize (size.x, size.y);
     target.setView (gamePtr->view);
     root.draw (target);
     target.draw (enemiesCounter);
     target.draw (moneyCounter);
+    target.draw (waveCounter);
 
     if (helpPressed) {
         //gamePtr->gameWindow.draw (backgroundShape);
@@ -216,7 +232,7 @@ bool GameState::handleEvent (const sf::Event& event) {
 
 
 bool GameState::update (sf::Time dt) {
-    gameBackground->setPosition (gamePtr->view.getCenter ().x - gamePtr->view.getSize ().x / 2.f - 30.f, gamePtr->view.getCenter ().y - gamePtr->view.getSize ().y / 2.f - 30.f);
+    //\gameBackground->setPosition (gamePtr->view.getCenter ().x - gamePtr->view.getSize ().x / 2.f - 30.f, gamePtr->view.getCenter ().y - gamePtr->view.getSize ().y / 2.f - 30.f);
     spawnCooldown -= dt;
 
     if (spawnCooldown <= sf::Time::Zero)
@@ -225,6 +241,7 @@ bool GameState::update (sf::Time dt) {
 
 
     if (Player::me->currentHP <= 0) {
+        SceneNode::globalMoney = 0;
         requestStackPush(States::END);
     }
     help.setCharacterSize (gamePtr->graphics.getWindowHeight () / 15);
@@ -237,36 +254,44 @@ bool GameState::update (sf::Time dt) {
 
 
         if (fighterToSpawn >= 0)
-        while ((15* SceneNode::fighterOnMap <= SceneNode::currentWave /10)+1) {
+        while ( SceneNode::fighterOnMap <= ((SceneNode::currentWave/2)+3)) {
             if (fighterToSpawn <= 0)
                 break;
-            spawnEnemyFighter ((rand () % 1100 + 200), (rand () % 1200) + 100);
+            spawnEnemyFighter ((rand () % 900 + 200), (rand () % 1000) + 100);
             --fighterToSpawn;
+            spawnCooldown += sf::seconds (1.f / 2.f);
+            break;
         }
 
 
         if (fatToSpawn >= 0)
-        while (SceneNode::fatOnMap <= SceneNode::currentWave) {
+        while (SceneNode::fatOnMap <= (((SceneNode::currentWave-1)/3)+1)) {
             if (fatToSpawn <= 0)
                 break;
-            spawnEnemyFat ((rand () % 1100 + 200), (rand () % 1200) + 100);
+            spawnEnemyFat ((rand () % 900 + 200), (rand () % 1000) + 100);
             --fatToSpawn;
+            spawnCooldown += sf::seconds (1.f / 2.f);
+            break;
         }
 
         if (swarmToSpawn >= 0)
-        while (SceneNode::swarmOnMap <= SceneNode::currentWave) {
+        while (SceneNode::swarmOnMap <= SceneNode::currentWave/2) {
             if (swarmToSpawn <= 0)
                 break;
-            spawnEnemySwarm ((rand () % 1100 + 200), (rand () % 1200) + 100);
+            spawnEnemySwarm ((rand () % 900 + 200), (rand () % 1000) + 100);
             --swarmToSpawn;
+            spawnCooldown += sf::seconds (1.f / 2.f);
+            break;
         }
 
         if (kamikazeToSpawn >= 0)
-        while (SceneNode::kamikazeOnMap <= SceneNode::currentWave) {
+        while (SceneNode::kamikazeOnMap <= ((SceneNode::currentWave-1)/3)) {
             if (kamikazeToSpawn <= 0)
                 break;
-            spawnEnemyKamikaze ((rand () % 1100 + 200), (rand () % 1200) + 100);
+            spawnEnemyKamikaze ((rand () % 900 + 200), (rand () % 1000) + 100);
             --kamikazeToSpawn;
+            spawnCooldown += sf::seconds (1.f / 2.f);
+            break;
         }
 
     }
@@ -307,34 +332,45 @@ bool GameState::update (sf::Time dt) {
         if (enemiesNumber == 0) {
 
 
+            spawnCooldown = sf::seconds (2);
+            Player::me->isMovingLeft = false;
+            Player::me->isMovingRight = false;
+            Player::me->isShooting = false;
+            Player::me->isJumping = false;
+            Player::me->isAscending = false;
+
+
 
             ++SceneNode::currentWave;
 
-            fighterToSpawn = 6 * (SceneNode::currentWave*3.f/5.f) +2;
+            fighterToSpawn = 6;
+            for (int k = 0; k < SceneNode::currentWave ; ++k)
+                fighterToSpawn +=  (k+1);
+            fighterToSpawn--;
 
 
             if (SceneNode::currentWave < 3) {
                 fatToSpawn = 0;
             }
             else
-               fatToSpawn = 2* SceneNode::currentWave/3.f;
+               fatToSpawn =  SceneNode::currentWave-1;
 
            
 
             
 
-            if (SceneNode::currentWave < 6) {
+            if (SceneNode::currentWave < 5) {
                 swarmToSpawn = 0;
             }
             else
-                swarmToSpawn =  SceneNode::currentWave;
+                swarmToSpawn =  (SceneNode::currentWave-5)*2 +1;
 
 
             if (SceneNode::currentWave < 10) {
                 kamikazeToSpawn = 0;
             }
             else
-                kamikazeToSpawn =  SceneNode::currentWave;
+                kamikazeToSpawn =  (SceneNode::currentWave-6)*3 -1;
 
 
 
@@ -365,6 +401,18 @@ bool GameState::update (sf::Time dt) {
     moneyCounter.setString (moneyString.str ());
     moneyCounter.setPosition (sf::Vector2f (gamePtr->view.getCenter ().x - (gamePtr->graphics.getWindowWidth () / 2) + 10,
         gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 10 - moneyCounter.getLocalBounds ().height));
+
+    
+    waveString.str (std::string ());
+    waveString.clear ();
+    waveString << "Wave: " << SceneNode::currentWave;
+    waveCounter.setString (waveString.str ());
+    waveCounter.setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y - (gamePtr->graphics.getWindowHeight () / 2) + 10));
+
+
+
+
 
     return true;
 }

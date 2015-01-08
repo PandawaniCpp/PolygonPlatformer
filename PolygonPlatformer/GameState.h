@@ -45,6 +45,8 @@ public:
 	unsigned		money;
     sf::Time spawnCooldown;
     sf::Text moneyCounter;
+    sf::Text waveCounter;
+
 
 	unsigned int enemiesNumber;
 	sf::Font font;
@@ -52,6 +54,9 @@ public:
 	
 	std::ostringstream enemiesOnMap;
 	std::ostringstream moneyString;
+    std::ostringstream waveString;
+
+    int upgradeCounter[4];
 
 	SceneNode * map;
     SceneNode root;

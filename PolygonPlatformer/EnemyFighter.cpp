@@ -9,7 +9,8 @@ EnemyFighter::~EnemyFighter(){
 	globalWorld->DestroyBody(myBody);
 	--fighterOnMap;
 	Player::me->heal(Player::me->hpPerMob);
-    globalMoney += 10 + (2 * currentWave);
+
+    globalMoney += 8 + (2 * currentWave);
 
 }
 
@@ -26,7 +27,11 @@ EnemyFighter::EnemyFighter(float x, float y) :healthbar_red(new SceneNode), heal
 	MyId = ObjectId::ENEMY_FIGHTER;
 
 	maxHP = 20;
-	currentHP = 20;
+
+    for (int k = 0; k < SceneNode::currentWave - 1; ++k)
+        maxHP += 2 * k;
+
+	currentHP = maxHP;
 	shootingCooldown = sf::seconds(1);
 	timeSinceLastShot = sf::Time::Zero;
 	ghostMode = sf::Time::Zero;

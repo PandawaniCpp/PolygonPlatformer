@@ -12,7 +12,7 @@ EnemyFat::~EnemyFat(){
 	Player::me->heal(Player::me->hpPerMob*5);
 
 
-    globalMoney += 20 + (10 * currentWave);
+    globalMoney += 16 + (4 * currentWave);
 }
 
 
@@ -22,12 +22,16 @@ EnemyFat::~EnemyFat(){
 
 EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_green(new SceneNode){
 
+    ghostMode = sf::Time::Zero;
+
 	++fatOnMap;
 
 
 	MyId = ObjectId::ENEMY_FAT;
 
-	maxHP = 200+(20*currentWave);
+	maxHP = 200+(30*(currentWave-1));
+
+
 	currentHP = maxHP;
 	jumpingCooldown = sf::seconds(2);
 	timeSinceLastJump = sf::Time::Zero;
@@ -78,6 +82,8 @@ void EnemyFat::jump()
 		myBody->SetLinearVelocity(b2Vec2(-15.f, -20.f));
 	else
 		myBody->SetLinearVelocity(b2Vec2(15.f, -20.f));
+
+    ghostMode = sf::seconds (1.f / 3.f);
 	
 }
 
@@ -85,6 +91,11 @@ void EnemyFat::jump()
 void EnemyFat::updateCurrent(sf::Time dt, b2World* world){
 
 	
+    ghostMode -= dt;
+    if (ghostMode <= sf::Time::Zero)
+        ghostMode = sf::Time::Zero;
+
+
     if (getPosition ().y >= 6000)
         damage (maxHP);
 
@@ -170,3 +181,9 @@ void EnemyFat::endContact(SceneNode* anotherNode)
 	if (anotherNode->MyId == ObjectId::PLATFORM&&ghostMode>sf::Time::Zero)
 		contact->SetEnabled(false);
 }*/
+
+
+void EnemyFat::preSolve (b2Contact* contact, SceneNode* anotherNode) {
+    if (anotherNode->MyId == ObjectId::PLATFORM&&ghostMode>sf::Time::Zero)
+        contact->SetEnabled (false);
+}

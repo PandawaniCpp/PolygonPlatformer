@@ -10,8 +10,8 @@ EnemyKamikaze::~EnemyKamikaze(){
 	globalWorld->DestroyBody(myBody);
 	--kamikazeOnMap;
 	if(!destroyedOnContact)
-		Player::me->heal(Player::me->hpPerMob);
-    globalMoney += 15 + (5 * currentWave);
+		Player::me->heal(Player::me->hpPerMob*2);
+    globalMoney += (currentWave-5)*15;
 }
 
 
@@ -26,8 +26,11 @@ EnemyKamikaze::EnemyKamikaze(float x, float y) :healthbar_red(new SceneNode), he
 
 	MyId = ObjectId::ENEMY_KAMIKAZE;
 
-	maxHP = 20;
-	currentHP = 20;
+	maxHP = currentWave*5 -10;
+
+
+
+	currentHP = maxHP;
 	//shootingCooldown = sf::seconds(1);
 	//timeSinceLastShot = sf::Time::Zero;
 	ghostMode = sf::Time::Zero;

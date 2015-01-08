@@ -12,7 +12,7 @@ EnemySwarm::~EnemySwarm(){
 	if (!destoyedOnContact)
 	Player::me->heal(Player::me->hpPerMob /5);
 
-    globalMoney += 2 + currentWave/2;
+    globalMoney += (8 + (2 * currentWave))/5;
 }
 
 

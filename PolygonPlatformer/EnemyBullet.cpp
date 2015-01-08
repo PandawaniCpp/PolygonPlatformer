@@ -26,6 +26,7 @@ EnemyBullet::EnemyBullet(float positionX, float positionY, bool facingRight){
 
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
+    myBodyDef.gravityScale = 0;
 	myBodyDef.position.Set((positionX + (20.f*current_direction))*PIXELTOMETER, positionY*PIXELTOMETER);
 	myBodyDef.angle = 0;
 
@@ -69,7 +70,7 @@ void EnemyBullet::beginContact(SceneNode* another){
 }
 
 void EnemyBullet::preSolve(b2Contact* contact, SceneNode* anotherNode){
-	if (anotherNode->MyId == ObjectId::ENEMY_FIGHTER)
+    if (anotherNode->MyId == ObjectId::ENEMY_FIGHTER || anotherNode->MyId == ObjectId::ENEMY_FAT || anotherNode->MyId == ObjectId::ENEMY_SWARM || anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE)
 		contact->SetEnabled(false);
 }
 
@@ -85,7 +86,7 @@ void EnemyBullet::updateCurrent(sf::Time dt, b2World* world){
 	}
 
 
-	myBody->SetTransform(b2Vec2(myBody->GetPosition().x, height * PIXELTOMETER), 0.f);
+	//myBody->SetTransform(b2Vec2(myBody->GetPosition().x, height * PIXELTOMETER), 0.f);
 	myBody->SetLinearVelocity(b2Vec2(velocity, 0.f));
 	setPosition(myBody->GetPosition().x / PIXELTOMETER, myBody->GetPosition().y / PIXELTOMETER);
 

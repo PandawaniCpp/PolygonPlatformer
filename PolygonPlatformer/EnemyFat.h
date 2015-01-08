@@ -11,11 +11,13 @@ public:
 	//void preSolve(b2Contact* contact, SceneNode* anotherNode);
 	void beginContact(SceneNode* anotherNode);
 	void endContact(SceneNode* anotherNode);
+    void preSolve (b2Contact* contact, SceneNode* anotherNode);
 	Ptr healthbar_red;
 	Ptr healthbar_green;
 	void jump();
 	sf::Time jumpingCooldown;
 	sf::Time timeSinceLastJump;
+    sf::Time ghostMode;
 	//sf::Time ghostMode;
 
 };

@@ -49,9 +49,9 @@ bool UpgradeState::update(sf::Time dt) {
 	//+std::to_string()
 
     text[0].setString ("Piercing Bulltes     " + std::to_string (5000));
-    text[1].setString ("Health               " + std::to_string (stateStack->gameStatePtr->upgrade[0]));
-    text[2].setString ("Cannibalism          " + std::to_string (stateStack->gameStatePtr->upgrade[1]));
-    text[3].setString ("Damage               " + std::to_string (stateStack->gameStatePtr->upgrade[2]));
+    text[1].setString ("Health               +  " + std::to_string((4 + stateStack->gameStatePtr->upgradeCounter[1]) * 5)+"   " + std::to_string (stateStack->gameStatePtr->upgrade[0]));
+    text[2].setString ("Cannibalism         +  " + std::to_string (1) + "   " + std::to_string (stateStack->gameStatePtr->upgrade[1]));
+    text[3].setString ("Damage              +  " + std::to_string ((1 + stateStack->gameStatePtr->upgradeCounter[3])) + "   " + std::to_string (stateStack->gameStatePtr->upgrade[2]));
     text[4].setString ("Ready");
 	
 	for (int i = 4; i >= 0; --i)
@@ -93,13 +93,16 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		case 1:
 		{
                   if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[0]) {
-                      Player::me->maxHP = Player::me->maxHP*1.5;
+                      stateStack->gameStatePtr->upgradeCounter[1]++;
+                      Player::me->maxHP = Player::me->maxHP + ((4 + stateStack->gameStatePtr->upgradeCounter[1])*5);
+                      Player::me->currentHP = Player::me->maxHP;
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[0];
-                      stateStack->gameStatePtr->upgrade[0] *= 1.5;
-                      stateStack->gameStatePtr->upgrade[0] += 20;;
+                      stateStack->gameStatePtr->upgrade[0] = stateStack->gameStatePtr->upgrade[0] + 50 + (stateStack->gameStatePtr->upgradeCounter[1]*50);
+                      
                       if (SceneNode::globalMoney <= 0)
                           SceneNode::globalMoney = 0;
+
                   }
 			wasPressed = 1;
 			
@@ -109,12 +112,14 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		{
 
                   if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[1]) {
-                      Player::me->hpPerMob *= 1.7;
-                      Player::me->hpPerMob += 1;
+                      stateStack->gameStatePtr->upgradeCounter[2]++;
+
+                      Player::me->hpPerMob = Player::me->hpPerMob + 1;
+                      
+                     
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[1];
-                      stateStack->gameStatePtr->upgrade[1] *= 1.5;
-                      stateStack->gameStatePtr->upgrade[1] +=20;
+                      stateStack->gameStatePtr->upgrade[1] = stateStack->gameStatePtr->upgrade[1] + 50 + (stateStack->gameStatePtr->upgradeCounter[2] * 50);
                       if (SceneNode::globalMoney <= 0)
                           SceneNode::globalMoney = 0;
                     
@@ -126,12 +131,13 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		case 3:
 		{
                   if (SceneNode::globalMoney >= (stateStack->gameStatePtr->upgrade[2])) {
-                      Player::me->bulletDamageVar = Player::me->bulletDamageVar*1.5;
-                      Player::me->bulletDamageVar += 2;
+                      stateStack->gameStatePtr->upgradeCounter[3]++;
+                      Player::me->bulletDamageVar = Player::me->bulletDamageVar + (1 + stateStack->gameStatePtr->upgradeCounter[3]);
+                     
+                    
                       //choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[2];
-                      stateStack->gameStatePtr->upgrade[2] *= 1.5;
-                      stateStack->gameStatePtr->upgrade[2] += 20;
+                      stateStack->gameStatePtr->upgrade[2] = stateStack->gameStatePtr->upgrade[2] + 50 + (stateStack->gameStatePtr->upgradeCounter[3] * 50);
                       if (SceneNode::globalMoney < 0)
                           SceneNode::globalMoney = 0;
                   }

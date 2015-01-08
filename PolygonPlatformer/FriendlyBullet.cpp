@@ -30,6 +30,7 @@ FriendlyBullet::FriendlyBullet(float positionX, float positionY, bool facingRigh
 	setOrigin(getTextureRect().width / 2.f, getTextureRect().height / 2.f);
 
 	b2BodyDef myBodyDef;
+    myBodyDef.gravityScale = 0;
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.position.Set((positionX+(20.f*current_direction))*PIXELTOMETER,positionY*PIXELTOMETER);
 	myBodyDef.angle = 0;
@@ -84,7 +85,7 @@ void FriendlyBullet::updateCurrent(sf::Time dt, b2World* world){
 
 
 	
-	myBody->SetTransform(b2Vec2(myBody->GetPosition().x, height * PIXELTOMETER), 0.f);
+	//myBody->SetTransform(b2Vec2(myBody->GetPosition().x, height * PIXELTOMETER), 0.f);
 	myBody->SetLinearVelocity(b2Vec2(velocity, 0.f));
 	setPosition(myBody->GetPosition().x / PIXELTOMETER, myBody->GetPosition().y / PIXELTOMETER);
 

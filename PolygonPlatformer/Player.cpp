@@ -9,7 +9,7 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	me = this;
 
 	bulletDamageVar = 10;
-	hpPerMob = 5;
+	hpPerMob = 3;
 	piercingBullets = false;
 
 	MyId = ObjectId::PLAYER;
@@ -64,20 +64,42 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 
 void Player::beginContact(SceneNode* anotherNode)
 {
+    int damageTaken=0;
+
 	if (anotherNode->MyId == ObjectId::ENEMY_FIGHTER)
 		contactCounter++;
 
-	if (anotherNode->MyId == ObjectId::ENEMY_BULLET)
-		damage(3+(2*currentWave/3));
+    if (anotherNode->MyId == ObjectId::ENEMY_BULLET) {
+        damageTaken = 4+currentWave;
+        
 
-	if (anotherNode->MyId == ObjectId::ENEMY_FAT)
-		damage(15+(5*currentWave));
 
-	if (anotherNode->MyId == ObjectId::ENEMY_SWARM)
-		damage(3+(2*currentWave/3));
+        damage (damageTaken);
+    }
 
-	if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE)
-		damage(20+(10*currentWave));
+    if (anotherNode->MyId == ObjectId::ENEMY_FAT) {
+
+        damageTaken = (20 + (currentWave - 1) * 2);
+
+
+        damage (damageTaken);
+    }
+
+    if (anotherNode->MyId == ObjectId::ENEMY_SWARM) {
+        damageTaken = 2 + currentWave;
+
+
+
+        damage (damageTaken);
+    }
+
+    if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE) {
+        damageTaken = ((currentWave * 10) - 20);
+
+
+
+        damage (damageTaken);
+    }
 
 }
 

@@ -266,7 +266,7 @@ bool Player::handleEvent (const sf::Event& event) {
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
-				heal(100);
+				//heal(100);
 			}
 
             currentState->handleEvent (this, event);

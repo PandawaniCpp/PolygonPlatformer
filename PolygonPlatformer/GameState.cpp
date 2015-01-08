@@ -190,22 +190,22 @@ bool GameState::handleEvent (const sf::Event& event) {
 
         case sf::Event::KeyPressed:
             if (event.key.code == sf::Keyboard::Space)
-                spawnEnemyFighter (rand () % 800, rand () % 300);
+                //spawnEnemyFighter (rand () % 800, rand () % 300);
             if (event.key.code == sf::Keyboard::M)
-                spawnEnemyFat (rand () % 800, rand () % 300);
+               // spawnEnemyFat (rand () % 800, rand () % 300);
             if (event.key.code == sf::Keyboard::N)
-                spawnEnemySwarm (rand () % 800, rand () % 300);
+               // spawnEnemySwarm (rand () % 800, rand () % 300);
             if (event.key.code == sf::Keyboard::B)
-                spawnEnemyKamikaze (rand () % 800, rand () % 300);
+               // spawnEnemyKamikaze (rand () % 800, rand () % 300);
             if (event.key.code == sf::Keyboard::Num1)
-                ++enemiesNumber;
+               // ++enemiesNumber;
             if (event.key.code == sf::Keyboard::I) {
-                requestStackPush (States::UPGRADE);
+                /*requestStackPush (States::UPGRADE);
                 Player::me->isMovingLeft = false;
                 Player::me->isMovingRight = false;
                 Player::me->isShooting = false;
                 Player::me->isJumping = false;
-                Player::me->isAscending = false;
+                Player::me->isAscending = false;*/
             }
 
             if (event.key.code == sf::Keyboard::Escape) {

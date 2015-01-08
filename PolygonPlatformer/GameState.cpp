@@ -254,7 +254,7 @@ bool GameState::update (sf::Time dt) {
 
 
         if (fighterToSpawn >= 0)
-        while ( SceneNode::fighterOnMap <= ((SceneNode::currentWave/2)+3)) {
+        while ( SceneNode::fighterOnMap < ((SceneNode::currentWave/2)+3)) {
             if (fighterToSpawn <= 0)
                 break;
             spawnEnemyFighter ((rand () % 900 + 200), (rand () % 1000) + 100);
@@ -265,7 +265,7 @@ bool GameState::update (sf::Time dt) {
 
 
         if (fatToSpawn >= 0)
-        while (SceneNode::fatOnMap <= (((SceneNode::currentWave-1)/3)+1)) {
+        while (SceneNode::fatOnMap < (((SceneNode::currentWave-1)/3)+1)) {
             if (fatToSpawn <= 0)
                 break;
             spawnEnemyFat ((rand () % 900 + 200), (rand () % 1000) + 100);
@@ -275,7 +275,7 @@ bool GameState::update (sf::Time dt) {
         }
 
         if (swarmToSpawn >= 0)
-        while (SceneNode::swarmOnMap <= SceneNode::currentWave/2) {
+        while (SceneNode::swarmOnMap < SceneNode::currentWave/2) {
             if (swarmToSpawn <= 0)
                 break;
             spawnEnemySwarm ((rand () % 900 + 200), (rand () % 1000) + 100);
@@ -285,7 +285,7 @@ bool GameState::update (sf::Time dt) {
         }
 
         if (kamikazeToSpawn >= 0)
-        while (SceneNode::kamikazeOnMap <= ((SceneNode::currentWave-1)/3)) {
+        while (SceneNode::kamikazeOnMap < ((SceneNode::currentWave-1)/3)) {
             if (kamikazeToSpawn <= 0)
                 break;
             spawnEnemyKamikaze ((rand () % 900 + 200), (rand () % 1000) + 100);

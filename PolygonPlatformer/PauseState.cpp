@@ -64,6 +64,13 @@ bool PauseState::handleEvent(const sf::Event& event) {
 			requestStackPop();
 			requestStackPop();
 			requestStackPush(States::MENU);
+            SceneNode::globalMoney = 0;
+            SceneNode::currentWave = 1;
+            SceneNode::fatOnMap = 0;
+            SceneNode::fighterOnMap = 0;
+            SceneNode::kamikazeOnMap = 0;
+            SceneNode::swarmOnMap = 0;
+           
 		}
 		else if (klawisz == 0){ 
 			//leave the game

@@ -252,12 +252,33 @@ bool GameState::update (sf::Time dt) {
 
     if (spawnCooldown <= sf::Time::Zero) {
 
+        
+        float x = (rand () % 1000 + 200);
+        float y = (rand () % 900 + 100);
+       
+        b2Vec2 distance = b2Vec2 (x*PIXELTOMETER, y*PIXELTOMETER);
+
+        while ((distance - Player::me->myBody->GetPosition ()).LengthSquared() <= 1600)  {
+            x = (rand () % 1000 + 200);
+            y = (rand () % 900 + 100);
+            distance.x = x*PIXELTOMETER;
+            distance.y = y*PIXELTOMETER;
+}
+
 
         if (fighterToSpawn >= 0)
         while ( SceneNode::fighterOnMap < ((SceneNode::currentWave/2)+3)) {
             if (fighterToSpawn <= 0)
                 break;
-            spawnEnemyFighter ((rand () % 900 + 200), (rand () % 1000) + 100);
+            while ((distance - Player::me->myBody->GetPosition ()).LengthSquared () <= 1600) {
+                x = (rand () % 1000 + 200);
+                y = (rand () % 900 + 100);
+                distance.x = x*PIXELTOMETER;
+                distance.y = y*PIXELTOMETER;
+            }
+            spawnEnemyFighter (x, y);
+            x = (rand () % 1000 + 200);
+            y = (rand () % 900 + 100);
             --fighterToSpawn;
             spawnCooldown += sf::seconds (1.f / 2.f);
             break;
@@ -268,17 +289,33 @@ bool GameState::update (sf::Time dt) {
         while (SceneNode::fatOnMap < (((SceneNode::currentWave-1)/3)+1)) {
             if (fatToSpawn <= 0)
                 break;
-            spawnEnemyFat ((rand () % 900 + 200), (rand () % 1000) + 100);
+            while ((distance - Player::me->myBody->GetPosition ()).LengthSquared () <= 1600) {
+                x = (rand () % 1000 + 200);
+                y = (rand () % 900 + 100);
+                distance.x = x*PIXELTOMETER;
+                distance.y = y*PIXELTOMETER;
+            }
+            spawnEnemyFat (x, y);
+            x = (rand () % 1000 + 200);
+            y = (rand () % 900 + 100);
             --fatToSpawn;
             spawnCooldown += sf::seconds (1.f / 2.f);
             break;
         }
 
         if (swarmToSpawn >= 0)
-        while (SceneNode::swarmOnMap < SceneNode::currentWave/2) {
+        while ((SceneNode::swarmOnMap+5)/10 < (SceneNode::currentWave/2)) {
             if (swarmToSpawn <= 0)
                 break;
-            spawnEnemySwarm ((rand () % 900 + 200), (rand () % 1000) + 100);
+            while ((distance - Player::me->myBody->GetPosition ()).LengthSquared () <= 1600) {
+                x = (rand () % 1000 + 200);
+                y = (rand () % 900 + 100);
+                distance.x = x*PIXELTOMETER;
+                distance.y = y*PIXELTOMETER;
+            }
+            spawnEnemySwarm (x, y);
+            x = (rand () % 1000 + 200);
+            y = (rand () % 900 + 100);
             --swarmToSpawn;
             spawnCooldown += sf::seconds (1.f / 2.f);
             break;
@@ -288,7 +325,15 @@ bool GameState::update (sf::Time dt) {
         while (SceneNode::kamikazeOnMap < ((SceneNode::currentWave-1)/3)) {
             if (kamikazeToSpawn <= 0)
                 break;
-            spawnEnemyKamikaze ((rand () % 900 + 200), (rand () % 1000) + 100);
+            while ((distance - Player::me->myBody->GetPosition ()).LengthSquared () <= 1600) {
+                x = (rand () % 1000 + 200);
+                y = (rand () % 900 + 100);
+                distance.x = x*PIXELTOMETER;
+                distance.y = y*PIXELTOMETER;
+            }
+            spawnEnemyKamikaze (x, y);
+            x = (rand () % 1000 + 200);
+            y = (rand () % 900 + 100);
             --kamikazeToSpawn;
             spawnCooldown += sf::seconds (1.f / 2.f);
             break;
@@ -366,7 +411,7 @@ bool GameState::update (sf::Time dt) {
                 swarmToSpawn =  (SceneNode::currentWave-5)*2 +1;
 
 
-            if (SceneNode::currentWave < 10) {
+            if (SceneNode::currentWave < 7) {
                 kamikazeToSpawn = 0;
             }
             else

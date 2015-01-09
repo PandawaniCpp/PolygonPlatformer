@@ -31,6 +31,7 @@ FriendlyBullet::FriendlyBullet(float positionX, float positionY, bool facingRigh
 
 	b2BodyDef myBodyDef;
     myBodyDef.gravityScale = 0;
+    myBodyDef.bullet = true;
 	myBodyDef.type = b2_dynamicBody;
 	myBodyDef.position.Set((positionX+(20.f*current_direction))*PIXELTOMETER,positionY*PIXELTOMETER);
 	myBodyDef.angle = 0;

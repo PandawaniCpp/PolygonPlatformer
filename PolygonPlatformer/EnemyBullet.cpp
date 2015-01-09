@@ -26,6 +26,7 @@ EnemyBullet::EnemyBullet(float positionX, float positionY, bool facingRight){
 
 	b2BodyDef myBodyDef;
 	myBodyDef.type = b2_dynamicBody;
+    myBodyDef.bullet = true;
     myBodyDef.gravityScale = 0;
 	myBodyDef.position.Set((positionX + (20.f*current_direction))*PIXELTOMETER, positionY*PIXELTOMETER);
 	myBodyDef.angle = 0;

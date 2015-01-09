@@ -29,7 +29,7 @@ EnemyFighter::EnemyFighter(float x, float y) :healthbar_red(new SceneNode), heal
 	maxHP = 20;
 
     for (int k = 0; k < SceneNode::currentWave - 1; ++k)
-        maxHP += 2 * k;
+        maxHP +=   k;
 
 	currentHP = maxHP;
 	shootingCooldown = sf::seconds(1);

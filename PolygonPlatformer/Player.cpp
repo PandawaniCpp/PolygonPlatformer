@@ -9,7 +9,7 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	me = this;
 
 	bulletDamageVar = 10;
-	hpPerMob = 3;
+	hpPerMob = 4;
 	piercingBullets = false;
 
 	MyId = ObjectId::PLAYER;
@@ -70,7 +70,7 @@ void Player::beginContact(SceneNode* anotherNode)
 		contactCounter++;
 
     if (anotherNode->MyId == ObjectId::ENEMY_BULLET) {
-        damageTaken = 4+currentWave;
+        damageTaken = ((currentWave-1)/2)+5;
         
 
 
@@ -146,7 +146,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 
 	if (timeSinceLastDamage >= touchingDamageCooldown&&contactCounter>0)
 	{
-		damage(1+(currentWave/2));
+        damage (((currentWave - 1) / 2) + 5);
 		timeSinceLastDamage -= touchingDamageCooldown;
 	}
 

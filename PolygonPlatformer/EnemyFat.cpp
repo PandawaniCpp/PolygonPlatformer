@@ -29,11 +29,11 @@ EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_gr
 
 	MyId = ObjectId::ENEMY_FAT;
 
-	maxHP = 200+(30*(currentWave-1));
+	maxHP = 150+(20*(currentWave-1));
 
 
 	currentHP = maxHP;
-	jumpingCooldown = sf::seconds(2);
+	jumpingCooldown = sf::seconds(1.5);
 	timeSinceLastJump = sf::Time::Zero;
 	//ghostMode = sf::Time::Zero;
 
@@ -79,9 +79,9 @@ EnemyFat::EnemyFat(float x, float y) :healthbar_red(new SceneNode), healthbar_gr
 void EnemyFat::jump()
 {
 	if (currentPlayer->getPosition().x < getPosition().x)
-		myBody->SetLinearVelocity(b2Vec2(-15.f, -20.f));
+		myBody->SetLinearVelocity(b2Vec2(-20.f, -20.f));
 	else
-		myBody->SetLinearVelocity(b2Vec2(15.f, -20.f));
+		myBody->SetLinearVelocity(b2Vec2(20.f, -20.f));
 
     ghostMode = sf::seconds (1.f / 3.f);
 	

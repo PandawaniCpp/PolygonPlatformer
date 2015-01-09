@@ -18,8 +18,6 @@ EndState::EndState(StateStack & stack, Game * game)
 	text.setStyle(sf::Text::Bold);
 	text.setColor(sf::Color::Blue);
 	text.setFont(font);
-
-
 }
 
 void EndState::draw(sf::RenderTarget& target) {
@@ -62,7 +60,11 @@ bool EndState::update(sf::Time dt) {
 
 bool EndState::handleEvent(const sf::Event& event) {
 
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) 
-		exit(1);
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return) {
+		requestStackPop();
+		requestStackPop();
+		requestStackPush(States::MENU);
+	}
+		
 	return true;
 }

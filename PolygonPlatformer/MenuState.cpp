@@ -26,6 +26,13 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	text[1].setString("Options");
 	text[2].setString("Play");
 
+	SceneNode::globalMoney = 0;
+	SceneNode::currentWave = 1;
+	SceneNode::fatOnMap = 0;
+	SceneNode::fighterOnMap = 0;
+	SceneNode::kamikazeOnMap = 0;
+	SceneNode::swarmOnMap = 0;
+
 }
 
 void MenuState::draw(sf::RenderTarget& target) {

@@ -2,6 +2,7 @@
 #include "State.h"
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "ResourcesID.h"
 
 class StateStack;
 class EndState : public State {

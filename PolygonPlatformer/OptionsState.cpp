@@ -8,7 +8,7 @@ OptionsState::OptionsState(StateStack & stack, Game * game)
 	risk = 0;
 	isCute = false;
 	stateID = States::TITLE;
-	klawisz = 3;
+	klawisz = 5;
 	gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
 	gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
 	gamePtr->gameWindow.setView(gamePtr->view);
@@ -20,7 +20,7 @@ OptionsState::OptionsState(StateStack & stack, Game * game)
 	background.setPosition(0.f, 0.f);
 
 	font.loadFromFile("./textures/coolFont.ttf");
-	for (int i = 0; i < 4; i++){
+	for (int i = 0; i < 6; i++){
 		text[i].setStyle(sf::Text::Bold);
 		text[i].setColor(sf::Color::Red);
 		text[i].setFont(font);
@@ -29,6 +29,8 @@ OptionsState::OptionsState(StateStack & stack, Game * game)
 	text[1].setString("Awesomeness level");
 	text[2].setString("Useless option bar");
 	text[3].setString("Cuteness overload");
+	text[4].setString("Music");
+	text[5].setString("FullScreen");
 }
 
 void OptionsState::draw(sf::RenderTarget& target) {
@@ -40,7 +42,7 @@ void OptionsState::draw(sf::RenderTarget& target) {
 	else
 	{
 		gamePtr->gameWindow.draw(background);
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < 6; ++i)
 			gamePtr->gameWindow.draw(text[i]);
 	}
 }
@@ -61,12 +63,13 @@ bool OptionsState::update(sf::Time dt) {
 	unsigned center = gamePtr->view.getCenter().y + gamePtr->graphics.getWindowHeight() / 6;
 	
 	text[1].setString("Awesomeness level "+std::to_string(stateStack->awesomeness));
-	for (int i = 3; i >= 0; --i){
+	text[4].setString("Music " + std::to_string(gamePtr->musicPlayer.mVolume));
+	for (int i = 5; i >= 0; --i){
 		text[i].setCharacterSize(65);
 		text[i].setColor(sf::Color::White);
 
 
-		text[i].setOrigin(text[i].getLocalBounds().width / 2, text[i].getLocalBounds().height / 2);
+		text[i].setOrigin(text[i].getLocalBounds().width / 2, text[i].getLocalBounds().height / 3);
 
 		text[i].setPosition(gamePtr->view.getCenter().x, center - 75 * i);
 
@@ -88,25 +91,39 @@ bool OptionsState::handleEvent(const sf::Event& event) {
 		 {
 			 isCute = true;
 		 }
+		
+		if (klawisz == 5)
+		{
+			gamePtr->graphics.changeFullscreen();
+			gamePtr->view.setSize(gamePtr->graphics.getWindowWidth(), gamePtr->graphics.getWindowHeight());
+			gamePtr->view.setCenter(gamePtr->graphics.getWindowWidth() / 2, gamePtr->graphics.getWindowHeight() / 2);
+			gamePtr->gameWindow.setView(gamePtr->view);
+
+
+		}
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Left)
 	{
 		if (klawisz == 1)
 			--stateStack->awesomeness;
+		if (klawisz == 4)
+			gamePtr->musicPlayer.setVolume(gamePtr->musicPlayer.mVolume-1);
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Right)
 	{
 		if (klawisz == 1)
 				++stateStack->awesomeness;
+		if (klawisz == 4)
+			gamePtr->musicPlayer.setVolume(gamePtr->musicPlayer.mVolume + 1);
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Down){
 		--klawisz;
 		if (klawisz < 0)
-			klawisz = 3;
+			klawisz = 5;
 	}
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Up){
 		++klawisz;
-		if (klawisz > 3)
+		if (klawisz > 5)
 			klawisz = 0;
 	}
 	return true;

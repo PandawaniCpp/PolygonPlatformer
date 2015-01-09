@@ -18,7 +18,7 @@ private:
 	int				klawisz;
 	int				risk;
 	bool			isCute;
-	sf::Text text[4];
+	sf::Text text[6];
 	sf::Font   font;
 	sf::Texture texture;
 	sf::Texture	cute;

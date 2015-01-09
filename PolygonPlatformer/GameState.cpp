@@ -157,7 +157,7 @@ soundPlayer () {
     help.setStyle (sf::Text::Italic);
     help.setFont (font);
     help.setColor (sf::Color::Yellow);
-    help.setString (" To move left press Left Key\n  To move right press Right Key\n To jump press Up Key\nTo shoot press K");
+    help.setString (" To move left press A\n  To move right press D\n To jump press W\nTo shoot press K");
     backgroundShape.setFillColor (sf::Color (0, 0, 0, 150));
     backgroundShape.setSize (sf::Vector2f (10000, 10000));
 

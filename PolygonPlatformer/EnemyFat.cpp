@@ -9,7 +9,7 @@
 EnemyFat::~EnemyFat(){
 	globalWorld->DestroyBody(myBody);
 	--fatOnMap;
-	Player::me->heal(Player::me->hpPerMob*5);
+	Player::me->heal(Player::me->hpPerMob*4);
 
 
     globalMoney += 16 + (4 * currentWave);

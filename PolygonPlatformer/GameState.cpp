@@ -75,9 +75,9 @@ soundPlayer () {
     //size of map (in bricks)
     //number of platforms
     //size of biggest platform
-    //size of smallest platform
+    //size of smallest platformz
     //minimal distance between platforms
-    map = new Map (7, {45, 45}, 17, {14, 2}, {5, 1}, 50.f);
+    map = new Map (7, {70, 45}, 40, {15, 1}, {7, 1}, 80.f);
 
     /////////////////////////////////
     //Setting up background//////////
@@ -286,7 +286,7 @@ bool GameState::update (sf::Time dt) {
 
 
         if (fatToSpawn >= 0)
-        while (SceneNode::fatOnMap < (((SceneNode::currentWave-1)/3)+1)) {
+        while (SceneNode::fatOnMap < (((SceneNode::currentWave-1)/2)+1)) {
             if (fatToSpawn <= 0)
                 break;
             while ((distance - Player::me->myBody->GetPosition ()).LengthSquared () <= 1600) {
@@ -398,7 +398,7 @@ bool GameState::update (sf::Time dt) {
                 fatToSpawn = 0;
             }
             else
-               fatToSpawn =  SceneNode::currentWave-1;
+               fatToSpawn =  (SceneNode::currentWave+1)/2;
 
            
 

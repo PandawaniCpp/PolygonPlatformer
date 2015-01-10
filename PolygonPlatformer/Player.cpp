@@ -70,7 +70,7 @@ void Player::beginContact(SceneNode* anotherNode)
 		contactCounter++;
 
     if (anotherNode->MyId == ObjectId::ENEMY_BULLET) {
-        damageTaken = ((currentWave-1)/2)+5;
+        damageTaken = ((currentWave-1)/3)+5;
         
 
 
@@ -86,7 +86,7 @@ void Player::beginContact(SceneNode* anotherNode)
     }
 
     if (anotherNode->MyId == ObjectId::ENEMY_SWARM) {
-        damageTaken = 2 + currentWave;
+        damageTaken = 5 + currentWave/2;
 
 
 

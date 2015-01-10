@@ -112,14 +112,17 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		{
 
                   if (SceneNode::globalMoney >= stateStack->gameStatePtr->upgrade[1]) {
+                      if (!((stateStack->gameStatePtr->upgradeCounter[2] / 3)>2))
                       stateStack->gameStatePtr->upgradeCounter[2]++;
+
+
 
                       Player::me->hpPerMob = Player::me->hpPerMob + 1 + (stateStack->gameStatePtr->upgradeCounter[2]/3);
                       
                      
                      // choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[1];
-                      stateStack->gameStatePtr->upgrade[1] = stateStack->gameStatePtr->upgrade[1] +  (stateStack->gameStatePtr->upgradeCounter[2] * 50);
+                      stateStack->gameStatePtr->upgrade[1] = stateStack->gameStatePtr->upgrade[1] +40+  (stateStack->gameStatePtr->upgradeCounter[2] * 50);
                       if (SceneNode::globalMoney <= 0)
                           SceneNode::globalMoney = 0;
                     
@@ -131,13 +134,14 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		case 3:
 		{
                   if (SceneNode::globalMoney >= (stateStack->gameStatePtr->upgrade[2])) {
+                      if (!((1 + stateStack->gameStatePtr->upgradeCounter[3])>9))
                       stateStack->gameStatePtr->upgradeCounter[3]++;
                       Player::me->bulletDamageVar = Player::me->bulletDamageVar + (1 + stateStack->gameStatePtr->upgradeCounter[3]);
                      
                     
                       //choose = true;
                       SceneNode::globalMoney -= stateStack->gameStatePtr->upgrade[2];
-                      stateStack->gameStatePtr->upgrade[2] = stateStack->gameStatePtr->upgrade[2] + (stateStack->gameStatePtr->upgradeCounter[3] * 50);
+                      stateStack->gameStatePtr->upgrade[2] = stateStack->gameStatePtr->upgrade[2] +20+ (stateStack->gameStatePtr->upgradeCounter[3] * 50);
                       if (SceneNode::globalMoney < 0)
                           SceneNode::globalMoney = 0;
                   }

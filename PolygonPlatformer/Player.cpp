@@ -91,6 +91,7 @@ void Player::beginContact(SceneNode* anotherNode)
 
 
         damage (damageTaken);
+        damage (hpPerMob / 5);
     }
 
     if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE) {
@@ -98,7 +99,9 @@ void Player::beginContact(SceneNode* anotherNode)
 
 
 
+
         damage (damageTaken);
+        damage (hpPerMob * 2);
     }
 
 }

@@ -16,10 +16,16 @@ public:
 	virtual bool update(sf::Time dt);
 	virtual bool handleEvent(const sf::Event& event);
 
+	// HELP
+	sf::Text help;
+	sf::Sprite backgroundHelp;
+	sf::Texture textureHelp;
+	bool      helpPressed;
+	sf::RectangleShape backgroundShapeHelp;
 
 private:
 	int				klawisz;
-	sf::Text text[3];
+	sf::Text text[4];
 	sf::Font   font;
 	sf::Texture texture;
 	sf::Sprite background;

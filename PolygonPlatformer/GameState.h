@@ -80,6 +80,9 @@ public:
 	int kamikazeToSpawn;
 	int swarmToSpawn;
 
+	sf::Text readyText;
+	bool ready;
+
     SceneNode * gameBackground;
 
 

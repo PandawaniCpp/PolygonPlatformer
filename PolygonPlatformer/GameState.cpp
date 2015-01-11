@@ -3,11 +3,12 @@
 #define PIXELTOMETER (1.f/10.f)
 
 
-GameState::GameState (StateStack & stack, Game * game) : State (stack, game), doSleep (true),
-timeStep (1.0f / 60.0f),
-velocityIterations (6),
-positionIterations (2),
-enemiesNumber (0),
+GameState::GameState(StateStack & stack, Game * game) : State(stack, game), doSleep(true),
+timeStep(1.0f / 60.0f),
+velocityIterations(6),
+positionIterations(2),
+enemiesNumber(0),
+ready(false),
 soundPlayer () {
 
     for (int i = 0; i < 4; i++)
@@ -17,7 +18,7 @@ soundPlayer () {
     fatToSpawn = 0;
     swarmToSpawn = 0;
     kamikazeToSpawn = 0;
-    spawnCooldown = sf::seconds (10.f);
+    spawnCooldown = sf::seconds (50.f);
 
 
     //stateStack = &stack;
@@ -179,6 +180,14 @@ soundPlayer () {
     backgroundShape.setFillColor (sf::Color (0, 0, 0, 150));
     backgroundShape.setSize (sf::Vector2f (10000, 10000));
 
+	readyText.setStyle(sf::Text::Italic);
+	readyText.setColor(sf::Color::Red);
+	readyText.setFont(font);
+	readyText.setString("Press space when ready to fight");
+	readyText.setCharacterSize(game->graphics.getWindowHeight() / 8);
+	readyText.setOrigin(sf::Vector2f(readyText.getLocalBounds().width / 2, readyText.getLocalBounds().height / 2));
+	readyText.setPosition(sf::Vector2f(game->view.getCenter().x,
+		game->view.getCenter().y - game->graphics.getWindowHeight() / 3));
     //gameBackground = new SceneNode ();
    // gameBackground->setTexture (textures.get (Textures::GAME_BACKGROUND));
 
@@ -194,6 +203,8 @@ void GameState::draw (sf::RenderTarget& target) {
     target.draw (enemiesCounter);
     target.draw (moneyCounter);
     target.draw (waveCounter);
+	if (!ready)
+		target.draw(readyText);
     target.draw (playerInformation[0]);
     target.draw (playerInformation[1]);
     target.draw (playerInformation[2]);
@@ -211,8 +222,11 @@ bool GameState::handleEvent (const sf::Event& event) {
     switch (event.type) {
 
         case sf::Event::KeyPressed:
-            if (event.key.code == sf::Keyboard::Space)
-                //spawnEnemyFighter (rand () % 800, rand () % 300);
+			if (event.key.code == sf::Keyboard::Space) {
+				spawnCooldown = sf::Time::Zero;
+				ready = true;
+				//spawnEnemyFighter (rand () % 800, rand () % 300);
+			}
             if (event.key.code == sf::Keyboard::M)
                // spawnEnemyFat (rand () % 800, rand () % 300);
             if (event.key.code == sf::Keyboard::N)
@@ -476,6 +490,9 @@ bool GameState::update (sf::Time dt) {
     waveCounter.setString (waveString.str ());
     waveCounter.setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
         gamePtr->view.getCenter ().y - (gamePtr->graphics.getWindowHeight () / 2) + 10));
+
+	readyText.setPosition(sf::Vector2f(gamePtr->view.getCenter().x,
+		gamePtr->view.getCenter().y - gamePtr->graphics.getWindowHeight() / 3));
 
 
     playerInformation[0].setString ("HP: " + std::to_string (static_cast<int>(Player::me->currentHP)) + " / " + std::to_string (static_cast<int>(Player::me->maxHP)));

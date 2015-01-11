@@ -59,7 +59,9 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	attachChild(healthbar_green);
 	healthbar_green->setOrigin(healthbar_green->getTextureRect().width / 2.f, healthbar_green->getTextureRect().height / 2.f);
 	healthbar_red->setOrigin(healthbar_red->getTextureRect().width / 2.f, healthbar_red->getTextureRect().height / 2.f);
-	
+
+
+   
 }
 
 void Player::beginContact(SceneNode* anotherNode)
@@ -254,6 +256,8 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 		currentHP = 0;
 	if (currentHP>maxHP)
 		currentHP = maxHP;
+
+    setColor (sf::Color (((maxHP - currentHP) / maxHP) * 255, ((currentHP) / maxHP) * 255, 0, 255));
 }
 
 bool Player::handleEvent (const sf::Event& event) {

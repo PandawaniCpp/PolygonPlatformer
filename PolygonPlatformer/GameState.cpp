@@ -127,6 +127,24 @@ soundPlayer () {
         game->view.getCenter ().y - (game->graphics.getWindowHeight () / 2) + 10));
 
 
+    for (int i = 0; i < 3; i++) {
+
+        playerInformation[i].setStyle (sf::Text::Italic);
+        playerInformation[i].setColor (sf::Color::Red);
+        playerInformation[i].setFont (font);
+        playerInformation[i].setCharacterSize (game->graphics.getWindowHeight () / 20);
+    }
+    playerInformation[0].setString ("HP: " + std::to_string (Player::me->currentHP) + "/" + std::to_string (Player::me->maxHP));
+    playerInformation[1].setString ("DMG: " + std::to_string (Player::me->bulletDamageVar));
+    playerInformation[2].setString ("Cannibalism: " + std::to_string (Player::me->hpPerMob));
+
+    playerInformation[0].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 180));
+    playerInformation[1].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 120));
+    playerInformation[2].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 60));
+
 
 
     waveCounter.setStyle (sf::Text::Italic);
@@ -176,6 +194,10 @@ void GameState::draw (sf::RenderTarget& target) {
     target.draw (enemiesCounter);
     target.draw (moneyCounter);
     target.draw (waveCounter);
+    target.draw (playerInformation[0]);
+    target.draw (playerInformation[1]);
+    target.draw (playerInformation[2]);
+
 
     if (helpPressed) {
         //gamePtr->gameWindow.draw (backgroundShape);
@@ -456,6 +478,17 @@ bool GameState::update (sf::Time dt) {
         gamePtr->view.getCenter ().y - (gamePtr->graphics.getWindowHeight () / 2) + 10));
 
 
+    playerInformation[0].setString ("HP: " + std::to_string (static_cast<int>(Player::me->currentHP)) + " / " + std::to_string (static_cast<int>(Player::me->maxHP)));
+    playerInformation[1].setString ("DMG: " + std::to_string (static_cast<int>(Player::me->bulletDamageVar)));
+    playerInformation[2].setString ("Cannibalism: " + std::to_string (static_cast<int>(Player::me->hpPerMob)));
+    playerInformation[0].setColor (sf::Color (((Player::me->maxHP - Player::me->currentHP) / Player::me->maxHP) * 255, ((Player::me->currentHP) / Player::me->maxHP) * 255, 0, 255));
+
+    playerInformation[0].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 180));
+    playerInformation[1].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 120));
+    playerInformation[2].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 60));
 
 
 

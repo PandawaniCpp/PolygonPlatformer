@@ -48,10 +48,10 @@ bool UpgradeState::update(sf::Time dt) {
 
 	//+std::to_string()
 
-    text[0].setString ("Piercing Bulltes     " + std::to_string (1000));
-    text[1].setString ("Health               +  " + std::to_string(10+(4 + stateStack->gameStatePtr->upgradeCounter[1]) * 5)+"   " + std::to_string (stateStack->gameStatePtr->upgrade[0]));
-    text[2].setString ("Cannibalism         +  " + std::to_string (1+(stateStack->gameStatePtr->upgradeCounter[2] / 3)) + "   " + std::to_string (stateStack->gameStatePtr->upgrade[1]));
-    text[3].setString ("Damage              +  " + std::to_string ((1 + stateStack->gameStatePtr->upgradeCounter[3])) + "   " + std::to_string (stateStack->gameStatePtr->upgrade[2]));
+    text[0].setString ("Piercing Bulltes     " + std::to_string (500));
+    text[1].setString ("Health               +  " + std::to_string(10+(4 + stateStack->gameStatePtr->upgradeCounter[1]+1) * 5)+"   " + std::to_string (stateStack->gameStatePtr->upgrade[0]));
+    text[2].setString ("Cannibalism         +  " + std::to_string (1+((stateStack->gameStatePtr->upgradeCounter[2]+1) / 3)) + "   " + std::to_string (stateStack->gameStatePtr->upgrade[1]));
+    text[3].setString ("Damage              +  " + std::to_string ((1 + stateStack->gameStatePtr->upgradeCounter[3]+1)) + "   " + std::to_string (stateStack->gameStatePtr->upgrade[2]));
     text[4].setString ("Ready");
 	
 	for (int i = 4; i >= 0; --i)
@@ -79,10 +79,10 @@ bool UpgradeState::handleEvent(const sf::Event& event) {
 		case 0:
 		{
 
-                  if (SceneNode::globalMoney >= 1000) {
+                  if (SceneNode::globalMoney >= 500) {
                       Player::me->piercingBullets = true;
                      // choose = true;
-                      SceneNode::globalMoney -= 1000;
+                      SceneNode::globalMoney -= 500;
                       if (SceneNode::globalMoney <= 0)
                           SceneNode::globalMoney = 0;
                   }

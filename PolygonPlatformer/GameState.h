@@ -46,6 +46,7 @@ public:
     sf::Time spawnCooldown;
     sf::Text moneyCounter;
     sf::Text waveCounter;
+    sf::Text playerInformation[3];
 
 
 	unsigned int enemiesNumber;

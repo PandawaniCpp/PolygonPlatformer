@@ -35,7 +35,7 @@ bool EndState::update(sf::Time dt) {
 		(float)gamePtr->graphics.getWindowHeight() / texture.getSize().y);
 	text.setCharacterSize(gamePtr->graphics.getWindowHeight() / 4);
 
-	text.setString(" Game Over\nBitch");
+	text.setString(" Game Over\nWave:"+std::to_string(SceneNode::currentWave));
 	text.setOrigin(text.getLocalBounds().width / 2, text.getLocalBounds().height / 2);
 
 	text.setPosition(gamePtr->view.getCenter().x + gamePtr->graphics.getWindowWidth() / 6, gamePtr->view.getCenter().y);

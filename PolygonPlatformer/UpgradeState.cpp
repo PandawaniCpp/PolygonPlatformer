@@ -27,6 +27,9 @@ void UpgradeState::draw(sf::RenderTarget& target) {
 
 	gamePtr->gameWindow.draw(backgroundShape);
 
+    for (int j = 0; j < 3; j++)
+        gamePtr->gameWindow.draw(stateStack->gameStatePtr->playerInformation[j]);
+
 	for (int i = 0; i < 5; ++i)
 		gamePtr->gameWindow.draw(text[i]);
 
@@ -69,7 +72,24 @@ bool UpgradeState::update(sf::Time dt) {
 
 	if (Player::me->piercingBullets)
 		text[0].setColor(sf::Color::Green);
-	return true;
+	
+
+
+
+    stateStack->gameStatePtr->playerInformation[0].setString ("HP: " + std::to_string (static_cast<int>(Player::me->currentHP)) + " / " + std::to_string (static_cast<int>(Player::me->maxHP)));
+    stateStack->gameStatePtr->playerInformation[1].setString ("DMG: " + std::to_string (static_cast<int>(Player::me->bulletDamageVar)));
+    stateStack->gameStatePtr->playerInformation[2].setString ("Cannibalism: " + std::to_string (static_cast<int>(Player::me->hpPerMob)));
+    stateStack->gameStatePtr->playerInformation[0].setColor (sf::Color (((Player::me->maxHP - Player::me->currentHP) / Player::me->maxHP) * 255, ((Player::me->currentHP) / Player::me->maxHP) * 255, 0, 255));
+
+    stateStack->gameStatePtr->playerInformation[0].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 180));
+    stateStack->gameStatePtr->playerInformation[1].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 120));
+    stateStack->gameStatePtr->playerInformation[2].setPosition (sf::Vector2f (gamePtr->view.getCenter ().x + (gamePtr->graphics.getWindowWidth () / 2) - 250,
+        gamePtr->view.getCenter ().y + (gamePtr->graphics.getWindowHeight () / 2) - 60));
+
+    return true;
+
 }
 
 bool UpgradeState::handleEvent(const sf::Event& event) {

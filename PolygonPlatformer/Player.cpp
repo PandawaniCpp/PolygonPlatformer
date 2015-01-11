@@ -197,6 +197,7 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
         isAscending = false;
     }
 
+
     if (!(isMovingLeft || isMovingRight))
         myBody->SetLinearVelocity (b2Vec2 (0.f, myBody->GetLinearVelocity ().y));
 

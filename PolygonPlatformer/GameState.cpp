@@ -59,11 +59,8 @@ soundPlayer () {
     textures.load (Textures::HEALTHBAR_RED, "./textures/healthbar_red.png");
     textures.load (Textures::HEALTHBAR_GREEN, "./textures/healthbar_green.png");
     textures.load (Textures::PLAYER_RIGHT_ANIMATION, "./textures/player_right_tmp.png");
-    textures.load (Textures::PLAYER_RIGHT, "./textures/player_right.png");
-    textures.load (Textures::PLAYER_LEFT, "./textures/player_left.png");
     textures.load (Textures::FRIENDLY_BULLET, "./textures/friendly_bullet.png");
     textures.load (Textures::ENEMY_BULLET, "./textures/enemy_bullet.png");
-    textures.load (Textures::GAME_BACKGROUND, "./textures/game_background.png");
     textures.load (Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
     textures.load (Textures::BLOOD, "./textures/blood.png");
     textures.load (Textures::GROUND, "./textures/brick.png");

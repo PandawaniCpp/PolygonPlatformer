@@ -216,6 +216,9 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 
 	if (timeSinceLastDamage >= touchingDamageCooldown&&contactCounter>0)
 	{
+        if (bloodlust)
+            heal (((currentWave - 1) / 2) + 5);
+        else
         damage (((currentWave - 1) / 2) + 5);
 		timeSinceLastDamage -= touchingDamageCooldown;
 	}

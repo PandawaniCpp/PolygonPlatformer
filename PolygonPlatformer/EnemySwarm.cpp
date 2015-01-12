@@ -1,5 +1,7 @@
 #include "EnemySwarm.h"
 #include "Player.h"
+#include "Pickup.h"
+
 #define PIXELTOMETER (1.f/10.f)
 #define RADIANTODEGREE 57.2957795f
 #define DEGREETORADIAN 0.0174532925f
@@ -13,6 +15,11 @@ EnemySwarm::~EnemySwarm(){
 	Player::me->heal(Player::me->hpPerMob /5);
 
     globalMoney += (8 + (2 * currentWave))/5;
+
+    if (rand () % 100 == 0)
+        new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_FRENZY);
+    if (rand () % 100 == 0)
+        new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_BLOODLUST);
 }
 
 

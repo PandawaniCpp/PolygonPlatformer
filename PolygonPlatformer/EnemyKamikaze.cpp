@@ -1,5 +1,6 @@
 #include "EnemyKamikaze.h"
 #include "Player.h"
+#include"Pickup.h"
 
 #define PIXELTOMETER (1.f/10.f)
 
@@ -12,6 +13,11 @@ EnemyKamikaze::~EnemyKamikaze(){
 	if(!destroyedOnContact)
 		Player::me->heal(Player::me->hpPerMob*2);
     globalMoney += (currentWave-5)*15;
+
+    if (rand () % 10 == 0)
+        new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_FRENZY);
+    if (rand () % 10 == 0)
+        new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_BLOODLUST);
 }
 
 

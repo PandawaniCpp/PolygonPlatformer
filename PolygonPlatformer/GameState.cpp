@@ -64,6 +64,8 @@ soundPlayer () {
     textures.load (Textures::ENEMY_FIGHTER, "./textures/enemy_fighter.png");
     textures.load (Textures::BLOOD, "./textures/blood.png");
     textures.load (Textures::GROUND, "./textures/brick.png");
+    textures.load (Textures::PICKUP_BLOODLUST, "./textures/pickup_bloodlust.png");
+    textures.load (Textures::PICKUP_FRENZY, "./textures/pickup_frenzy.png");
 
     /////////////////////////////////
     //Scene - Setup//////////////////

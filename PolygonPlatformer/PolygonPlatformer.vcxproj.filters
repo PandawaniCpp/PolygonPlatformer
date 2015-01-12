@@ -36,6 +36,7 @@
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="EndState.cpp" />
     <ClCompile Include="LoadState.cpp" />
+    <ClCompile Include="Pickup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnemyBullet.h" />
@@ -73,5 +74,6 @@
     <ClInclude Include="Credits.h" />
     <ClInclude Include="EndState.h" />
     <ClInclude Include="LoadState.h" />
+    <ClInclude Include="Pickup.h" />
   </ItemGroup>
 </Project>

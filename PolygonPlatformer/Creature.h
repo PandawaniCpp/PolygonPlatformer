@@ -6,7 +6,7 @@ class Creature :public Entity {
 public:
     Creature ();
 
-    void heal (float amount);
+    virtual void heal (float amount);
 
     virtual void damage (float amount);
 

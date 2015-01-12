@@ -101,6 +101,7 @@
     <ClCompile Include="NonPhysical.cpp" />
     <ClCompile Include="OptionsState.cpp" />
     <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="PlatformAtom.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="NonPhysical.h" />
     <ClInclude Include="OptionsState.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="Pickup.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="PlatformAtom.h" />
     <ClInclude Include="Player.h" />

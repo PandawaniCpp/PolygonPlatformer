@@ -38,6 +38,12 @@ public:
 	int animationCounter;
 	Ptr healthbar_red;
 	Ptr healthbar_green;
+    sf::Time frenzyCooldown;
+    sf::Time bloodlustCooldown;
+    bool frenzy;
+    bool bloodlust;
+
+
 
 	float bulletDamageVar;
 	float hpPerMob;

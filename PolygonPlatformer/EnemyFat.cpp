@@ -1,5 +1,6 @@
 #include "EnemyFat.h"
 #include "Player.h"
+#include "Pickup.h"
 
 #define PIXELTOMETER (1.f/10.f)
 
@@ -13,6 +14,12 @@ EnemyFat::~EnemyFat(){
 
 
     globalMoney += 16 + (4 * currentWave);
+
+    if (rand () % 20 == 0)
+        new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_FRENZY);
+    if (rand () % 5 == 0)
+        new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_BLOODLUST);
+
 }
 
 

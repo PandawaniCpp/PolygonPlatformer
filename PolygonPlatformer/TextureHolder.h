@@ -23,7 +23,9 @@ namespace Textures {
 		MENU,
 		TITLE,
 		PAUSE,
-		UPGRADE
+		UPGRADE,
+        PICKUP_FRENZY,
+        PICKUP_BLOODLUST
     };
 }
 

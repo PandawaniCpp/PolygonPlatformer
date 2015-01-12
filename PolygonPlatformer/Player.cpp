@@ -6,6 +6,13 @@ Player* Player::me = nullptr;
 
 Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), healthbar_green(new SceneNode)  {
 
+    frenzy = false;
+    bloodlust = false;
+    frenzyCooldown = sf::Time::Zero;
+    bloodlustCooldown = sf::Time::Zero;
+
+
+
 	me = this;
 
 	bulletDamageVar = 10;
@@ -66,6 +73,14 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 
 void Player::beginContact(SceneNode* anotherNode)
 {
+
+    if (anotherNode->MyId == ObjectId::PICKUP_FRENZY)
+        frenzyCooldown = sf::seconds (4.f);
+
+    if (anotherNode->MyId == ObjectId::PICKUP_BLOODLUST)
+        bloodlustCooldown = sf::seconds ((rand()%3)+1);
+
+
     int damageTaken=0;
 
 	if (anotherNode->MyId == ObjectId::ENEMY_FIGHTER)
@@ -74,36 +89,54 @@ void Player::beginContact(SceneNode* anotherNode)
     if (anotherNode->MyId == ObjectId::ENEMY_BULLET) {
         damageTaken = ((currentWave-1)/3)+5;
         
+        if (frenzy)
+            damageTaken /= 2;
 
-
+        if (bloodlust)
+            heal (damageTaken);
+        else
         damage (damageTaken);
     }
 
     if (anotherNode->MyId == ObjectId::ENEMY_FAT) {
 
         damageTaken = (20 + (currentWave - 1) * 2);
-
-
+        if (frenzy)
+            damageTaken /= 2;
+        if (bloodlust)
+            heal (damageTaken);
+        else
         damage (damageTaken);
     }
 
     if (anotherNode->MyId == ObjectId::ENEMY_SWARM) {
         damageTaken = 5 + currentWave/2;
+        if (frenzy)
+            damageTaken /= 2;
 
+        if (bloodlust)
+            heal (damageTaken);
+        else {
 
+            damage (damageTaken);
 
-        damage (damageTaken);
-        damage (hpPerMob / 5);
+            damage (hpPerMob / 5);
+        }
     }
 
     if (anotherNode->MyId == ObjectId::ENEMY_KAMIKAZE) {
         damageTaken = ((currentWave * 10) - 20);
+        if (frenzy)
+            damageTaken /= 2;
 
 
+        if (bloodlust)
+            heal (damageTaken);
+        else {
 
-
-        damage (damageTaken);
-        damage (hpPerMob * 2);
+            damage (damageTaken);
+            damage (hpPerMob * 2);
+        }
     }
 
 }
@@ -115,8 +148,17 @@ void Player::endContact(SceneNode* anotherNode)
 }
 
 void Player::shoot(){
-	SceneNode::Ptr tmp(new FriendlyBullet((myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,isFacingRight,piercingBullets,bulletDamageVar));
-	globalQueuedForInsertion->push_back(tmp);
+    if (frenzy) {
+
+        SceneNode::Ptr tmp (new FriendlyBullet ((myBody->GetPosition ().x / PIXELTOMETER), myBody->GetPosition ().y / PIXELTOMETER, isFacingRight, piercingBullets, bulletDamageVar*1.5));
+        globalQueuedForInsertion->push_back (tmp);
+    }
+    else {
+
+        SceneNode::Ptr tmp (new FriendlyBullet ((myBody->GetPosition ().x / PIXELTOMETER), myBody->GetPosition ().y / PIXELTOMETER, isFacingRight, piercingBullets, bulletDamageVar));
+        globalQueuedForInsertion->push_back (tmp);
+    }
+	
 }
 
 void Player::damage(unsigned amount){
@@ -130,6 +172,29 @@ void Player::damage(unsigned amount){
 
 
 void Player::updateCurrent (sf::Time dt, b2World* world) {
+
+
+    frenzyCooldown -= dt;
+    bloodlustCooldown -= dt;
+
+
+    if (frenzyCooldown <= sf::Time::Zero)
+        frenzy = false;
+
+    if (bloodlustCooldown <= sf::Time::Zero)
+        bloodlust = false;
+
+
+
+    if (frenzyCooldown > sf::Time::Zero)
+        frenzy = true;
+
+    if (bloodlustCooldown > sf::Time::Zero)
+        bloodlust = true;
+
+
+
+
     setPosition (myBody->GetPosition ().x / PIXELTOMETER, myBody->GetPosition ().y / PIXELTOMETER);
 	//healthbar_red->setPosition(getPosition().x, getPosition().y - 30.f);
     /*if (myBody->GetLinearVelocity ().y == 0 && currentState)
@@ -259,14 +324,23 @@ void Player::updateCurrent (sf::Time dt, b2World* world) {
 		currentHP = maxHP;
 
     setColor (sf::Color (((maxHP - currentHP) / maxHP) * 255, ((currentHP) / maxHP) * 255, 0, 255));
+
+    if (frenzy)
+        setColor (sf::Color (0, 0, 255, 255));
+    if (bloodlust)
+        setColor (sf::Color::Magenta);
 }
 
 bool Player::handleEvent (const sf::Event& event) {
 
     switch (event.type) {
         case sf::Event::KeyPressed:
+
 			if (event.key.code == sf::Keyboard::K)
 			{
+                if (frenzy)
+                    shoot ();
+                else
 				isShooting = true;
 				/*SceneNode::Ptr tmp(new FriendlyBullet(globalWorld, globalTextureHolder, (myBody->GetPosition().x / PIXELTOMETER), myBody->GetPosition().y / PIXELTOMETER,globalRoot,globalQueuedForDeletion,isFacingRight));
 				globalRoot->attachChild(tmp);*/
@@ -283,6 +357,7 @@ bool Player::handleEvent (const sf::Event& event) {
         case sf::Event::KeyReleased:
 			if (event.key.code == sf::Keyboard::K)
 			{
+                
 				isShooting = false;
 				
 			}

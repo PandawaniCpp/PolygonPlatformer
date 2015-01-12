@@ -19,6 +19,7 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	for (int i = 0; i < 4; i++){
 		text[i].setStyle(sf::Text::Bold);
 		text[i].setColor(sf::Color::Red);
+
 		text[i].setFont(font);
 	}
 	text[0].setString("Leave");
@@ -96,7 +97,7 @@ bool MenuState::handleEvent(const sf::Event& event) {
 		if (helpPressed == false && klawisz == 3)
 		{
 			requestStackPop();
-			requestStackPush(States::GAME);
+			requestStackPush(States::LOAD);
 		}
 		else if (helpPressed == false && klawisz == 1)
 		{

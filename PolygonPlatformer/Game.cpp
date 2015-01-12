@@ -23,6 +23,7 @@ musicPlayer() {
 	mStateStack.registerState<EndState>(States::END);
 	mStateStack.registerState<Credits>(States::CREDITS);
 	mStateStack.registerState<OptionsState>(States::OPTIONS);
+	mStateStack.registerState<LoadState>(States::LOAD);
 	mStateStack.pushState(States::CREDITS);
 	mStateStack.applyPendingChanges();
 

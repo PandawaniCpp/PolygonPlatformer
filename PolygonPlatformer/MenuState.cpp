@@ -35,15 +35,22 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	SceneNode::kamikazeOnMap = 0;
 	SceneNode::swarmOnMap = 0;
 
+	
 	helpPressed = false;
 	help.setStyle(sf::Text::Italic);
 	help.setFont(font);
 	help.setColor(sf::Color::Yellow);
-	help.setCharacterSize(150);
-	help.setString(" To move left press A\n  To move right press D\n To jump press W\nTo shoot press K");
+	help.setCharacterSize(50);
+	help.setString(" To move left press A\n  To move right press D\n To jump press W\nTo shoot press K \n\nPickups:\n   Frenzy: You can shoot as fast as you can press \"k\" button.\n Also, you deal more damage, and take less\n    Bloodlust: Instead of taking damae you are healed instead");
+
 	backgroundShapeHelp.setFillColor(sf::Color(0, 0, 0, 150));
 	backgroundShapeHelp.setSize(sf::Vector2f(10000, 10000));
 
+	frenzy.loadFromFile("./textures/pickup_frenzy.png");
+	frenSprite.setTexture(frenzy);
+	
+	blood.loadFromFile("./textures/pickup_bloodlust.png");
+	bloodSprite.setTexture(blood);
 }
 
 void MenuState::draw(sf::RenderTarget& target) {
@@ -57,6 +64,8 @@ void MenuState::draw(sf::RenderTarget& target) {
 	{
 		gamePtr->gameWindow.draw(backgroundShapeHelp);
 		gamePtr->gameWindow.draw(help);
+		gamePtr->gameWindow.draw(bloodSprite);
+		gamePtr->gameWindow.draw(frenSprite);
 
 	}
 }
@@ -85,7 +94,8 @@ bool MenuState::update(sf::Time dt) {
 	
 	help.setOrigin(help.getLocalBounds().width / 2, help.getLocalBounds().height / 2);
 	help.setPosition(gamePtr->view.getCenter().x, gamePtr->view.getCenter().y);
-
+	bloodSprite.setPosition(help.getPosition().x-400, help.getPosition().y+230);
+	frenSprite.setPosition(help.getPosition().x-400, help.getPosition().y+110);
 	text[klawisz].setColor(sf::Color::Red);
 	return true;
 

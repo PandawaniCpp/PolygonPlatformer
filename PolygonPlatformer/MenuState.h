@@ -28,6 +28,10 @@ private:
 	sf::Text text[4];
 	sf::Font   font;
 	sf::Texture texture;
+	sf::Texture frenzy;
+	sf::Sprite frenSprite;
+	sf::Texture blood;
+	sf::Sprite bloodSprite;
 	sf::Sprite background;
 	sf::Time textEffectTime;
 

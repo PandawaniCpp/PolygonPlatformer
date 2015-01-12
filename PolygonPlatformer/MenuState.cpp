@@ -41,7 +41,7 @@ MenuState::MenuState(StateStack & stack, Game * game)
 	help.setFont(font);
 	help.setColor(sf::Color::Yellow);
 	help.setCharacterSize(50);
-	help.setString(" To move left press A\n  To move right press D\n To jump press W\nTo shoot press K \n\nPickups:\n   Frenzy: You can shoot as fast as you can press \"k\" button.\n Also, you deal more damage, and take less\n    Bloodlust: Instead of taking damae you are healed instead");
+	help.setString(" To move left press A\n  To move right press D\n To jump press W\nTo shoot press K \n\nPickups:\n   Frenzy: You can shoot as fast as you can press \"k\" button.\n Also, you deal more damage, and take less\n    Bloodlust: Instead of taking damae you are healed");
 
 	backgroundShapeHelp.setFillColor(sf::Color(0, 0, 0, 150));
 	backgroundShapeHelp.setSize(sf::Vector2f(10000, 10000));

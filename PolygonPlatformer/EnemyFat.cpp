@@ -10,6 +10,7 @@
 EnemyFat::~EnemyFat(){
 	globalWorld->DestroyBody(myBody);
 	--fatOnMap;
+    if (Player::me != nullptr)
 	Player::me->heal(Player::me->hpPerMob*4);
 
 

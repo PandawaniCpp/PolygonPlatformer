@@ -4,6 +4,17 @@ Player* Player::me = nullptr;
 
 #define PIXELTOMETER (1.f/10.f)
 
+
+
+Player::~Player () {
+    me = nullptr;
+}
+
+
+
+
+
+
 Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), healthbar_green(new SceneNode)  {
 
     frenzy = false;

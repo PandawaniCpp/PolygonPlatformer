@@ -10,7 +10,7 @@
 EnemyKamikaze::~EnemyKamikaze(){
 	globalWorld->DestroyBody(myBody);
 	--kamikazeOnMap;
-	if(!destroyedOnContact)
+	if(!destroyedOnContact&&Player::me!=nullptr)
 		Player::me->heal(Player::me->hpPerMob*2);
     globalMoney += (currentWave-5)*15;
 

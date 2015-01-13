@@ -8,6 +8,7 @@
 EnemyFighter::~EnemyFighter(){
 	globalWorld->DestroyBody(myBody);
 	--fighterOnMap;
+    if (Player::me!=nullptr)
 	Player::me->heal(Player::me->hpPerMob);
 
     globalMoney += 8 + (2 * currentWave);

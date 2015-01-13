@@ -15,6 +15,7 @@ class Player :public Creature {
 public:
     PlayerState *currentState;
     Player ();
+    ~Player ();
 	static Player* me;
     virtual void updateCurrent (sf::Time dt, b2World* world = nullptr);
 	void beginContact(SceneNode* anotherNode);

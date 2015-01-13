@@ -11,7 +11,7 @@ EnemySwarm::~EnemySwarm(){
 	globalWorld->DestroyBody(myBody);
 
 	--swarmOnMap;
-	if (!destoyedOnContact)
+	if (!destoyedOnContact&&Player::me!=nullptr)
 	Player::me->heal(Player::me->hpPerMob /5);
 
     globalMoney += (8 + (2 * currentWave))/5;

@@ -105,8 +105,6 @@ soundPlayer () {
     /////////////////////////////////
     gamePtr->view.setCenter (player->getPosition ());
 
-    game->musicPlayer.play (Music::GAMETHEME);
-
     ////////////////////////////////
     //Loading font//////////////////
     ////////////////////////////////
@@ -223,6 +221,8 @@ bool GameState::handleEvent (const sf::Event& event) {
         case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Space) {
 				spawnCooldown = sf::Time::Zero;
+				if (!ready)
+					gamePtr->musicPlayer.play(Music::GAMETHEME);
 				ready = true;
 				//spawnEnemyFighter (rand () % 800, rand () % 300);
 			}

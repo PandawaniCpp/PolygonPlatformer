@@ -16,9 +16,9 @@ EnemySwarm::~EnemySwarm(){
 
     globalMoney += (8 + (2 * currentWave))/5;
 
-    if (rand () % 100 == 0)
+    if (rand () % 100 == 0 && Player::me != nullptr&&Player::me->currentHP>0)
         new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_FRENZY);
-    if (rand () % 100 == 0)
+    if (rand () % 100 == 0 && Player::me != nullptr&&Player::me->currentHP>0)
         new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_BLOODLUST);
 }
 

@@ -14,9 +14,9 @@ EnemyKamikaze::~EnemyKamikaze(){
 		Player::me->heal(Player::me->hpPerMob*2);
     globalMoney += (currentWave-5)*15;
 
-    if (rand () % 10 == 0)
+    if (rand () % 10 == 0 && Player::me != nullptr&&Player::me->currentHP>0)
         new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_FRENZY);
-    if (rand () % 10 == 0)
+    if (rand () % 10 == 0 && Player::me != nullptr&&Player::me->currentHP>0)
         new Pickup (getPosition ().x, getPosition ().y, ObjectId::PICKUP_BLOODLUST);
 }
 

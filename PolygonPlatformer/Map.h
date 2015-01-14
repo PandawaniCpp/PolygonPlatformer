@@ -34,6 +34,8 @@ public:
     PositionsVector * getSpawnList () { return &mSpawnList; };
     unsigned int getNumberOfSpawns () { return mSpawnList.size (); };
 
+    bool generateOneMoreTime;
+
 private:
     PositionsVector mSpawnList;
     Dimensions mSize;

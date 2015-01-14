@@ -13,31 +13,43 @@ Map::~Map () {
 
 void Map::generate () {
     //walls
-    Platform * ceiling = new Platform ({0.f, 0.f}, {mSize.first - 1, 1}, true);
-    Platform * rightWall = new Platform ({ceiling->getCorner (2).x, 0.f}, {1, mSize.second}, true);
-    Platform * leftWall = new Platform ({0.f, ceiling->getCorner (3).y}, {1, mSize.second - 1}, true);
-    Platform * floor = new Platform ({0.f, leftWall->getCorner (3).y}, {mSize.first, 1}, true);
+    do {
+        generateOneMoreTime = false;
 
-    attachChild (SceneNode::Ptr (ceiling));
-    attachChild (SceneNode::Ptr (leftWall));
-    attachChild (SceneNode::Ptr (rightWall));
-    attachChild (SceneNode::Ptr (floor));
 
-    mBrickHeight = floor->getBrickHeight ();
-    mBrickWidth = floor->getBrickWidth ();
-    mHeight = mSize.second * mBrickHeight;
-    mWidth = mSize.first * mBrickWidth;
+        Platform * ceiling = new Platform ({0.f, 0.f}, {mSize.first - 1, 1}, true);
+        Platform * rightWall = new Platform ({ceiling->getCorner (2).x, 0.f}, {1, mSize.second}, true);
+        Platform * leftWall = new Platform ({0.f, ceiling->getCorner (3).y}, {1, mSize.second - 1}, true);
+        Platform * floor = new Platform ({0.f, leftWall->getCorner (3).y}, {mSize.first, 1}, true);
 
-    placePlatforms ();
 
-    int loopBreaker = 0;
-    while (lookForCollisions (mMinimalDistance)) {
+        attachChild (SceneNode::Ptr (ceiling));
+        attachChild (SceneNode::Ptr (leftWall));
+        attachChild (SceneNode::Ptr (rightWall));
+        attachChild (SceneNode::Ptr (floor));
 
-        loopBreaker++;
-        if (loopBreaker >= 10000)
-            break;
+        mBrickHeight = floor->getBrickHeight ();
+        mBrickWidth = floor->getBrickWidth ();
+        mHeight = mSize.second * mBrickHeight;
+        mWidth = mSize.first * mBrickWidth;
+
+        placePlatforms ();
+
+        int loopBreaker = 0;
+        while (lookForCollisions (mMinimalDistance)) {
+
+            loopBreaker++;
+            if (loopBreaker >= 10000)
+                break;
+        }
+
+        if (lookForCollisions (mMinimalDistance))  {
+            generateOneMoreTime = true;
+            mChildren.clear ();
+}
+
     }
-
+    while (generateOneMoreTime);
     handleOuties ();
 
     //spawns
@@ -140,22 +152,22 @@ void Map::handleCollision (Platform * platformA, Platform * platformB) {
     else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x > platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y > platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)   {
         platformA->movePlatformRelative ({40.f + rand () % 10, 40.f + rand () % 10});
         if (rand ()%10==0)
-        platformB->movePlatformRelative ({-4000.f + rand () % 10, -40.f + rand () % 10});
+        platformB->movePlatformRelative ({-4000.f + rand () % 1000, -4000.f + rand () % 1000});
     }
     else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x<platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y>platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)  {
         platformA->movePlatformRelative ({-40.f + rand () % 10, 40.f + rand () % 10});
         if (rand () % 10 == 0)
-        platformB->movePlatformRelative ({4000.f + rand () % 10, -40.f + rand () % 10});
+        platformB->movePlatformRelative ({4000.f + rand () % 1000, -4000.f + rand () % 1000});
     }
     else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x < platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y<platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)  {
         platformA->movePlatformRelative ({-40.f + rand () % 10, -40.f + rand () % 10});
         if (rand () % 10 == 0)
-        platformB->movePlatformRelative ({4000.f + rand () % 10, 40.f + rand () % 10});
+        platformB->movePlatformRelative ({4000.f + rand () % 1000, 4000.f + rand () % 1000});
     }
     else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x>platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y < platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)  {
-        platformA->movePlatformRelative ({40.f + rand () % 10, -40.f + rand () % 10});
+        platformA->movePlatformRelative ({40.f + rand () % 10, -4000.f + rand () % 1000});
         if (rand () % 10 == 0)
-        platformB->movePlatformRelative ({-4000.f + rand () % 10, 40.f + rand () % 10});
+        platformB->movePlatformRelative ({-4000.f + rand () % 1000, 4000.f + rand () % 1000});
     }
 }
 

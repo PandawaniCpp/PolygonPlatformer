@@ -30,7 +30,13 @@ void Map::generate () {
 
     placePlatforms ();
 
-    while (lookForCollisions (mMinimalDistance));
+    int loopBreaker = 0;
+    while (lookForCollisions (mMinimalDistance)) {
+
+        loopBreaker++;
+        if (loopBreaker >= 10000)
+            break;
+    }
 
     handleOuties ();
 
@@ -98,23 +104,23 @@ bool Map::lookForCollisions (float sensitivity) {
 void Map::handleCollision (Platform * platformA, Platform * platformB) {
 
     if (platformA == static_cast<Platform*>(mChildren[0].get ()))
-        platformB->movePlatformRelative ({0.f, 10.f});
+        platformB->movePlatformRelative ({0.f, 100.f});
     else if (platformA == static_cast<Platform*>(mChildren[2].get ()))
-        platformB->movePlatformRelative ({10.f, 0.f});
+        platformB->movePlatformRelative ({100.f, 0.f});
     else if (platformA == static_cast<Platform*>(mChildren[1].get ()))
-        platformB->movePlatformRelative ({-10.f, 0.f});
+        platformB->movePlatformRelative ({-100.f, 0.f});
     else if (platformA == static_cast<Platform*>(mChildren[3].get ()))
-        platformB->movePlatformRelative ({0.f, -10.f});
+        platformB->movePlatformRelative ({0.f, -100.f});
     else if (platformB == static_cast<Platform*>(mChildren[0].get ()))
-        platformA->movePlatformRelative ({0.f, 10.f});
+        platformA->movePlatformRelative ({0.f, 100.f});
     else if (platformB == static_cast<Platform*>(mChildren[2].get ()))
-        platformA->movePlatformRelative ({10.f, 0.f});
+        platformA->movePlatformRelative ({100.f, 0.f});
     else if (platformB == static_cast<Platform*>(mChildren[1].get ()))
-        platformA->movePlatformRelative ({-10.f, 0.f});
+        platformA->movePlatformRelative ({-100.f, 0.f});
     else if (platformB == static_cast<Platform*>(mChildren[3].get ()))
-        platformA->movePlatformRelative ({0.f, -10.f});
+        platformA->movePlatformRelative ({0.f, -100.f});
 
-    else {
+    /*else {
         switch (rand () % 4) {
             case 0:
                 platformA->movePlatformRelative ({10.f, -10.f});
@@ -129,6 +135,27 @@ void Map::handleCollision (Platform * platformA, Platform * platformB) {
                 platformA->movePlatformRelative ({-10.f, 10.f});
                 break;
         }
+    }*/
+
+    else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x > platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y > platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)   {
+        platformA->movePlatformRelative ({40.f + rand () % 10, 40.f + rand () % 10});
+        if (rand ()%10==0)
+        platformB->movePlatformRelative ({-4000.f + rand () % 10, -40.f + rand () % 10});
+    }
+    else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x<platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y>platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)  {
+        platformA->movePlatformRelative ({-40.f + rand () % 10, 40.f + rand () % 10});
+        if (rand () % 10 == 0)
+        platformB->movePlatformRelative ({4000.f + rand () % 10, -40.f + rand () % 10});
+    }
+    else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x < platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y<platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)  {
+        platformA->movePlatformRelative ({-40.f + rand () % 10, -40.f + rand () % 10});
+        if (rand () % 10 == 0)
+        platformB->movePlatformRelative ({4000.f + rand () % 10, 40.f + rand () % 10});
+    }
+    else if (platformA->mChildren.begin ()->get ()->myBody->GetPosition ().x>platformB->mChildren.begin ()->get ()->myBody->GetPosition ().x&&platformA->mChildren.begin ()->get ()->myBody->GetPosition ().y < platformB->mChildren.begin ()->get ()->myBody->GetPosition ().y)  {
+        platformA->movePlatformRelative ({40.f + rand () % 10, -40.f + rand () % 10});
+        if (rand () % 10 == 0)
+        platformB->movePlatformRelative ({-4000.f + rand () % 10, 40.f + rand () % 10});
     }
 }
 

@@ -76,7 +76,7 @@ public:
     b2Body* myBody;
 	ObjectId::ID MyId;
 	
-protected:
+
     std::vector<Ptr> mChildren;
     SceneNode* mParent;
 	

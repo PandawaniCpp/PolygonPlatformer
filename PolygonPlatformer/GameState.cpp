@@ -18,7 +18,7 @@ soundPlayer () {
     fatToSpawn = 0;
     swarmToSpawn = 0;
     kamikazeToSpawn = 0;
-    spawnCooldown = sf::seconds (50.f);
+    spawnCooldown = sf::seconds (2000.f);
 
 
     //stateStack = &stack;
@@ -77,7 +77,7 @@ soundPlayer () {
     //size of biggest platform
     //size of smallest platformz
     //minimal distance between platforms
-    map = new Map (7, {70, 45}, 40, {15, 1}, {7, 1}, 80.f);
+    map = new Map (7, {70, 45}, 30, {15, 1}, {7, 1}, 80.f);
 
     /////////////////////////////////
     //Setting up background//////////

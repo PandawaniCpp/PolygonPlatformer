@@ -57,7 +57,21 @@ Player::Player() :currentState(new FlyingState), healthbar_red(new SceneNode), h
 	myBodyDef.angle = 0;
 	b2Body* dynamicBody = globalWorld->CreateBody(&myBodyDef);
 	boxShape.SetAsBox((getTextureRect().width / 2.f)*PIXELTOMETER, (getTextureRect().height / 2.f)*PIXELTOMETER);
-	boxFixtureDef.shape = &boxShape;
+
+
+    b2Vec2 vertices[6];
+    vertices[0].Set (1.5, -2.5);
+    vertices[1].Set (1.5, 2.45);
+    vertices[2].Set (0.5, 2.5);
+    vertices[3].Set (-0.5, 2.5);
+    vertices[4].Set (-1.5, 2.45);
+    vertices[5].Set (-1.5, -2.5);
+
+    b2PolygonShape polygonShape;
+    polygonShape.Set (vertices, 6); //pass array to the shape
+
+    boxFixtureDef.shape = &polygonShape;
+	//boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 1;
 	boxFixtureDef.friction = 0;
 	dynamicBody->CreateFixture(&boxFixtureDef);
